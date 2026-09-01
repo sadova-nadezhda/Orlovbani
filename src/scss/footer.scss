@@ -1,0 +1,140 @@
+@import "vars.scss";
+@import "mixins.scss";
+
+.footer {
+  padding: calc(64 * var(--width-multiplier)) 0 0;
+  background-color: var(--primary, $primary);
+  color: var(--white, $white);
+
+  @media (max-width: 767px) {
+    padding-top: var(--pad-24);
+  }
+
+  &__container {
+    display: flex;
+    gap: calc(120 * var(--width-multiplier));
+    padding-bottom: calc(64 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      gap: calc(64 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--pad-24);
+      padding-bottom: var(--pad-24);
+    }
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: calc(16 * var(--width-multiplier));
+
+    &--brand {
+      gap: var(--pad-16);
+      @media (max-width: 767px) {
+        grid-column: span 2;
+        align-items: center;
+      }
+    }
+
+    &:last-child {
+      @media (max-width: 767px) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  &__logo img {
+    width: calc(230 * var(--width-multiplier));
+    height: auto;
+
+    @media (max-width: 767px) {
+      width: calc(160 * var(--width-multiplier));
+    }
+  }
+
+  &__slogan {
+    max-width: calc(230 * var(--width-multiplier));
+    font-weight: 500;
+    font-size: calc(16 * var(--width-multiplier));
+    line-height: 1.4em;
+    text-align: center;
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  &__label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: calc(14 * var(--width-multiplier));
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: calc(16 * var(--width-multiplier));
+
+    a {
+      @include transition;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--width-multiplier));
+  }
+
+  &__name {
+    display: block;
+    margin-bottom: calc(4 * var(--width-multiplier));
+    font-size: calc(12 * var(--width-multiplier));
+  }
+
+  &__value {
+    @include transition;
+  }
+
+  a.footer__value:hover {
+    opacity: 0.6;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pad-16) var(--pad-24);
+    padding: var(--pad-24) 0;
+    border-top: 1px solid rgba(255, 255, 255, 1);
+    font-size: calc(12 * var(--width-multiplier));
+  }
+
+  &__copy {
+    @media (max-width: 767px) {
+      order: 1;
+    }
+  }
+
+  &__link {
+    @include transition;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &:last-of-type {
+      @media (max-width: 767px) {
+        order: 1;
+      }
+    }
+  }
+}

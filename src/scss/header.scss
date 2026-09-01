@@ -1,0 +1,500 @@
+@import "vars.scss";
+@import "mixins.scss";
+
+.header {
+  // Тема шапки: поверх hero — светлая, при скролле — тёмная на белом фоне
+  --header-color: var(--white);
+  --header-bg: transparent;
+  --header-pill-bg: var(--light);
+  --header-pill-bg-hover: rgba(255, 255, 255, 0.25);
+  --header-pill-text: rgba(255, 255, 255, 0.6);
+  --header-blur: blur(calc(8 * var(--width-multiplier)));
+
+  // Логотип: полный знак и компактный венок лежат друг на друге
+  --logo-w: calc(160 * var(--width-multiplier));
+  --logo-h: calc(87 * var(--width-multiplier));
+  --logo-full-opacity: 1;
+  --logo-full-scale: 1;
+  --logo-mark-opacity: 0;
+  --logo-mark-scale: 0.85;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  padding: calc(20 * var(--width-multiplier)) 0;
+  color: var(--header-color);
+  background-color: var(--header-bg);
+  transition: padding 0.35s ease-in-out, background-color 0.35s ease-in-out;
+
+  @media (max-width: 767px) {
+    --logo-w: calc(120 * var(--width-multiplier));
+    --logo-h: calc(65 * var(--width-multiplier));
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: var(--gap-8);
+  }
+
+  &__logo {
+    justify-self: center;
+  }
+
+  &__burger {
+    justify-self: end;
+  }
+
+  &.scrolled,
+  .page-light & {
+    --header-color: var(--primary);
+    --header-bg: var(--white);
+    --header-pill-bg: rgba(32, 32, 32, 0.05);
+    --header-pill-bg-hover: rgba(110, 29, 11, 0.12);
+    --header-pill-text: rgba(110, 29, 11, 0.5);
+    --header-blur: none;
+
+    --logo-w: calc(130 * var(--width-multiplier));
+    --logo-h: calc(37 * var(--width-multiplier));
+    --logo-full-opacity: 0;
+    --logo-full-scale: 0.85;
+    --logo-mark-opacity: 1;
+    --logo-mark-scale: 1;
+
+    padding: calc(12 * var(--width-multiplier)) 0;
+
+    @media (max-width: 767px) {
+      --logo-w: calc(104 * var(--width-multiplier));
+      --logo-h: calc(30 * var(--width-multiplier));
+    }
+
+    .header__container {
+      align-items: center;
+    }
+  }
+
+  // Поверх открытого меню шапка снова светлая и с полным логотипом
+  .menu-open &.scrolled,
+  .menu-open.page-light & {
+    --header-color: var(--white);
+    --header-bg: transparent;
+    --header-pill-bg: var(--light);
+    --header-pill-bg-hover: rgba(255, 255, 255, 0.25);
+    --header-pill-text: rgba(255, 255, 255, 0.6);
+    --header-blur: blur(calc(8 * var(--width-multiplier)));
+
+    --logo-w: calc(160 * var(--width-multiplier));
+    --logo-h: calc(87 * var(--width-multiplier));
+    --logo-full-opacity: 1;
+    --logo-full-scale: 1;
+    --logo-mark-opacity: 0;
+    --logo-mark-scale: 0.85;
+
+    @media (max-width: 767px) {
+      --logo-w: calc(120 * var(--width-multiplier));
+      --logo-h: calc(65 * var(--width-multiplier));
+    }
+  }
+}
+
+// ====== Логотип ======
+
+.logo {
+  position: relative;
+  display: block;
+  width: var(--logo-w);
+  height: var(--logo-h);
+  transition: width 0.35s ease-in-out, height 0.35s ease-in-out;
+
+  &__full,
+  &__mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
+  }
+
+  &__full {
+    width: calc(160 * var(--width-multiplier));
+    height: calc(87 * var(--width-multiplier));
+    opacity: var(--logo-full-opacity);
+    transform: translate(-50%, -50%) scale(var(--logo-full-scale));
+
+    @media (max-width: 767px) {
+      width: calc(120 * var(--width-multiplier));
+      height: calc(65 * var(--width-multiplier));
+    }
+  }
+
+  &__mark {
+    width: calc(117 * var(--width-multiplier));
+    height: calc(33 * var(--width-multiplier));
+    background-color: currentColor;
+    opacity: var(--logo-mark-opacity);
+    transform: translate(-50%, -50%) scale(var(--logo-mark-scale));
+    -webkit-mask: url("../img/logo-mark.svg") center / contain no-repeat;
+    mask: url("../img/logo-mark.svg") center / contain no-repeat;
+  }
+}
+
+// ====== Мобильная шапка ======
+
+@media (max-width: 767px) {
+  // на мобильной шапка всегда тёмная на белом
+  .header,
+  .header.scrolled {
+    --header-color: var(--primary);
+    --header-bg: var(--white);
+    --header-pill-bg: rgba(32, 32, 32, 0.05);
+    --header-pill-bg-hover: rgba(110, 29, 11, 0.12);
+    --header-pill-text: rgba(110, 29, 11, 0.5);
+    --header-blur: none;
+
+    padding: calc(12 * var(--width-multiplier)) 0;
+  }
+
+  .menu-open .header,
+  .menu-open .header.scrolled {
+    --header-color: var(--white);
+    --header-bg: transparent;
+    --header-pill-bg: var(--light);
+    --header-pill-bg-hover: rgba(255, 255, 255, 0.25);
+    --header-pill-text: rgba(255, 255, 255, 0.6);
+  }
+
+  .header,
+  .header.scrolled,
+  .menu-open .header,
+  .menu-open .header.scrolled {
+    --logo-w: calc(117 * var(--width-multiplier));
+    --logo-h: calc(33 * var(--width-multiplier));
+    --logo-full-opacity: 0;
+    --logo-full-scale: 0.85;
+    --logo-mark-opacity: 1;
+    --logo-mark-scale: 1;
+  }
+
+  .header__container {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .header__lang {
+    display: none;
+  }
+
+  .header__logo {
+    justify-self: start;
+  }
+}
+
+// ====== Языки ======
+
+.lang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(2 * var(--width-multiplier));
+  width: max-content;
+  padding: calc(4 * var(--width-multiplier));
+  border-radius: var(--br-200);
+  background-color: var(--header-pill-bg);
+  backdrop-filter: var(--header-blur);
+  transition: background-color 0.2s ease-in-out;
+
+  // подвижная подложка под активным языком
+  &__thumb {
+    position: absolute;
+    top: calc(4 * var(--width-multiplier));
+    bottom: calc(4 * var(--width-multiplier));
+    left: 0;
+    width: var(--lang-thumb-w, 0);
+    border-radius: var(--br-200);
+    background-color: var(--primary, $primary);
+    transform: translateX(var(--lang-thumb-x, 0));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &.is-ready &__thumb {
+    opacity: 1;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in-out;
+  }
+
+  &__item {
+    position: relative;
+    z-index: 1;
+    padding: calc(7 * var(--width-multiplier)) calc(18 * var(--width-multiplier));
+    border-radius: var(--br-200);
+    color: var(--header-pill-text);
+    font: 500 calc(12 * var(--width-multiplier))/1.1 Euclid;
+    text-transform: uppercase;
+    @include transition;
+
+    &:hover {
+      color: var(--header-color);
+    }
+
+    &.is-active {
+      color: var(--white, $white);
+    }
+  }
+}
+
+// ====== Бургер ======
+
+.burger {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  width: max-content;
+  padding: calc(4 * var(--width-multiplier));
+  padding-right: calc(10 * var(--width-multiplier));
+  border: none;
+  border-radius: var(--br-200);
+  color: var(--header-color);
+  background-color: var(--header-pill-bg);
+  font: 500 calc(14 * var(--width-multiplier))/1.1 Euclid;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--header-pill-bg-hover);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(24 * var(--width-multiplier));
+    width: calc(24 * var(--width-multiplier));
+    height: calc(24 * var(--width-multiplier));
+    border-radius: 100%;
+    background-color: var(--header-pill-bg);
+    pointer-events: none;
+    svg {
+      min-width: calc(20 * var(--width-multiplier));
+      width: calc(20 * var(--width-multiplier));
+      height: calc(20 * var(--width-multiplier));
+      pointer-events: none;
+    }
+  }
+
+  &__text {
+    pointer-events: none;
+    &--close {
+      display: none;
+    }
+  }
+
+  &.is-active {
+    .burger__text {
+      display: none;
+    }
+    .burger__text--close {
+      display: block;
+    }
+  }
+}
+
+// ====== Меню ======
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  background-color: #623C2F;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+
+  > .container {
+    display: flex;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(42 * var(--width-multiplier));
+    width: 100%;
+    min-height: 100%;
+    padding: calc(140 * var(--width-multiplier)) 0 calc(56 * var(--width-multiplier));
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(24 * var(--width-multiplier));
+  }
+
+  &__item {
+    opacity: 0;
+    transform: translateY(calc(24 * var(--width-multiplier)));
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{0.05 * $i}s;
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+    display: block;
+    padding: 0 calc(64 * var(--width-multiplier));
+    color: rgba(255, 255, 255, 0.5);
+    font: 400 calc(40 * var(--width-multiplier))/1.1 Shadower;
+    text-align: center;
+    text-transform: uppercase;
+    transition: color 0.35s ease-in-out;
+
+    @media (max-width: 767px) {
+      padding: 0 calc(40 * var(--width-multiplier));
+      font-size: calc(28 * var(--width-multiplier));
+    }
+
+    // веточки лежат и не видны, при наведении поднимаются
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: calc(44 * var(--width-multiplier));
+      height: calc(46 * var(--width-multiplier));
+      background-color: currentColor;
+      -webkit-mask: url("../img/sprig.svg") center / contain no-repeat;
+      mask: url("../img/sprig.svg") center / contain no-repeat;
+      opacity: 0;
+      transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
+    }
+
+    &::before {
+      left: calc(8 * var(--width-multiplier));
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    &::after {
+      right: calc(8 * var(--width-multiplier));
+      transform: translateY(-50%) scaleX(-1) rotate(-90deg);
+    }
+
+    &:hover {
+      color: var(--white, $white);
+
+      &::before {
+        opacity: 1;
+        transform: translateY(-50%) rotate(0deg);
+      }
+
+      &::after {
+        opacity: 1;
+        transform: translateY(-50%) scaleX(-1) rotate(0deg);
+      }
+    }
+  }
+  &__button.button {
+    position: relative;
+    padding: calc(16 * var(--width-multiplier)) calc(64 * var(--width-multiplier));
+    border-radius: var(--br-200);
+    opacity: 0;
+    transform: translateY(calc(24 * var(--width-multiplier)));
+    transition: opacity 0.5s ease-in-out 0.4s, transform 0.5s ease-in-out 0.4s;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: calc(18 * var(--width-multiplier));
+      height: calc(34 * var(--width-multiplier));
+      background-color: var(--primary, $primary);
+      -webkit-mask: url("../img/sprig.svg") center / contain no-repeat;
+      mask: url("../img/sprig.svg") center / contain no-repeat;
+    }
+
+    &::before {
+      left: calc(24 * var(--width-multiplier));
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      right: calc(24 * var(--width-multiplier));
+      transform: translateY(-50%) scaleX(-1);
+    }
+  }
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+
+    .nav__item,
+    .nav__button {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+// ====== Мобильное меню ======
+
+@media (max-width: 767px) {
+  // в открытом меню на месте логотипа — переключатель языков
+  .menu-open .header__lang {
+    display: flex;
+  }
+
+  .menu-open .header__logo {
+    display: none;
+  }
+
+  .nav__container {
+    justify-content: flex-start;
+    gap: 0;
+    width: 100vw;
+    margin: 0 calc(-8 * var(--width-multiplier));
+    padding: calc(140 * var(--width-multiplier)) 0 calc(32 * var(--width-multiplier));
+  }
+
+  .nav__menu {
+    gap: 0;
+    margin: auto 0;
+  }
+
+  .nav__link {
+    padding: calc(16 * var(--width-multiplier));
+    font-size: calc(24 * var(--width-multiplier));
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .nav__button.button {
+    margin-top: auto;
+    padding: calc(16 * var(--width-multiplier)) calc(48 * var(--width-multiplier));
+  }
+
+  .nav__button.button::before {
+    left: calc(16 * var(--width-multiplier));
+  }
+
+  .nav__button.button::after {
+    right: calc(16 * var(--width-multiplier));
+  }
+}

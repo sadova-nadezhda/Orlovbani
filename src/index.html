@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Главная" })
+  <body>
+    @@include('html/header.html')
+
+    <main>
+      <section class="hero home-hero section-hidden">
+        <div class="hero__slider swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="hero__image"><img src="@img/hero-home.webp" alt="" /></div>
+              <div class="container">
+                <div class="hero__content">
+                  <h1 class="hero__title text-up">Скидка -10% на посещение в будни</h1>
+                  <div class="hero__desc">индивидуальные вип-кабинеты для отдыха вашей компании до х человек</div>
+                  <a href="" class="hero__button button button-white button-white-1">Забронировать посещение</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="hero__image"><img src="@img/hero-home.webp" alt="" /></div>
+              <div class="container">
+                <div class="hero__content">
+                  <h2 class="hero__title text-up">Мужской банный клуб</h2>
+                  <div class="hero__desc">традиционные русские бани, хамам и авторские spa-программы</div>
+                  <a href="" class="hero__button button button-white button-white-1">Узнать подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="hero__image"><img src="@img/hero-home.webp" alt="" /></div>
+              <div class="container">
+                <div class="hero__content">
+                  <h2 class="hero__title text-up">Программа лояльности</h2>
+                  <div class="hero__desc">накопительные бонусы и привилегии для постоянных гостей клуба</div>
+                  <a href="" class="hero__button button button-white button-white-1">Стать участником</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="hero__bottom">
+            <div class="hero__card hero-card">
+              <div class="hero-card__logo"></div>
+              <div class="hero-card__buttons">
+                <a href="" class="hero-card__btn button s button-white button-white-2">Перейти</a>
+                <button type="button" class="hero-card__btn button s button-light" data-card-close>Закрыть</button>
+              </div>
+            </div>
+            <div class="hero__pagination"></div>
+            <div class="hero__tagline">Восстанавливая силу / Сохраняя традиции.</div>
+          </div>
+        </div>
+      </section>
+      <section class="about home-about">
+        <div class="about__scroll">
+          <div class="about__sticky">
+            <div class="container">
+              <div class="about__card">
+                <div class="about__media">
+                  <video class="about__video is-active" data-src="@img/about-video-1.mp4" muted loop playsinline preload="none"></video>
+                  <video class="about__video" data-src="@img/about-video-2.mp4" muted loop playsinline preload="none"></video>
+                  <video class="about__video" data-src="@img/about-video-3.mp4" muted loop playsinline preload="none"></video>
+                  <video class="about__video" data-src="@img/about-video-1.mp4" muted loop playsinline preload="none"></video>
+                </div>
+                <div class="about__inner">
+                  <ul class="about__nav">
+                    <li><button type="button" class="about__tab is-active">О клубе</button></li>
+                    <li><button type="button" class="about__tab">Идея</button></li>
+                    <li><button type="button" class="about__tab">Принципы</button></li>
+                    <li><button type="button" class="about__tab">Новый формат</button></li>
+                  </ul>
+                  <div class="about__content">
+                    <div class="about__item is-active">
+                      <h2 class="about__title text-up">Орловские бани Select</h2>
+                      <p class="about__text">Орловские Бани Select — премиальное мужское пространство, где качественный пар, высокий уровень сервиса и уважение к традициям становятся частью современной культуры</p>
+                    </div>
+                    <div class="about__item">
+                      <h2 class="about__title text-up">Главная идея</h2>
+                      <p class="about__text">Мы создаем пространство, в котором качественный пар, сильные традиции, высокий сервис и круг единомышленников помогают восстанавливать силы, сохранять ясность мышления и поддерживать качество жизни.</p>
+                    </div>
+                    <div class="about__item">
+                      <h2 class="about__title text-up">Почему Select</h2>
+                      <p class="about__text">Мы сознательно оставляем только то, что действительно помогает человеку восстановиться. Каждый элемент проекта отвечает на один вопрос: помогает ли это гостю восстанавливать силы, энергию и внутренний баланс?</p>
+                    </div>
+                    <div class="about__item">
+                      <h2 class="about__title text-up">Новый формат</h2>
+                      <p class="about__text">Клубный формат вместо привычной аренды: закрытое пространство, регулярные встречи и круг людей, для которых баня — часть образа жизни, а не разовый визит.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="book home-book section-pad-s section-hidden">
+        <div class="container">
+          <div class="book__container">
+            <div class="book__info">
+              <h2 class="book__title s text-up">Орловские бани Select открывают двери</h2>
+              <div class="book__image">
+                <img src="@img/book-img.png" alt="" />
+              </div>
+              <p class="book__text">Баня — это больше, чем отдых. Это время, чтобы остановиться, восстановить силы и вернуть ясность. В Орловских Банях Select традиции настоящего пара сочетаются с высоким уровнем сервиса и вниманием к каждой детали.</p>
+            </div>
+            <div class="book__media">
+              <video class="book__video" data-src="@img/book-video-1.mp4" muted loop playsinline preload="none"></video>
+              <div class="book__overlay">
+                <h2 class="book__heading s text-up">Ваше время для восстановления</h2>
+                <a href="" class="book__button button button-white button-white-1 modal-btn" data-type="book">Забронировать</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="gallery home-gallery section-pad-s section-hidden">
+        <div class="container">
+          <div class="gallery__container">
+            <div class="gallery__slider swiper">
+              <div class="gallery__list swiper-wrapper">
+                <div class="gallery__item gallery__item--big swiper-slide"><img src="@img/gallery-1.png" alt="" /></div>
+                <div class="gallery__item gallery__item--big swiper-slide"><img src="@img/gallery-2.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-3.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-4.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-5.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-6.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-7.png" alt="" /></div>
+                <div class="gallery__item swiper-slide"><img src="@img/gallery-8.png" alt="" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="services home-services section-pad-s section-hidden">
+        <div class="container">
+          <div class="services__container">
+            <div class="services__card">
+              <img class="services__image" src="@img/home-services.png" alt="" />
+              <div class="services__inner">
+                <div class="services__content">
+                  <h2 class="services__title s text-up">SPA-услуги</h2>
+                  <p class="services__desc">Индивидуальные парения, массажи и уходовые процедуры, направленные на восстановление сил, внутренний баланс и глубокую перезагрузку.</p>
+                  <ul class="services__tags">
+                    <li class="services__tag">индивидуальные парения</li>
+                    <li class="services__tag">массажи</li>
+                    <li class="services__tag">уходовые процедуры</li>
+                  </ul>
+                </div>
+                <a href="" class="services__button button button-white button-white-1">Смотреть все услуги</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="news home-news section-pad section-hidden">
+        <div class="container">
+          <div class="news__conrainer">
+            <h2 class="news__title text-center text-up">Новости и акции</h2>
+            <div class="news__slider swiper">
+              <div class="news__list swiper-wrapper">
+                <a href="news.html" class="news__item news-card swiper-slide">
+                  <div class="news-card__image"><img src="@img/news-1.png" alt="" /></div>
+                  <div class="news-card__body">
+                    <span class="news-card__label">Новости</span>
+                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
+                    <span class="news-card__more">Подробнее</span>
+                  </div>
+                </a>
+                <a href="news.html" class="news__item news-card swiper-slide">
+                  <div class="news-card__image"><img src="@img/news-1.png" alt="" /></div>
+                  <div class="news-card__body">
+                    <span class="news-card__label">Новости</span>
+                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
+                    <span class="news-card__more">Подробнее</span>
+                  </div>
+                </a>
+                <a href="news.html" class="news__item news-card swiper-slide">
+                  <div class="news-card__image"><img src="@img/news-1.png" alt="" /></div>
+                  <div class="news-card__body">
+                    <span class="news-card__label">Новости</span>
+                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
+                    <span class="news-card__more">Подробнее</span>
+                  </div>
+                </a>
+                <a href="news.html" class="news__item news-card news-card--promo swiper-slide">
+                  <div class="news-card__image"><img src="@img/promo-1.png" alt="" /></div>
+                  <div class="news-card__body">
+                    <span class="news-card__label">Акции</span>
+                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
+                    <span class="news-card__more">Подробнее</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="reviews home-reviews section-pad section-hidden">
+        <div class="container">
+          <div class="reviews__conrainer">
+            <h2 class="reviews__title text-center text-up">Отзывы</h2>
+            <div class="reviews__slider swiper">
+              <div class="reviews__list swiper-wrapper">
+                <article class="reviews__item reviews-card swiper-slide">
+                  <div class="reviews-card__head">
+                    <div class="reviews-card__rating">
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star is-empty"></span>
+                    </div>
+                    <span class="reviews-card__score">4/5</span>
+                  </div>
+                  <p class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</p>
+                  <div class="reviews-card__foot">
+                    <span class="reviews-card__author">Марк К</span>
+                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
+                  </div>
+                </article>
+                <article class="reviews__item reviews-card swiper-slide">
+                  <div class="reviews-card__head">
+                    <div class="reviews-card__rating">
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star is-empty"></span>
+                    </div>
+                    <span class="reviews-card__score">4/5</span>
+                  </div>
+                  <p class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</p>
+                  <div class="reviews-card__foot">
+                    <span class="reviews-card__author">Марк К</span>
+                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
+                  </div>
+                </article>
+                <article class="reviews__item reviews-card swiper-slide">
+                  <div class="reviews-card__head">
+                    <div class="reviews-card__rating">
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star is-empty"></span>
+                    </div>
+                    <span class="reviews-card__score">4/5</span>
+                  </div>
+                  <p class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</p>
+                  <div class="reviews-card__foot">
+                    <span class="reviews-card__author">Марк К</span>
+                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
+                  </div>
+                </article>
+                <article class="reviews__item reviews-card swiper-slide">
+                  <div class="reviews-card__head">
+                    <div class="reviews-card__rating">
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star is-empty"></span>
+                    </div>
+                    <span class="reviews-card__score">4/5</span>
+                  </div>
+                  <p class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</p>
+                  <div class="reviews-card__foot">
+                    <span class="reviews-card__author">Марк К</span>
+                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
+                  </div>
+                </article>
+                <article class="reviews__item reviews-card swiper-slide">
+                  <div class="reviews-card__head">
+                    <div class="reviews-card__rating">
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star"></span>
+                    <span class="reviews-card__star is-empty"></span>
+                    </div>
+                    <span class="reviews-card__score">4/5</span>
+                  </div>
+                  <p class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</p>
+                  <div class="reviews-card__foot">
+                    <span class="reviews-card__author">Марк К</span>
+                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="feedback home-feedback section-pad-s section-hidden">
+        <div class="container">
+          <div class="feedback__container">
+            <div class="feedback__card">
+              <video class="feedback__video" data-src="@img/feedback-video.mp4" muted loop playsinline preload="none"></video>
+              <div class="feedback__inner">
+                <h2 class="feedback__title text-up">Свяжитесь с нами</h2>
+                <div class="feedback__main">
+                  <a href="tel:+70000000000" class="feedback__phone">+7 (XXX) XXX-XX-XX</a>
+                  <div class="feedback__contacts">
+                    <span class="feedback__contact">Улица Каныша Сатпаева, 29/6</span>
+                    <span class="feedback__contact text-up">Ежедневно с 10.00 до 23.00</span>
+                    <a href="mailto:info@orlovbanya-select.kz" class="feedback__contact text-up">info@orlovbanya-select.kz</a>
+                  </div>
+                </div>
+                <div class="feedback__bottom">
+                  <a href="" class="feedback__button button button-white button-white-1 modal-btn" data-type="book">Забронировать визит</a>
+                  <ul class="feedback__notes">
+                    <li>VIP-парковка для гостей</li>
+                    <li>Каждый час парения</li>
+                    <li>Услуги химчистки</li>
+                  </ul>
+                </div>
+                <a href="" class="feedback__map" target="_blank" rel="noopener">
+                  <img src="@img/map.png" alt="Схема проезда" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/footer.html') 
+    @@include('html/foot.html')
+  </body>
+</html>

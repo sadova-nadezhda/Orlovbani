@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Бронирование бани" })
+  <body class="page-light">
+    @@include('html/header.html')
+
+    <main>
+      <section class="formats section-pad section-hidden">
+        <div class="container">
+          <div class="formats__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Бронирование бани</span>
+            </nav>
+
+            <h1 class="formats__title s text-up">Выберите формат отдыха</h1>
+
+            <div class="formats__list">
+              <a href="club.html" class="formats__item format-card">
+                <img class="format-card__image" src="@img/format-img-1.png" alt="" />
+                <div class="format-card__body">
+                  <div class="format-card__note">Просторный</div>
+                  <h2 class="format-card__title text-up">Мужской банный клуб</h2>
+                  <span class="format-card__price">от 6 900 ₸ / гость</span>
+                </div>
+              </a>
+              <a href="club.html" class="formats__item format-card">
+                <img class="format-card__image" src="@img/format-img-2.png" alt="" />
+                <div class="format-card__body">
+                  <div class="format-card__note">до 6 гостей</div>
+                  <h2 class="format-card__title text-up">VIP-кабинет «Шале»</h2>
+                  <span class="format-card__price">от 42 000 ₸</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/footer.html') 
+    @@include('html/foot.html')
+  </body>
+</html>

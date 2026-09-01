@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Бронирование" })
+  <body class="page-light is-bar">
+    @@include('html/header.html')
+
+    <main>
+      <section class="formats booking section-pad">
+        <div class="container">
+          <div class="formats__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <a href="format.html" class="breadcrumbs__link">Бронирование бани</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Мужской банный клуб</span>
+            </nav>
+
+            <h1 class="formats__title s text-up">Бронирование</h1>
+
+            <a href="club.html" class="booking__back">
+              <span class="booking__back-icon">
+                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M-9.80139e-05 6L5.9999 -6.11959e-08L7.3999 1.4L2.7999 6L7.3999 10.6L5.9999 12L-9.80139e-05 6Z" fill="white"/>
+                </svg>
+              </span>
+              <span class="booking__back-text text-up">Изменить бронирование</span>
+            </a>
+
+            <div class="booking__container">
+              <div class="booking__list">
+                <div class="booking__item order-card">
+                  <div class="order-card__image">
+                    <img src="@img/gallery-1.png" alt="" />
+                  </div>
+                  <div class="order-card__body">
+                    <h2 class="order-card__title">Взрослый билет</h2>
+                    <span class="order-card__note">Сеанс 3 часа + 30 минут</span>
+                    <div class="order-card__prices">
+                      <span class="order-card__price">12 600 ₸</span>
+                      <span class="order-card__old">18 000 ₸</span>
+                    </div>
+                  </div>
+                  <div class="order-card__count">
+                    <span class="order-card__count-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17C12.2833 17 12.5208 16.9042 12.7125 16.7125C12.9042 16.5208 13 16.2833 13 16C13 15.7167 12.9042 15.4792 12.7125 15.2875C12.5208 15.0958 12.2833 15 12 15C11.7167 15 11.4792 15.0958 11.2875 15.2875C11.0958 15.4792 11 15.7167 11 16C11 16.2833 11.0958 16.5208 11.2875 16.7125C11.4792 16.9042 11.7167 17 12 17ZM12 13C12.2833 13 12.5208 12.9042 12.7125 12.7125C12.9042 12.5208 13 12.2833 13 12C13 11.7167 12.9042 11.4792 12.7125 11.2875C12.5208 11.0958 12.2833 11 12 11C11.7167 11 11.4792 11.0958 11.2875 11.2875C11.0958 11.4792 11 11.7167 11 12C11 12.2833 11.0958 12.5208 11.2875 12.7125C11.4792 12.9042 11.7167 13 12 13ZM12 9C12.2833 9 12.5208 8.90417 12.7125 8.7125C12.9042 8.52083 13 8.28333 13 8C13 7.71667 12.9042 7.47917 12.7125 7.2875C12.5208 7.09583 12.2833 7 12 7C11.7167 7 11.4792 7.09583 11.2875 7.2875C11.0958 7.47917 11 7.71667 11 8C11 8.28333 11.0958 8.52083 11.2875 8.7125C11.4792 8.90417 11.7167 9 12 9ZM20 20H4C3.45 20 2.97917 19.8042 2.5875 19.4125C2.19583 19.0208 2 18.55 2 18V14C2.55 14 3.02083 13.8042 3.4125 13.4125C3.80417 13.0208 4 12.55 4 12C4 11.45 3.80417 10.9792 3.4125 10.5875C3.02083 10.1958 2.55 10 2 10V6C2 5.45 2.19583 4.97917 2.5875 4.5875C2.97917 4.19583 3.45 4 4 4H20C20.55 4 21.0208 4.19583 21.4125 4.5875C21.8042 4.97917 22 5.45 22 6V10C21.45 10 20.9792 10.1958 20.5875 10.5875C20.1958 10.9792 20 11.45 20 12C20 12.55 20.1958 13.0208 20.5875 13.4125C20.9792 13.8042 21.45 14 22 14V18C22 18.55 21.8042 19.0208 21.4125 19.4125C21.0208 19.8042 20.55 20 20 20Z" fill="#6E1D0B"/>
+                      </svg>
+                    </span>
+                    <span class="order-card__count-value">2 билета</span>
+                  </div>
+                </div>
+
+                <div class="booking__item order-card">
+                  <div class="order-card__image">
+                    <img src="@img/gallery-2.png" alt="" />
+                  </div>
+                  <div class="order-card__body">
+                    <h2 class="order-card__title">Гостевой билет</h2>
+                    <span class="order-card__note">Сеанс 3 часа + 30 минут</span>
+                    <div class="order-card__prices">
+                      <span class="order-card__price">12 600 ₸</span>
+                      <span class="order-card__old">18 000 ₸</span>
+                    </div>
+                  </div>
+                  <div class="order-card__count">
+                    <span class="order-card__count-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17C12.2833 17 12.5208 16.9042 12.7125 16.7125C12.9042 16.5208 13 16.2833 13 16C13 15.7167 12.9042 15.4792 12.7125 15.2875C12.5208 15.0958 12.2833 15 12 15C11.7167 15 11.4792 15.0958 11.2875 15.2875C11.0958 15.4792 11 15.7167 11 16C11 16.2833 11.0958 16.5208 11.2875 16.7125C11.4792 16.9042 11.7167 17 12 17ZM12 13C12.2833 13 12.5208 12.9042 12.7125 12.7125C12.9042 12.5208 13 12.2833 13 12C13 11.7167 12.9042 11.4792 12.7125 11.2875C12.5208 11.0958 12.2833 11 12 11C11.7167 11 11.4792 11.0958 11.2875 11.2875C11.0958 11.4792 11 11.7167 11 12C11 12.2833 11.0958 12.5208 11.2875 12.7125C11.4792 12.9042 11.7167 13 12 13ZM12 9C12.2833 9 12.5208 8.90417 12.7125 8.7125C12.9042 8.52083 13 8.28333 13 8C13 7.71667 12.9042 7.47917 12.7125 7.2875C12.5208 7.09583 12.2833 7 12 7C11.7167 7 11.4792 7.09583 11.2875 7.2875C11.0958 7.47917 11 7.71667 11 8C11 8.28333 11.0958 8.52083 11.2875 8.7125C11.4792 8.90417 11.7167 9 12 9ZM20 20H4C3.45 20 2.97917 19.8042 2.5875 19.4125C2.19583 19.0208 2 18.55 2 18V14C2.55 14 3.02083 13.8042 3.4125 13.4125C3.80417 13.0208 4 12.55 4 12C4 11.45 3.80417 10.9792 3.4125 10.5875C3.02083 10.1958 2.55 10 2 10V6C2 5.45 2.19583 4.97917 2.5875 4.5875C2.97917 4.19583 3.45 4 4 4H20C20.55 4 21.0208 4.19583 21.4125 4.5875C21.8042 4.97917 22 5.45 22 6V10C21.45 10 20.9792 10.1958 20.5875 10.5875C20.1958 10.9792 20 11.45 20 12C20 12.55 20.1958 13.0208 20.5875 13.4125C20.9792 13.8042 21.45 14 22 14V18C22 18.55 21.8042 19.0208 21.4125 19.4125C21.0208 19.8042 20.55 20 20 20Z" fill="#6E1D0B"/>
+                      </svg>
+                    </span>
+                    <span class="order-card__count-value">1 билет</span>
+                  </div>
+                </div>
+
+                <div class="booking__item order-card">
+                  <div class="order-card__image">
+                    <img src="@img/gallery-3.png" alt="" />
+                  </div>
+                  <div class="order-card__body">
+                    <h2 class="order-card__title">Дневной билет</h2>
+                    <span class="order-card__note">Сеанс 2 часа</span>
+                    <div class="order-card__prices">
+                      <span class="order-card__price">6 900 ₸</span>
+                      <span class="order-card__old">9 000 ₸</span>
+                    </div>
+                  </div>
+                  <div class="order-card__count">
+                    <span class="order-card__count-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17C12.2833 17 12.5208 16.9042 12.7125 16.7125C12.9042 16.5208 13 16.2833 13 16C13 15.7167 12.9042 15.4792 12.7125 15.2875C12.5208 15.0958 12.2833 15 12 15C11.7167 15 11.4792 15.0958 11.2875 15.2875C11.0958 15.4792 11 15.7167 11 16C11 16.2833 11.0958 16.5208 11.2875 16.7125C11.4792 16.9042 11.7167 17 12 17ZM12 13C12.2833 13 12.5208 12.9042 12.7125 12.7125C12.9042 12.5208 13 12.2833 13 12C13 11.7167 12.9042 11.4792 12.7125 11.2875C12.5208 11.0958 12.2833 11 12 11C11.7167 11 11.4792 11.0958 11.2875 11.2875C11.0958 11.4792 11 11.7167 11 12C11 12.2833 11.0958 12.5208 11.2875 12.7125C11.4792 12.9042 11.7167 13 12 13ZM12 9C12.2833 9 12.5208 8.90417 12.7125 8.7125C12.9042 8.52083 13 8.28333 13 8C13 7.71667 12.9042 7.47917 12.7125 7.2875C12.5208 7.09583 12.2833 7 12 7C11.7167 7 11.4792 7.09583 11.2875 7.2875C11.0958 7.47917 11 7.71667 11 8C11 8.28333 11.0958 8.52083 11.2875 8.7125C11.4792 8.90417 11.7167 9 12 9ZM20 20H4C3.45 20 2.97917 19.8042 2.5875 19.4125C2.19583 19.0208 2 18.55 2 18V14C2.55 14 3.02083 13.8042 3.4125 13.4125C3.80417 13.0208 4 12.55 4 12C4 11.45 3.80417 10.9792 3.4125 10.5875C3.02083 10.1958 2.55 10 2 10V6C2 5.45 2.19583 4.97917 2.5875 4.5875C2.97917 4.19583 3.45 4 4 4H20C20.55 4 21.0208 4.19583 21.4125 4.5875C21.8042 4.97917 22 5.45 22 6V10C21.45 10 20.9792 10.1958 20.5875 10.5875C20.1958 10.9792 20 11.45 20 12C20 12.55 20.1958 13.0208 20.5875 13.4125C20.9792 13.8042 21.45 14 22 14V18C22 18.55 21.8042 19.0208 21.4125 19.4125C21.0208 19.8042 20.55 20 20 20Z" fill="#6E1D0B"/>
+                      </svg>
+                    </span>
+                    <span class="order-card__count-value">1 билет</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="booking__form form-card">
+                <h2 class="form-card__title s text-up">Ваши данные</h2>
+                <p class="form-card__desc">Оставьте контактные данные — администратор свяжется с вами, уточнит детали бронирования и поможет выбрать подходящий формат посещения.</p>
+                <form class="form-card__form form" action="#">
+                  <input type="text" class="input" name="name" placeholder="Имя" autocomplete="given-name" required />
+                  <input type="text" class="input" name="surname" placeholder="Фамилия" autocomplete="family-name" required />
+                  <input type="tel" class="input" name="phone" placeholder="+7 (___) ___ ____" autocomplete="tel" required />
+                  <button type="submit" class="form-card__button button button-primary">Забронировать</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="booking-bar is-visible" data-booking-bar>
+      <div class="container">
+        <div class="booking-bar__inner">
+          <div class="booking-bar__info">
+            <span class="booking-bar__mark"></span>
+            <div class="booking-bar__total">
+              <span class="booking-bar__label">К оплате</span>
+              <div class="booking-bar__prices">
+                <span class="booking-bar__price" data-booking-price>44 700 ₸</span>
+                <span class="booking-bar__old" data-booking-old>63 000 ₸</span>
+              </div>
+            </div>
+          </div>
+          <div class="booking-bar__meta">
+            <span class="booking-bar__meta-item">
+              <span class="booking-bar__meta-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H16V2H18V4H19C19.55 4 20.0208 4.19583 20.4125 4.5875C20.8042 4.97917 21 5.45 21 6V20C21 20.55 20.8042 21.0208 20.4125 21.4125C20.0208 21.8042 19.55 22 19 22H5ZM5 20H19V10H5V20Z" fill="#6E1D0B"/>
+                </svg>
+              </span>
+              <span class="booking-bar__meta-value">15.08.2026</span>
+            </span>
+            <span class="booking-bar__meta-item">
+              <span class="booking-bar__meta-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22C10.6167 22 9.31667 21.7375 8.1 21.2125ZM4 12H12V4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12Z" fill="#6E1D0B"/>
+                </svg>
+              </span>
+              <span class="booking-bar__meta-value">12:00&ndash;15:30</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @@include('html/footer.html')
+    @@include('html/foot.html')
+  </body>
+</html>

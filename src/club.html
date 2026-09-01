@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Мужской банный клуб" })
+  <body class="page-light">
+    @@include('html/header.html')
+
+    <main>
+      <section class="formats tickets section-pad">
+        <div class="container">
+          <div class="formats__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <a href="format.html" class="breadcrumbs__link">Бронирование бани</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Мужской банный клуб</span>
+            </nav>
+
+            <h1 class="formats__title s text-up">Мужской банный клуб</h1>
+
+            <form class="tickets__filters filters" action="#">
+              <div class="filters__field field" data-field>
+                <span class="field__label">Выберите дату</span>
+                <div class="field__control" data-field-control>
+                  <span class="field__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H16V2H18V4H19C19.55 4 20.0208 4.19583 20.4125 4.5875C20.8042 4.97917 21 5.45 21 6V20C21 20.55 20.8042 21.0208 20.4125 21.4125C20.0208 21.8042 19.55 22 19 22H5ZM5 20H19V10H5V20Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                  <input type="text" class="field__input" name="date" value="01.09.2026" readonly data-datepicker />
+                  <span class="field__arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <div class="filters__field field" data-field>
+                <span class="field__label">Выберите время</span>
+                <div class="field__control" data-field-control data-select>
+                  <span class="field__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22C10.6167 22 9.31667 21.7375 8.1 21.2125ZM4 12H12V4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                  <span class="field__value" data-select-value>12:00</span>
+                  <input type="hidden" name="time" value="12:00" data-select-input />
+                  <span class="field__arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                  <div class="field__dropdown select-list" data-select-list data-lenis-prevent>
+                    <button type="button" class="select-list__item is-active" data-select-option="10:00">10:00</button>
+                    <button type="button" class="select-list__item" data-select-option="11:00">11:00</button>
+                    <button type="button" class="select-list__item" data-select-option="12:00">12:00</button>
+                    <button type="button" class="select-list__item" data-select-option="13:00">13:00</button>
+                    <button type="button" class="select-list__item" data-select-option="14:00">14:00</button>
+                    <button type="button" class="select-list__item" data-select-option="15:00">15:00</button>
+                    <button type="button" class="select-list__item" data-select-option="16:00">16:00</button>
+                    <button type="button" class="select-list__item" data-select-option="18:00">18:00</button>
+                    <button type="button" class="select-list__item" data-select-option="20:00">20:00</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="tickets__list">
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-1.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-2.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Гостевой билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Билет для гостя действующего члена клуба. Полный доступ к парным, бассейну и зонам отдыха в течение сеанса.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="6900" data-old-price="9000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-3.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 2 часа</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Дневной билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">6 900 ₸</span>
+                    <span class="ticket-card__old">9 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Короткий будний сеанс для тех, кто заходит в клуб в первой половине дня. Доступ к русской бане и хамаму.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="15400" data-old-price="21000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-4.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 4 часа</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Ночной сеанс</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">15 400 ₸</span>
+                    <span class="ticket-card__old">21 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Поздний сеанс в спокойном ритме клуба: меньше гостей, больше времени на пар и восстановление.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="10800" data-old-price="15000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-5.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Будний билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">10 800 ₸</span>
+                    <span class="ticket-card__old">15 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Специальный тариф на посещение с понедельника по четверг. Действует при бронировании онлайн.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="14700" data-old-price="19500">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-6.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Билет выходного дня</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">14 700 ₸</span>
+                    <span class="ticket-card__old">19 500 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Посещение клуба в субботу и воскресенье. Расширенная программа парения и полный сервис.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="24000" data-old-price="32000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-7.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 5 часов</div>
+                  <h2 class="ticket-card__title" data-ticket-title>VIP-билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">24 000 ₸</span>
+                    <span class="ticket-card__old">32 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Отдельная зона клуба, персональный банщик и сопровождение сервиса на протяжении всего сеанса.</p>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="54000" data-old-price="72000">
+                <div class="ticket-card__image">
+                  <img src="@img/gallery-8.png" alt="" data-ticket-image />
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>5 посещений</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Абонемент</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">54 000 ₸</span>
+                    <span class="ticket-card__old">72 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <p class="ticket-card__desc" hidden data-ticket-desc>Пять посещений клуба по фиксированной цене. Абонемент действует 6 месяцев с даты покупки.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="booking-bar" data-booking-bar>
+      <div class="container">
+        <div class="booking-bar__inner">
+          <div class="booking-bar__info">
+            <span class="booking-bar__mark"></span>
+            <div class="booking-bar__total">
+              <span class="booking-bar__label">К оплате</span>
+              <div class="booking-bar__prices">
+                <span class="booking-bar__price" data-booking-price>0 ₸</span>
+                <span class="booking-bar__old" data-booking-old>0 ₸</span>
+              </div>
+            </div>
+          </div>
+          <a href="book.html" class="booking-bar__button button s button-primary">Перейти к бронированию</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer" data-drawer aria-hidden="true">
+      <div class="drawer__overlay" data-drawer-close></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="drawer__head">
+          <div class="drawer__heading">
+            <h2 class="drawer__title s text-up" id="drawer-title" data-drawer-title>Взрослый билет</h2>
+            <div class="drawer__note" data-drawer-note>Сеанс 3 часа + 30 минут</div>
+          </div>
+          <button type="button" class="drawer__close" data-drawer-close aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="#202020"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drawer__scroll" data-lenis-prevent>
+          <div class="drawer__image">
+            <img src="@img/gallery-1.png" alt="" data-drawer-image />
+          </div>
+
+          <div class="drawer__desc" data-drawer-desc></div>
+
+          <div class="drawer__prices">
+            <span class="drawer__price" data-drawer-price></span>
+            <span class="drawer__old" data-drawer-old></span>
+            <span class="drawer__per">Цена за гостя</span>
+          </div>
+
+          <div class="drawer__block">
+            <h3 class="drawer__subtitle">Условия посещения</h3>
+            <ul class="drawer__list">
+              <li>Билет действует на выбранные дату и время</li>
+              <li>Продолжительность сеанса — 3 часа + 30 минут</li>
+              <li>Стоимость рассчитывается с учётом действующего тарифа и сезона</li>
+              <li>Дополнительные SPA-услуги и другие позиции можно выбрать отдельно</li>
+            </ul>
+          </div>
+
+          <div class="drawer__block last">
+            <h3 class="drawer__subtitle">Обратите внимание</h3>
+            <p class="drawer__text">Итоговая стоимость может меняться в зависимости от даты, времени посещения и действующих специальных предложений.</p>
+          </div>
+        </div>
+
+        <div class="drawer__foot">
+          <button type="button" class="drawer__button button s button-dark" data-drawer-add>Добавить</button>
+        </div>
+      </div>
+    </div>
+
+    @@include('html/footer.html')
+    @@include('html/foot.html')
+  </body>
+</html>
