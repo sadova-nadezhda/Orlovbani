@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Товары для бани" })
+  <body class="page-light">
+    @@include('html/header.html')
+
+    <main>
+      <section class="products section-pad section-hidden">
+        <div class="container">
+          <div class="products__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Товары для бани</span>
+            </nav>
+
+            <h1 class="products__title s text-up">Товары для бани</h1>
+
+            <div class="products__tabs tabs">
+              <button type="button" class="tabs__item is-active" data-filter="all">Все</button>
+              <button type="button" class="tabs__item" data-filter="rent">Аренда</button>
+              <button type="button" class="tabs__item" data-filter="hats">Панамы</button>
+            </div>
+
+            <div class="products__groups">
+              <div class="products__group" data-group="rent">
+                <h3 class="products__group-title text-up">Аренда</h3>
+                <div class="products__list">
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Пештемаль</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-1.png" alt="Банный набор" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Банный набор</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Пештемаль</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Пештемаль</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="products__group" data-group="hats">
+                <h3 class="products__group-title text-up">Панамы</h3>
+                <div class="products__list">
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Панама</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Панама</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Панама</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="products__item product-card">
+                    <div class="product-card__image"><img src="@img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__body">
+                      <h3 class="product-card__title">Панама</h3>
+                      <span class="product-card__note">Состав: Хлопковая пештемаль</span>
+                      <div class="product-card__prices">
+                        <span class="product-card__price">12 600 ₸</span>
+                        <span class="product-card__old">18 000 ₸</span>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="schedule section-pad-bottom">
+        <div class="container">
+          <div class="schedule__container">
+            <div class="schedule__media">
+              <video class="schedule__video" data-src="@img/schedule-video.mp4" muted loop playsinline preload="none"></video>
+              <h2 class="schedule__title s text-up">Расписание общих парений</h2>
+            </div>
+
+            <ul class="schedule__list">
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Классический пар</span>
+                  <span class="schedule-card__time">12:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/morning-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пихтовый пар</span>
+                  <span class="schedule-card__time">13:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Берёзовый пар</span>
+                  <span class="schedule-card__time">15:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Таёжный пар</span>
+                  <span class="schedule-card__time">16:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пар с минеральным контрастом</span>
+                  <span class="schedule-card__time">17:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Авторский пар Орловских бань</span>
+                  <span class="schedule-card__time">18:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пихтовый пар</span>
+                  <span class="schedule-card__time">19:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Контрастный пар</span>
+                  <span class="schedule-card__time">20:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Финальный классический пар</span>
+                  <span class="schedule-card__time">21:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="@img/evening-icon.svg" alt="" /></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/footer.html')
+    @@include('html/foot.html')
+  </body>
+</html>

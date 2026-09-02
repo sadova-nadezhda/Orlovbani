@@ -1310,6 +1310,18 @@
     }
   }
 
+  // на внутренней странице над заголовком стоят хлебные крошки
+  &__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pad-24);
+
+    @media (max-width: 767px) {
+      gap: var(--pad-16);
+    }
+  }
+
   &__title {
     font: 400 calc(40 * var(--width-multiplier))/1.1 Shadower;
 
@@ -1458,6 +1470,16 @@
 
   @media (max-width: 767px) {
     margin-bottom: var(--pad-16);
+  }
+
+  // крошки поверх тёмной подложки
+  &--light {
+    color: rgba(255, 255, 255, 0.5);
+
+    .breadcrumbs__link:hover,
+    .breadcrumbs__current {
+      color: var(--white, $white);
+    }
   }
 }
 
@@ -2673,6 +2695,607 @@ body.is-bar footer {
 
     @media (max-width: 767px) {
       max-width: unset;
+    }
+  }
+}
+
+// ====== Программа лояльности ======
+
+.programm {
+  padding-top: var(--pad-16);
+
+  @media (max-width: 767px) {
+    padding-top: var(--gap-8);
+  }
+
+  &__card {
+    position: relative;
+    border-radius: var(--br-20);
+    background-color: var(--dark, $dark);
+    color: var(--white, $white);
+    overflow: hidden;
+  }
+
+  &__image {
+    @include position-abs;
+    z-index: 1;
+    @include full-img-cover;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--pad-42);
+    min-height: calc(620 * var(--width-multiplier));
+    padding: var(--pad-42);
+
+    @media (max-width: 1024px) {
+      min-height: calc(600 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      gap: var(--pad-24);
+      min-height: calc(560 * var(--width-multiplier));
+      padding: var(--pad-24) var(--pad-16);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-24);
+
+    @media (max-width: 767px) {
+      gap: var(--pad-16);
+    }
+  }
+
+  &__title {
+    max-width: calc(480 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      max-width: unset;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+    max-width: calc(460 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      max-width: unset;
+    }
+  }
+
+  &__tag {
+    padding: calc(12 * var(--width-multiplier)) var(--pad-16);
+    border-radius: var(--br-20);
+    background-color: var(--light, $light);
+    font-size: calc(18 * var(--width-multiplier));
+    font-weight: 500;
+    @media (max-width: 767px) {
+      padding: calc(8 * var(--width-multiplier)) var(--pad-12);
+      font-size: calc(16 * var(--width-multiplier));
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  &__button {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
+
+.how {
+  padding-top: var(--pad-42);
+
+  @media (max-width: 767px) {
+    padding-top: var(--pad-24);
+  }
+
+  &__title {
+    margin-bottom: var(--pad-42);
+    color: var(--primary, $primary);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-24);
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-8);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.how-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pad-16);
+  min-height: calc(500 * var(--width-multiplier));
+  padding: var(--pad-24) var(--pad-16);
+  border-radius: var(--br-12);
+  background-color: var(--white, $white);
+  text-align: center;
+
+  @media (max-width: 1024px) {
+    min-height: calc(400 * var(--width-multiplier));
+  }
+
+  @media (max-width: 767px) {
+    min-height: calc(300 * var(--width-multiplier));
+    padding: var(--pad-16) var(--gap-8);
+  }
+
+  &__title {
+    font: 400 calc(24 * var(--width-multiplier))/1.2 Euclid;
+
+    @media (max-width: 1024px) {
+      font-size: calc(20 * var(--width-multiplier));
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+
+    img {
+      width: auto;
+      height: calc(160 * var(--width-multiplier));
+      object-fit: contain;
+
+      @media (max-width: 1024px) {
+        height: calc(140 * var(--width-multiplier));
+      }
+    }
+  }
+}
+
+// ====== SPA-услуги ======
+
+.services-page {
+  padding-top: var(--pad-42);
+
+  @media (max-width: 767px) {
+    padding-top: var(--pad-24);
+  }
+
+  .services__title {
+    margin-bottom: var(--pad-24);
+    color: var(--primary, $primary);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-16);
+    }
+  }
+
+  .services__tabs {
+    margin-bottom: var(--pad-42);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-24);
+    }
+  }
+
+  .services__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-8);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad-16);
+  border-radius: var(--br-12);
+  background-color: var(--white, $white);
+
+  @media (max-width: 767px) {
+    padding: var(--pad-8);
+  }
+
+  &__image {
+    position: relative;
+    height: calc(240 * var(--width-multiplier));
+    margin-bottom: var(--pad-16);
+    border-radius: var(--br-12);
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      height: calc(220 * var(--width-multiplier));
+    }
+
+    img {
+      @include full-img-cover;
+      transition: transform 0.6s ease-in-out;
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.05);
+  }
+
+  &__badge {
+    position: absolute;
+    z-index: 2;
+    top: var(--pad-8);
+    left: var(--pad-8);
+    padding: calc(8 * var(--width-multiplier)) calc(16 * var(--width-multiplier));
+    border-radius: var(--br-200);
+    background-color: rgba(32, 32, 32, 0.15);
+    color: var(--white, $white);
+    font-size: calc(12 * var(--width-multiplier));
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__label {
+    margin-bottom: var(--gap-8);
+    color: var(--grey, $grey);
+    font-size: calc(12 * var(--width-multiplier));
+  }
+
+  &__title {
+    margin-bottom: var(--gap-8);
+    font: 400 calc(20 * var(--width-multiplier))/1.2 Euclid;
+
+    @media (max-width: 1024px) {
+      font-size: calc(18 * var(--width-multiplier));
+    }
+  }
+
+  &__prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--gap-8);
+    margin-top: auto;
+  }
+
+  &__price {
+    color: var(--primary, $primary);
+    font: 500 calc(18 * var(--width-multiplier))/1.2 Euclid;
+  }
+
+  &__old {
+    color: var(--grey, $grey);
+    font: 400 calc(14 * var(--width-multiplier))/1.2 Euclid;
+    text-decoration: line-through;
+  }
+}
+
+// ====== Товары для бани ======
+
+.products {
+  padding-top: var(--pad-42);
+
+  @media (max-width: 767px) {
+    padding-top: var(--pad-24);
+  }
+
+  &__title {
+    margin-bottom: var(--pad-42);
+    color: var(--primary, $primary);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-24);
+    }
+  }
+
+  &__tabs {
+    margin-bottom: var(--pad-42);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-24);
+    }
+  }
+
+  &__groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-64);
+
+    @media (max-width: 767px) {
+      gap: var(--pad-42);
+    }
+  }
+
+  &__group-title {
+    margin-bottom: var(--pad-24);
+    color: var(--primary, $primary);
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-16);
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap-8);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad-16);
+  border-radius: var(--br-12);
+  background-color: var(--white, $white);
+
+  @media (max-width: 767px) {
+    padding: var(--pad-8);
+  }
+
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(240 * var(--width-multiplier));
+    margin-bottom: var(--pad-16);
+    border-radius: var(--br-12);
+    background-color: rgba(32, 32, 32, 0.08);
+    overflow: hidden;
+
+    @media (max-width: 767px) {
+      height: calc(140 * var(--width-multiplier));
+      margin-bottom: var(--gap-8);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.6s ease-in-out;
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.05);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__title {
+    margin-bottom: var(--gap-8);
+    font: 400 calc(20 * var(--width-multiplier))/1.2 Euclid;
+
+    @media (max-width: 1024px) {
+      font-size: calc(18 * var(--width-multiplier));
+    }
+  }
+
+  &__note {
+    margin-bottom: var(--pad-16);
+    font-size: calc(12 * var(--width-multiplier));
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--gap-8);
+    }
+  }
+
+  &__prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--gap-8);
+    margin-top: auto;
+  }
+
+  &__price {
+    color: var(--primary, $primary);
+    font: 500 calc(18 * var(--width-multiplier))/1.2 Euclid;
+  }
+
+  &__old {
+    color: var(--grey, $grey);
+    font: 400 calc(14 * var(--width-multiplier))/1.2 Euclid;
+    text-decoration: line-through;
+  }
+}
+
+// ====== Расписание парений ======
+
+.schedule {
+  --schedule-top: calc(61 * var(--width-multiplier) + var(--gap-8));
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: var(--gap-8);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__media {
+    position: sticky;
+    top: var(--schedule-top);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-height: calc(100svh - var(--schedule-top) - var(--gap-8));
+    padding: var(--pad-24);
+    border-radius: var(--br-20);
+    background-color: var(--primary, $primary);
+    color: var(--white, $white);
+    text-align: center;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      position: relative;
+      top: unset;
+      max-height: unset;
+      height: calc(540 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      padding: var(--pad-16);
+      border-radius: var(--br-12);
+    }
+  }
+
+  &__video {
+    @include position-abs;
+    z-index: 1;
+    @include full-img-cover;
+  }
+
+  &__title {
+    position: relative;
+    z-index: 3;
+    max-width: calc(360 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      max-width: unset;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-8);
+  }
+}
+
+.schedule-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pad-16);
+  padding: var(--pad-16);
+  border-radius: var(--br-12);
+  background-color: var(--white, $white);
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--width-multiplier));
+    min-width: 0;
+  }
+
+  &__label {
+    color: var(--primary, $primary);
+    font-size: calc(12 * var(--width-multiplier));
+  }
+
+  &__time {
+    color: var(--primary, $primary);
+    font: 700 calc(32 * var(--width-multiplier))/1.1 Shadower;
+
+    @media (max-width: 767px) {
+      font-size: calc(24 * var(--width-multiplier));
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+    width: calc(54 * var(--width-multiplier));
+    height: calc(54 * var(--width-multiplier));
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @media (max-width: 767px) {
+      width: calc(42 * var(--width-multiplier));
+      height: calc(42 * var(--width-multiplier));
+    }
+  }
+}
+
+// ====== Контакты ======
+
+.contacts {
+  --contacts-offset: calc(61 * var(--width-multiplier));
+
+  @media (max-width: 767px) {
+    --contacts-offset: calc(56 * var(--width-multiplier));
+  }
+
+  .feedback__card {
+    border-radius: 0;
+  }
+
+  .feedback__inner {
+    gap: var(--pad-42);
+    min-height: calc(100svh - var(--contacts-offset));
+
+    @media (max-width: 767px) {
+      gap: var(--pad-24);
+      padding: var(--pad-24) var(--pad-16) var(--pad-42);
+    }
+  }
+
+  .breadcrumbs {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 767px) {
+    .feedback__contact:nth-child(2) {
+      order: 1;
+    }
+
+    .feedback__inner {
+      justify-content: flex-start;
+      gap: var(--pad-16);
+    }
+
+    .feedback__main {
+      margin: auto 0;
     }
   }
 }

@@ -392,7 +392,8 @@
   // Услуги
   // ======================
   const initServices = () => {
-    revealOnce($(".services"));
+    // анимация появления нужна только блоку на главной, на странице услуг её нет
+    revealOnce($(".home-services"));
   };
 
   // ======================
@@ -663,6 +664,74 @@
 
     return { render };
   };
+
+  // ролик подгружается и играет только пока он на экране
+  const initLazyVideo = (video) => {
+    if (!video) return;
+
+    const start = () => {
+      if (!video.getAttribute("src") && video.dataset.src) {
+        video.setAttribute("src", video.dataset.src);
+      }
+      video.play?.()?.catch?.(() => {});
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      start();
+      return;
+    }
+
+    new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start();
+        else video.pause?.();
+      },
+      { rootMargin: "20% 0px", threshold: 0 }
+    ).observe(video);
+  };
+
+  // ======================
+  // Расписание парений
+  // ======================
+  const initSchedule = () => {
+    initLazyVideo($(".schedule__video"));
+    return null;
+  };
+
+  // ======================
+  // Фильтр по табам — прячет элементы, у которых значение не совпало
+  // ======================
+  const initTabsFilter = (section, selector, key) => {
+    if (!section) return null;
+
+    const items = $$(selector, section);
+    const tabs = $$("[data-filter]", section);
+    if (!items.length || !tabs.length) return null;
+
+    const render = (filter) => {
+      items.forEach((item) => {
+        item.hidden = filter !== "all" && item.dataset[key] !== filter;
+      });
+
+      refreshLayout();
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((el) => el.classList.toggle("is-active", el === tab));
+        render(tab.dataset.filter || "all");
+      });
+    });
+
+    render("all");
+
+    return { render };
+  };
+
+  // товары для бани фильтруются целыми разделами, SPA-услуги — карточками
+  const initProducts = () => initTabsFilter($(".products"), "[data-group]", "group");
+
+  const initServicesPage = () => initTabsFilter($(".services-page"), "[data-category]", "category");
 
   // ======================
   // Поля выбора даты и времени
@@ -1105,6 +1174,9 @@
     safe("reviews", initReviews);
     safe("feedback", initFeedback);
     safe("newsPage", initNewsPage);
+    safe("servicesPage", initServicesPage);
+    safe("products", initProducts);
+    safe("schedule", initSchedule);
     safe("fields", initFields);
     safe("tickets", () => initTickets({ scrollLock }));
     safe("phoneMask", initPhoneMask);

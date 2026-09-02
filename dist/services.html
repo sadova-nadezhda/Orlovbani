@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Успешно</title>
+  <title>SPA-услуги</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
@@ -65,19 +65,291 @@
 
 
     <main>
-      <section class="success section-pad-s section-hidden">
+      <section class="services services-page section-pad section-hidden">
         <div class="container">
-          <div class="success__container">
-            <img class="success__image" src="img/thanks-img.png" alt="" />
-            <div class="success__content">
-              <h1 class="success__title s text-up">Ваше посещение Орловских бань Select успешно забронировано.</h1>
-              <div class="success__desc">Информация о бронировании и детали посещения отправлены на указанные вами контактные данные.</div>
-              <a href="index.html" class="success__button button button-white button-white-1">Вернуться на главную</a>
+          <div class="services__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">SPA-услуги</span>
+            </nav>
+
+            <h1 class="services__title s text-up">SPA-услуги</h1>
+
+            <div class="services__tabs tabs">
+              <button type="button" class="tabs__item is-active" data-filter="all">Все услуги</button>
+              <button type="button" class="tabs__item" data-filter="steam">Парения</button>
+              <button type="button" class="tabs__item" data-filter="massage">Массажи</button>
+              <button type="button" class="tabs__item" data-filter="wash">Помывки</button>
+              <button type="button" class="tabs__item" data-filter="scrub">Скрабирования</button>
+              <button type="button" class="tabs__item" data-filter="spa">SPA-программы</button>
+            </div>
+
+            <div class="services__list">
+              <div class="services__item service-card" data-category="steam">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">45 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Парение</span>
+                  <h2 class="service-card__title">Классическое парение</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">25 000 ₸</span>
+                    <span class="service-card__old">27 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="steam">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">45 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Парение</span>
+                  <h2 class="service-card__title">Пихтовое парение</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">25 000 ₸</span>
+                    <span class="service-card__old">27 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="steam">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">60 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Парение</span>
+                  <h2 class="service-card__title">Берёзовое парение</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">30 000 ₸</span>
+                    <span class="service-card__old">32 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="steam">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">60 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Парение</span>
+                  <h2 class="service-card__title">Авторское парение Орловских бань</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">35 000 ₸</span>
+                    <span class="service-card__old">38 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="massage">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">60 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Массаж</span>
+                  <h2 class="service-card__title">Классический массаж</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">28 000 ₸</span>
+                    <span class="service-card__old">30 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="wash">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">30 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Помывка</span>
+                  <h2 class="service-card__title">Помывка с мыльным массажем</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">15 000 ₸</span>
+                    <span class="service-card__old">18 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="scrub">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">30 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">Скрабирование</span>
+                  <h2 class="service-card__title">Скрабирование тела</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">16 000 ₸</span>
+                    <span class="service-card__old">18 000 ₸</span>
+                  </div>
+                </div>
+              </div>
+              <div class="services__item service-card" data-category="spa">
+                <div class="service-card__image">
+                  <img src="img/services-img.png" alt="" />
+                  <span class="service-card__badge">120 мин.</span>
+                </div>
+                <div class="service-card__body">
+                  <span class="service-card__label">SPA-программа</span>
+                  <h2 class="service-card__title">Полное восстановление</h2>
+                  <div class="service-card__prices">
+                    <span class="service-card__price">65 000 ₸</span>
+                    <span class="service-card__old">72 000 ₸</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+      <section class="schedule section-pad-bottom">
+        <div class="container">
+          <div class="schedule__container">
+            <div class="schedule__media">
+              <video class="schedule__video" data-src="img/schedule-video.mp4" muted loop playsinline preload="none"></video>
+              <h2 class="schedule__title s text-up">Расписание общих парений</h2>
+            </div>
+
+            <ul class="schedule__list">
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Классический пар</span>
+                  <span class="schedule-card__time">12:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/morning-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пихтовый пар</span>
+                  <span class="schedule-card__time">13:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Берёзовый пар</span>
+                  <span class="schedule-card__time">15:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Таёжный пар</span>
+                  <span class="schedule-card__time">16:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/day-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пар с минеральным контрастом</span>
+                  <span class="schedule-card__time">17:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Авторский пар Орловских бань</span>
+                  <span class="schedule-card__time">18:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Пихтовый пар</span>
+                  <span class="schedule-card__time">19:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Контрастный пар</span>
+                  <span class="schedule-card__time">20:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/evening-icon.svg" alt="" /></span>
+              </li>
+              <li class="schedule__item schedule-card">
+                <div class="schedule-card__body">
+                  <span class="schedule-card__label">Финальный классический пар</span>
+                  <span class="schedule-card__time">21:00</span>
+                </div>
+                <span class="schedule-card__icon"><img src="img/evening-icon.svg" alt="" /></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__container">
+      <div class="footer__col footer__col--brand">
+        <a href="index.html" class="footer__logo">
+          <img src="img/footer-logo.svg" alt="Орловские бани" />
+        </a>
+        <p class="footer__slogan">Восстанавливая силу / Сохраняя традиции.</p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Навигация</span>
+        <ul class="footer__menu">
+          <li><a href="">О нас</a></li>
+          <li><a href="">Мужской банный клуб</a></li>
+          <li><a href="">SPA-Услуги</a></li>
+          <li><a href="">Новости и акции</a></li>
+          <li><a href="">Кухня</a></li>
+          <li><a href="">Товары для бани</a></li>
+          <li><a href="">Контакты</a></li>
+          <li><a href="">Бронирование</a></li>
+          <li><a href="">Франшиза</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Каналы связи</span>
+        <ul class="footer__list">
+          <li>
+            <span class="footer__name">Instagram</span>
+            <a href="" class="footer__value" target="_blank" rel="noopener">@orlov_banya_select</a>
+          </li>
+          <li>
+            <span class="footer__name">WhatsApp</span>
+            <a href="" class="footer__value" target="_blank" rel="noopener">+7 (XXX) XXX-XX-XX</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Контакты</span>
+        <ul class="footer__list">
+          <li>
+            <span class="footer__name">Адрес</span>
+            <span class="footer__value">Улица Каныша Сатпаева, 29/6</span>
+          </li>
+          <li>
+            <span class="footer__name">График</span>
+            <span class="footer__value">Ежедневно с 10:00 до 23:00</span>
+          </li>
+          <li>
+            <span class="footer__name">Телефон</span>
+            <a href="tel:+70000000000" class="footer__value">+7 (XXX) XXX-XX-XX</a>
+          </li>
+          <li>
+            <span class="footer__name">E-mail</span>
+            <a href="mailto:info@orlovbanya-select.kz" class="footer__value text-up">info@orlovbanya-select.kz</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 XXX</span>
+      <a href="" class="footer__link">Политика конфиденциальности</a>
+      <a href="" class="footer__link">Договор оферты</a>
+      <a href="https://factum.agency/" class="footer__link" target="_blank">Сделано в factum.</a>
+    </div>
+  </div>
+</footer>
 
     <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260902193935"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260902193935"></script>

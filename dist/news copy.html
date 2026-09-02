@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Успешно</title>
+  <title>Новости и акции</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/site.webmanifest">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260902193935" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260902193935" />
-  <link rel="stylesheet" href="css/style.css?_v=20260902193935" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260902135421" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260902135421" />
+  <link rel="stylesheet" href="css/style.css?_v=20260902135421" />
   <!-- <script>document.documentElement.classList.add("is-loading");</script> -->
 </head>
 
@@ -65,26 +65,207 @@
 
 
     <main>
-      <section class="success section-pad-s section-hidden">
+      <section class="news news-page section-pad section-hidden">
         <div class="container">
-          <div class="success__container">
-            <img class="success__image" src="img/thanks-img.png" alt="" />
-            <div class="success__content">
-              <h1 class="success__title s text-up">Ваше посещение Орловских бань Select успешно забронировано.</h1>
-              <div class="success__desc">Информация о бронировании и детали посещения отправлены на указанные вами контактные данные.</div>
-              <a href="index.html" class="success__button button button-white button-white-1">Вернуться на главную</a>
+          <div class="news__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Новости и акции</span>
+            </nav>
+
+            <h1 class="news__title s text-up">Новости и акции</h1>
+
+            <div class="news__tabs tabs">
+              <button type="button" class="tabs__item is-active" data-filter="all">Все</button>
+              <button type="button" class="tabs__item" data-filter="news">Новости</button>
+              <button type="button" class="tabs__item" data-filter="promo">Акции</button>
+            </div>
+
+            <div class="news__grid">
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Новый банный мастер в команде клуба</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Обновили парную и зону отдыха</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="promo-inner.html" class="news__item news-card news-card--promo" data-category="promo">
+                <div class="news-card__image"><img src="img/promo-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Акции</span>
+                  <h3 class="news-card__title">Скидка -10% на посещение в будни</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Клубные встречи по четвергам</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="promo-inner.html" class="news__item news-card news-card--promo" data-category="promo">
+                <div class="news-card__image"><img src="img/promo-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Акции</span>
+                  <h3 class="news-card__title">Второе посещение в подарок</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Новое меню банной кухни</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Расширили расписание сеансов</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="promo-inner.html" class="news__item news-card news-card--promo" data-category="promo">
+                <div class="news-card__image"><img src="img/promo-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Акции</span>
+                  <h3 class="news-card__title">Абонемент на 5 посещений выгоднее</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">Запустили программу лояльности</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="promo-inner.html" class="news__item news-card news-card--promo" data-category="promo">
+                <div class="news-card__image"><img src="img/promo-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Акции</span>
+                  <h3 class="news-card__title">SPA-программа со скидкой -15%</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+              <a href="news-inner.html" class="news__item news-card" data-category="news">
+                <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                <div class="news-card__body">
+                  <span class="news-card__label">Новости</span>
+                  <h3 class="news-card__title">VIP-кабинет «Шале» после обновления</h3>
+                  <span class="news-card__more">Подробнее</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="news__foot">
+              <button type="button" class="news__more button s button-white button-white-2" data-news-more>Показать ещё</button>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260902193935"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260902193935"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260902193935"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260902193935"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260902193935"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260902193935"></script>
-<script src="js/app.min.js?_v=20260902193935"></script>
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__container">
+      <div class="footer__col footer__col--brand">
+        <a href="index.html" class="footer__logo">
+          <img src="img/footer-logo.svg" alt="Орловские бани" />
+        </a>
+        <p class="footer__slogan">Восстанавливая силу / Сохраняя традиции.</p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Навигация</span>
+        <ul class="footer__menu">
+          <li><a href="">О нас</a></li>
+          <li><a href="">Мужской банный клуб</a></li>
+          <li><a href="">SPA-Услуги</a></li>
+          <li><a href="">Новости и акции</a></li>
+          <li><a href="">Кухня</a></li>
+          <li><a href="">Товары для бани</a></li>
+          <li><a href="">Контакты</a></li>
+          <li><a href="">Бронирование</a></li>
+          <li><a href="">Франшиза</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Каналы связи</span>
+        <ul class="footer__list">
+          <li>
+            <span class="footer__name">Instagram</span>
+            <a href="" class="footer__value" target="_blank" rel="noopener">@orlov_banya_select</a>
+          </li>
+          <li>
+            <span class="footer__name">WhatsApp</span>
+            <a href="" class="footer__value" target="_blank" rel="noopener">+7 (XXX) XXX-XX-XX</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__label">Контакты</span>
+        <ul class="footer__list">
+          <li>
+            <span class="footer__name">Адрес</span>
+            <span class="footer__value">Улица Каныша Сатпаева, 29/6</span>
+          </li>
+          <li>
+            <span class="footer__name">График</span>
+            <span class="footer__value">Ежедневно с 10:00 до 23:00</span>
+          </li>
+          <li>
+            <span class="footer__name">Телефон</span>
+            <a href="tel:+70000000000" class="footer__value">+7 (XXX) XXX-XX-XX</a>
+          </li>
+          <li>
+            <span class="footer__name">E-mail</span>
+            <a href="mailto:info@orlovbanya-select.kz" class="footer__value text-up">info@orlovbanya-select.kz</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy">&copy; 2026 XXX</span>
+      <a href="" class="footer__link">Политика конфиденциальности</a>
+      <a href="" class="footer__link">Договор оферты</a>
+      <a href="https://factum.agency/" class="footer__link" target="_blank">Сделано в factum.</a>
+    </div>
+  </div>
+</footer>
+
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260902135421"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260902135421"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260902135421"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260902135421"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260902135421"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260902135421"></script>
+<script src="js/app.min.js?_v=20260902135421"></script>
   </body>
 </html>
