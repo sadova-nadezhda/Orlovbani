@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "Бар и кухня" })
+  <body class="page-light">
+    @@include('html/header.html')
+
+    <main>
+      <!-- section-hidden не ставим: overflow у родителя ломает sticky у табов -->
+      <section class="menu section-pad-s">
+        <div class="container">
+          <div class="menu__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Бар и кухня</span>
+            </nav>
+
+            <h1 class="menu__title s text-up">Бар и кухня</h1>
+
+            <nav class="menu__tabs tabs">
+              <a href="#menu-groups" class="tabs__item is-active" data-anchor="menu-groups">Все</a>
+              <a href="#snacks" class="tabs__item" data-anchor="snacks">Закуски</a>
+              <a href="#salads" class="tabs__item" data-anchor="salads">Салаты</a>
+              <a href="#hot" class="tabs__item" data-anchor="hot">Горячее</a>
+              <a href="#soups" class="tabs__item" data-anchor="soups">Супы</a>
+              <a href="#drinks" class="tabs__item" data-anchor="drinks">Напитки</a>
+            </nav>
+
+            <div class="menu__groups" id="menu-groups">
+              <div class="menu__group" id="snacks">
+                <h2 class="menu__group-title s text-up">Закуски</h2>
+                <ul class="menu__list">
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Мясная тарелка</h3>
+                      <p class="menu-card__desc">говяжий язык, буженина, куриный рулет, горчичный соус</p>
+                    </div>
+                    <span class="menu-card__price">9 200 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Сырная тарелка</h3>
+                      <p class="menu-card__desc">пармезан, дорблю, камамбер, мёд, грецкий орех</p>
+                    </div>
+                    <span class="menu-card__price">8 400 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Соленья по-домашнему</h3>
+                      <p class="menu-card__desc">квашеная капуста, огурцы, помидоры, черемша</p>
+                    </div>
+                    <span class="menu-card__price">4 600 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Гренки ржаные с чесноком</h3>
+                      <p class="menu-card__desc">ржаной хлеб, чеснок, сырный соус</p>
+                    </div>
+                    <span class="menu-card__price">3 200 ₸</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="menu__group" id="salads">
+                <h2 class="menu__group-title s text-up">Салаты</h2>
+                <ul class="menu__list">
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Салат Малибу</h3>
+                      <p class="menu-card__desc">куриная грудка, свежие огурцы, помидоры, микс-салат, мандарины, сухарики</p>
+                    </div>
+                    <span class="menu-card__price">5 800 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Салат Греческий</h3>
+                      <p class="menu-card__desc">свежие огурцы, помидоры, сыр фета, микс-зелени, маслины, оливки</p>
+                    </div>
+                    <span class="menu-card__price">5 800 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Салат свежий</h3>
+                      <p class="menu-card__desc">заправка на выбор: майонез, сметана, оливковое масло</p>
+                    </div>
+                    <span class="menu-card__price">5 800 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Тёплый салат с бон-филе из конины</h3>
+                      <p class="menu-card__desc">бон-филе из конины, микс-зелени, имбирно-соевый соус</p>
+                    </div>
+                    <span class="menu-card__price">5 800 ₸</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- мин 6-8 картинок -->
+              <div class="menu__gallery swiper">
+                <div class="menu__gallery-list swiper-wrapper">
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-1.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-2.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-3.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-4.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-1.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-2.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-3.png" alt="" /></div>
+                  <div class="menu__gallery-item swiper-slide"><img src="@img/menu-4.png" alt="" /></div>
+                </div>
+              </div>
+
+              <div class="menu__group" id="hot">
+                <h2 class="menu__group-title s text-up">Горячее</h2>
+                <ul class="menu__list">
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Бешбармак по-казахски</h3>
+                      <p class="menu-card__desc">конина, казы, домашняя лапша, лук</p>
+                    </div>
+                    <span class="menu-card__price">12 600 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Стейк из мраморной говядины</h3>
+                      <p class="menu-card__desc">мраморная говядина, розмарин, перечный соус</p>
+                    </div>
+                    <span class="menu-card__price">15 800 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Форель на углях</h3>
+                      <p class="menu-card__desc">форель, лимон, тимьян, овощи гриль</p>
+                    </div>
+                    <span class="menu-card__price">11 400 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Шашлык из баранины</h3>
+                      <p class="menu-card__desc">корейка ягнёнка, маринованный лук, лаваш</p>
+                    </div>
+                    <span class="menu-card__price">9 800 ₸</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="menu__group" id="soups">
+                <h2 class="menu__group-title s text-up">Супы</h2>
+                <ul class="menu__list">
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Сорпа</h3>
+                      <p class="menu-card__desc">баранина, картофель, морковь, зелень</p>
+                    </div>
+                    <span class="menu-card__price">4 200 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Уха по-домашнему</h3>
+                      <p class="menu-card__desc">форель, судак, картофель, укроп</p>
+                    </div>
+                    <span class="menu-card__price">5 400 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Куриный бульон с лапшой</h3>
+                      <p class="menu-card__desc">домашняя лапша, куриное филе, зелень</p>
+                    </div>
+                    <span class="menu-card__price">3 600 ₸</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="menu__group" id="drinks">
+                <h2 class="menu__group-title s text-up">Напитки</h2>
+                <ul class="menu__list">
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Чай травяной</h3>
+                      <p class="menu-card__desc">сбор из горных трав, мёд, лимон</p>
+                    </div>
+                    <span class="menu-card__price">2 400 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Морс домашний</h3>
+                      <p class="menu-card__desc">брусника, клюква, облепиха</p>
+                    </div>
+                    <span class="menu-card__price">1 800 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Квас на ржаном хлебе</h3>
+                      <p class="menu-card__desc">квас домашнего брожения</p>
+                    </div>
+                    <span class="menu-card__price">1 600 ₸</span>
+                  </li>
+                  <li class="menu__item menu-card">
+                    <div class="menu-card__body">
+                      <h3 class="menu-card__title">Свежевыжатый сок</h3>
+                      <p class="menu-card__desc">апельсин, яблоко, грейпфрут</p>
+                    </div>
+                    <span class="menu-card__price">2 800 ₸</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    @@include('html/footer.html')
+    @@include('html/foot.html')
+  </body>
+</html>

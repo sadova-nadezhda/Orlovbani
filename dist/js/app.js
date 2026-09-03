@@ -734,6 +734,50 @@
   const initServicesPage = () => initTabsFilter($(".services-page"), "[data-category]", "category");
 
   // ======================
+  // Бар и кухня
+  // ======================
+  const initMenu = () => {
+    const section = $(".menu");
+    if (!section) return null;
+
+    const gallery = $(".menu__gallery", section);
+    if (gallery && typeof Swiper !== "undefined") {
+      state.swipers.menu = new Swiper(gallery, {
+        slidesPerView: "auto",
+        spaceBetween: s(8),
+        grabCursor: true,
+        centeredSlides: true,
+        loop: true,
+      });
+    }
+
+    // разделы не фильтруются, ссылки просто прокручивают к нужному блоку
+    const links = $$("[data-anchor]", section);
+    if (!links.length) return null;
+
+    // «Все» ведёт на начало списка и остаётся активной, пока не дошли до первого раздела
+    const groups = links
+      .map((link) => ({ link, target: document.getElementById(link.dataset.anchor) }))
+      .filter((item) => item.target?.classList.contains("menu__group"));
+
+    const sync = () => {
+      const offset = s(140);
+      let current = links[0];
+
+      groups.forEach(({ link, target }) => {
+        if (target.getBoundingClientRect().top <= offset) current = link;
+      });
+
+      links.forEach((link) => link.classList.toggle("is-active", link === current));
+    };
+
+    window.addEventListener("scroll", sync, { passive: true });
+    sync();
+
+    return { sync };
+  };
+
+  // ======================
   // Поля выбора даты и времени
   // ======================
   const initFields = () => {
@@ -1175,6 +1219,7 @@
     safe("feedback", initFeedback);
     safe("newsPage", initNewsPage);
     safe("servicesPage", initServicesPage);
+    safe("menu", initMenu);
     safe("products", initProducts);
     safe("schedule", initSchedule);
     safe("fields", initFields);
