@@ -281,7 +281,16 @@
     }
   }
 
+
+  // колонки заданы явно: без этого скрытая карточка освобождает первую ячейку,
+  // и пагинация с подписью сдвигаются влево
   &__card {
+    grid-column: 1;
+
+    // на мобильной колонка одна, явная расстановка не нужна
+    @media (max-width: 767px) {
+      grid-column: auto;
+    }
 
     &.is-hidden {
       display: none;
@@ -289,6 +298,7 @@
   }
 
   &__pagination {
+    grid-column: 2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,15 +323,18 @@
     }
 
     @media (max-width: 767px) {
+      grid-column: auto;
       order: 1;
     }
   }
 
   &__tagline {
+    grid-column: 3;
     justify-self: end;
     text-align: right;
 
     @media (max-width: 767px) {
+      grid-column: auto;
       justify-self: center;
       text-align: center;
       margin-bottom: calc(24 * var(--width-multiplier));
@@ -550,7 +563,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--pad-16);
-    min-height: calc(680 * var(--width-multiplier));
+    min-height: calc(600 * var(--width-multiplier));
 
     @media (max-width: 767px) {
       grid-template-columns: 1fr;
@@ -708,7 +721,7 @@
     grid-template-columns: 2fr 2fr 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
     gap: var(--pad-16);
-    height: calc(660 * var(--width-multiplier));
+    height: calc(600 * var(--width-multiplier));
 
     @media (max-width: 767px) {
       display: flex;
@@ -797,7 +810,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: var(--pad-24);
-    min-height: calc(660 * var(--width-multiplier));
+    min-height: calc(600 * var(--width-multiplier));
     padding: var(--pad-42);
 
     @media (max-width: 767px) {
@@ -1057,7 +1070,6 @@
   gap: var(--gap-8);
 
   &__item {
-    // пункт может быть и кнопкой-фильтром, и якорной ссылкой
     display: inline-flex;
     align-items: center;
     padding: calc(10 * var(--width-multiplier));
@@ -1121,7 +1133,7 @@
       margin: auto;
       border-radius: calc(12 * var(--width-multiplier));
       object-fit: cover;
-      transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+      transition: width 0.4s ease-out, height 0.4s ease-out;
       @media (max-width: 767px) {
         width: 100%;
         height: 100%;
@@ -1173,7 +1185,6 @@
     }
   }
 
-  // градиент в background не анимируется, поэтому он вынесен в отдельный слой с opacity
   &--promo::before {
     content: "";
     @include position-abs;
@@ -1303,7 +1314,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--pad-24);
-    min-height: calc(740 * var(--width-multiplier));
+    min-height: calc(600 * var(--width-multiplier));
     padding: calc(48 * var(--width-multiplier)) calc(40 * var(--width-multiplier));
     text-align: center;
 
@@ -2677,7 +2688,7 @@ body.is-bar footer {
     align-items: center;
     gap: var(--pad-24);
     width: 100%;
-    max-width: calc(700 * var(--width-multiplier));
+    max-width: calc(720 * var(--width-multiplier));
 
     @media (max-width: 767px) {
       gap: var(--pad-16);
@@ -2695,6 +2706,186 @@ body.is-bar footer {
 
   &__desc {
     max-width: calc(512 * var(--width-multiplier));
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+}
+
+// ====== О компании ======
+
+.complex {
+  &__card {
+    position: relative;
+    border-radius: var(--br-20);
+    background-color: var(--dark, $dark);
+    color: var(--white, $white);
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      @include position-abs;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(56.5% 56.5% at 50% 50%, rgba(0, 0, 0, 0.9) 13.84%, rgba(0, 0, 0, 0) 100%),
+                  linear-gradient(0deg, rgba(32, 32, 32, 0.3), rgba(32, 32, 32, 0.3));
+    }
+  }
+
+  &__image {
+    @include position-abs;
+    z-index: 1;
+    @include full-img-cover;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pad-42);
+    min-height: calc(620 * var(--width-multiplier));
+    padding: var(--pad-42);
+    text-align: center;
+
+    @media (max-width: 1024px) {
+      min-height: calc(640 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      gap: var(--pad-24);
+      min-height: calc(560 * var(--width-multiplier));
+      padding: var(--pad-24) var(--pad-16);
+    }
+  }
+
+  &__label {
+    position: relative;
+    padding: 0 calc(32 * var(--width-multiplier));
+    font-weight: 500;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: calc(15 * var(--width-multiplier));
+      height: calc(35 * var(--width-multiplier));
+      background-color: currentColor;
+      -webkit-mask: url("../img/sprig.svg") center / contain no-repeat;
+      mask: url("../img/sprig.svg") center / contain no-repeat;
+    }
+
+    &::before {
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      right: 0;
+      transform: translateY(-50%) scaleX(-1);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pad-24);
+
+    @media (max-width: 767px) {
+      gap: var(--pad-16);
+    }
+  }
+
+  &__title {
+    max-width: calc(660 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      font-size: calc(32 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      max-width: unset;
+      font-size: calc(28 * var(--width-multiplier));
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap-8);
+    max-width: calc(460 * var(--width-multiplier));
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  &__tag {
+    padding: calc(12 * var(--width-multiplier)) var(--pad-16);
+    border-radius: var(--br-200);
+    background-color: var(--light, $light);
+    font-size: calc(18 * var(--width-multiplier));
+    font-weight: 500;
+
+    @media (max-width: 1024px) {
+      font-size: calc(16 * var(--width-multiplier));
+    }
+    
+    @media (max-width: 767px) {
+      padding: var(--gap-8) calc(12 * var(--width-multiplier));
+      font-size: calc(12 * var(--width-multiplier));
+    }
+  }
+
+  &__text {
+    max-width: calc(664 * var(--width-multiplier));
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  &__button {
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
+
+.vip {
+  .complex__inner {
+    justify-content: flex-start;
+  }
+
+  .complex__body {
+    margin: auto 0;
+  }
+
+  .complex__title {
+    max-width: calc(620 * var(--width-multiplier));
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  .complex__text {
+    max-width: calc(486 * var(--width-multiplier));
+    color: var(--white, $white);
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  .complex__tags {
+    max-width: calc(660 * var(--width-multiplier));
 
     @media (max-width: 767px) {
       max-width: unset;
@@ -2847,6 +3038,135 @@ body.is-bar footer {
     white-space: nowrap;
     @media (max-width: 767px) {
       font-size: calc(16 * var(--width-multiplier));
+    }
+  }
+}
+
+// ====== Бар и кухня на странице «О компании» ======
+
+.about-menu {
+  padding-top: var(--pad-64);
+
+  @media (max-width: 767px) {
+    padding-top: var(--pad-42);
+  }
+
+  &__container {
+    padding: var(--pad-42) 0;
+    border-radius: var(--br-20);
+    background-color: var(--white, $white);
+    overflow: hidden;
+    @media (max-width: 767px) {
+      padding: var(--pad-24) var(--pad-16);
+    }
+  }
+
+  &__title {
+    margin-bottom: var(--pad-64);
+    color: var(--primary, $primary);
+
+    @media (max-width: 767px) {
+      margin-bottom: var(--pad-24);
+    }
+  }
+
+  &__text {
+    max-width: calc(560 * var(--width-multiplier));
+    margin: var(--pad-64) auto 0;
+    text-align: center;
+
+    @media (max-width: 767px) {
+      max-width: unset;
+      margin-top: var(--pad-24);
+    }
+  }
+
+  .menu__gallery {
+    width: 100vw;
+    height: calc(360 * var(--width-multiplier));
+    margin: 0 calc(50% - 50vw);
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+
+    @media (max-width: 1024px) {
+      height: calc(300 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      height: calc(220 * var(--width-multiplier));
+    }
+  }
+}
+
+// ====== Баннер программы лояльности ======
+
+.about-programm {
+  &__card {
+    position: relative;
+    border-radius: var(--br-20);
+    background-color: var(--dark, $dark);
+    color: var(--white, $white);
+    overflow: hidden;
+
+    @media (max-width: 767px) {
+      border-radius: var(--br-12);
+    }
+
+    &::after {
+      content: "";
+      @include position-abs;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(32, 32, 32, 0.85) 0%, rgba(32, 32, 32, 0.4) 45%, rgba(32, 32, 32, 0) 75%);
+
+      @media (max-width: 767px) {
+        background: linear-gradient(180deg, rgba(32, 32, 32, 0.5) 0%, rgba(32, 32, 32, 0.85) 100%);
+      }
+    }
+  }
+
+  &__image {
+    @include position-abs;
+    z-index: 1;
+    @include full-img-cover;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--pad-42);
+    min-height: calc(420 * var(--width-multiplier));
+    padding: var(--pad-42);
+
+    @media (max-width: 1024px) {
+      min-height: calc(400 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      align-items: stretch;
+      gap: var(--pad-24);
+      min-height: calc(380 * var(--width-multiplier));
+      padding: var(--pad-24) var(--pad-16);
+    }
+  }
+
+  &__title {
+    max-width: calc(740 * var(--width-multiplier));
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  }
+
+  &__button {
+    @media (max-width: 767px) {
+      width: 100%;
     }
   }
 }
@@ -3448,6 +3768,97 @@ body.is-bar footer {
 
     .feedback__main {
       margin: auto 0;
+    }
+  }
+}
+
+// ====== SEO-блок ======
+
+.seo {
+  &__card {
+    padding: var(--pad-16) var(--pad-24);
+    border-radius: var(--br-12);
+    background-color: var(--white, $white);
+
+    @media (max-width: 767px) {
+      padding: var(--pad-16);
+    }
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pad-16);
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--width-multiplier));
+  }
+
+  &__title {
+    color: var(--primary, $primary);
+    font: 700 calc(24 * var(--width-multiplier))/1.1 Shadower;
+
+    @media (max-width: 1024px) {
+      font-size: calc(22 * var(--width-multiplier));
+    }
+
+    @media (max-width: 767px) {
+      font-size: calc(20 * var(--width-multiplier));
+    }
+  }
+
+  &__subtitle {
+    color: var(--primary, $primary);
+    font-size: calc(16 * var(--width-multiplier));
+
+    @media (max-width: 1024px) {
+      font-size: calc(14 * var(--width-multiplier));
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+    transition: transform 0.35s ease-in-out;
+
+    img {
+      width: auto;
+      height: calc(32 * var(--width-multiplier));
+      object-fit: contain;
+      pointer-events: none;
+    }
+  }
+
+  &__card.is-open &__icon {
+    transform: rotate(-180deg);
+  }
+
+  &__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease-in-out;
+  }
+
+  &__card.is-open &__body {
+    grid-template-rows: 1fr;
+  }
+
+  &__content {
+    overflow: hidden;
+
+    > * {
+      margin-top: var(--pad-16);
     }
   }
 }

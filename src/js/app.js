@@ -468,14 +468,58 @@
   };
 
   // ======================
+  // SEO-блок
+  // ======================
+  const initSeo = () => {
+    const card = $("[data-seo]");
+    const toggle = card ? $("[data-seo-toggle]", card) : null;
+    const body = card ? $(".seo__body", card) : null;
+    if (!card || !toggle) return null;
+
+    toggle.addEventListener("click", () => {
+      const open = card.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    // высота меняется всю анимацию, поэтому пересчитываем layout по её окончании
+    body?.addEventListener("transitionend", (e) => {
+      if (e.propertyName === "grid-template-rows") refreshLayout();
+    });
+
+    return null;
+  };
+
+  // ======================
   // Промо-карточка в hero
   // ======================
   const initHeroCard = () => {
     const card = $(".hero__card");
     if (!card) return;
 
+    // закрытая карточка не возвращается до конца сессии
+    const KEY = "hero-card-closed";
+
+    const remember = () => {
+      try {
+        sessionStorage.setItem(KEY, "1");
+      } catch (e) {
+        // приватный режим — просто не запоминаем
+      }
+    };
+
+    const wasClosed = () => {
+      try {
+        return sessionStorage.getItem(KEY) === "1";
+      } catch (e) {
+        return false;
+      }
+    };
+
+    if (wasClosed()) card.classList.add("is-hidden");
+
     $("[data-card-close]", card)?.addEventListener("click", () => {
       card.classList.add("is-hidden");
+      remember();
       refreshLayout();
     });
   };
@@ -799,6 +843,7 @@
         locale: flatpickr.l10ns?.ru ?? "default",
         dateFormat: "d.m.Y",
         defaultDate: input.value || "today",
+        minDate: "today",
         monthSelectorType: "static",
         clickOpens: false,
         disableMobile: true,
@@ -1205,11 +1250,16 @@
       }
     };
 
+    Fancybox.bind("[data-fancybox]", {
+      // Your custom options
+    });
+
     safe("header", initHeader);
     const mobileMenu = safe("burger", () => initBurger({ scrollLock }));
     const lang = safe("lang", initLang);
     safe("swipers", initSwipers);
     safe("heroCard", initHeroCard);
+    safe("seo", initSeo);
     safe("about", initAbout);
     safe("book", initBook);
     const gallery = safe("gallery", initGallery);

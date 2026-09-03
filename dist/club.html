@@ -11,9 +11,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/site.webmanifest">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260903120317" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260903120317" />
-  <link rel="stylesheet" href="css/style.css?_v=20260903120317" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260903154557" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260903154557" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260903154557" />
+  <link rel="stylesheet" href="css/style.css?_v=20260903154557" />
   <!-- <script>document.documentElement.classList.add("is-loading");</script> -->
 </head>
 
@@ -48,12 +49,12 @@
     <div class="container">
       <div class="nav__container">
         <ul class="nav__menu">
-          <li class="nav__item"><a href="" class="nav__link">Мужской банный клуб</a></li>
-          <li class="nav__item"><a href="" class="nav__link">Меню</a></li>
-          <li class="nav__item"><a href="" class="nav__link">SPA-услуги</a></li>
-          <li class="nav__item"><a href="" class="nav__link">Новости и акции</a></li>
-          <li class="nav__item"><a href="" class="nav__link">Программа лояльности</a></li>
-          <li class="nav__item"><a href="" class="nav__link">Контакты</a></li>
+          <li class="nav__item"><a href="about.html" class="nav__link">Мужской банный клуб</a></li>
+          <li class="nav__item"><a href="menu.html" class="nav__link">Меню</a></li>
+          <li class="nav__item"><a href="services.html" class="nav__link">SPA-услуги</a></li>
+          <li class="nav__item"><a href="news.html" class="nav__link">Новости и акции</a></li>
+          <li class="nav__item"><a href="programm.html" class="nav__link">Программа лояльности</a></li>
+          <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
         </ul>
         <a href="" class="nav__button button button-white button-white-1">
           Забронировать
@@ -87,7 +88,7 @@
                       <path d="M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H16V2H18V4H19C19.55 4 20.0208 4.19583 20.4125 4.5875C20.8042 4.97917 21 5.45 21 6V20C21 20.55 20.8042 21.0208 20.4125 21.4125C20.0208 21.8042 19.55 22 19 22H5ZM5 20H19V10H5V20Z" fill="#6E1D0B"/>
                     </svg>
                   </span>
-                  <input type="text" class="field__input" name="date" value="01.09.2026" readonly data-datepicker />
+                  <input type="text" class="field__input" name="date" value="" readonly data-datepicker />
                   <span class="field__arrow">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
@@ -129,7 +130,7 @@
             <div class="tickets__list">
               <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
                 <div class="ticket-card__image">
-                  <img src="img/gallery-1.png" alt="" data-ticket-image />
+                  <img src="img/news-1.png" alt="" data-ticket-image />
                 </div>
                 <div class="ticket-card__body">
                   <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
@@ -157,16 +158,16 @@
                     <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
                   </div>
                 </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</p>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
               </div>
 
               <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
                 <div class="ticket-card__image">
-                  <img src="img/gallery-2.png" alt="" data-ticket-image />
+                  <img src="img/news-1.png" alt="" data-ticket-image />
                 </div>
                 <div class="ticket-card__body">
                   <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Гостевой билет</h2>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
                   <div class="ticket-card__prices">
                     <span class="ticket-card__price">12 600 ₸</span>
                     <span class="ticket-card__old">18 000 ₸</span>
@@ -190,85 +191,19 @@
                     <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
                   </div>
                 </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Билет для гостя действующего члена клуба. Полный доступ к парным, бассейну и зонам отдыха в течение сеанса.</p>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
               </div>
 
-              <div class="tickets__item ticket-card" data-ticket data-price="6900" data-old-price="9000">
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
                 <div class="ticket-card__image">
-                  <img src="img/gallery-3.png" alt="" data-ticket-image />
-                </div>
-                <div class="ticket-card__body">
-                  <div class="ticket-card__note" data-ticket-note>Сеанс 2 часа</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Дневной билет</h2>
-                  <div class="ticket-card__prices">
-                    <span class="ticket-card__price">6 900 ₸</span>
-                    <span class="ticket-card__old">9 000 ₸</span>
-                    <span class="ticket-card__per">Цена за гостя</span>
-                  </div>
-                  <div class="ticket-card__actions">
-                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
-                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
-                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
-                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
-                  </div>
-                </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Короткий будний сеанс для тех, кто заходит в клуб в первой половине дня. Доступ к русской бане и хамаму.</p>
-              </div>
-
-              <div class="tickets__item ticket-card" data-ticket data-price="15400" data-old-price="21000">
-                <div class="ticket-card__image">
-                  <img src="img/gallery-4.png" alt="" data-ticket-image />
-                </div>
-                <div class="ticket-card__body">
-                  <div class="ticket-card__note" data-ticket-note>Сеанс 4 часа</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Ночной сеанс</h2>
-                  <div class="ticket-card__prices">
-                    <span class="ticket-card__price">15 400 ₸</span>
-                    <span class="ticket-card__old">21 000 ₸</span>
-                    <span class="ticket-card__per">Цена за гостя</span>
-                  </div>
-                  <div class="ticket-card__actions">
-                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
-                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
-                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
-                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
-                  </div>
-                </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Поздний сеанс в спокойном ритме клуба: меньше гостей, больше времени на пар и восстановление.</p>
-              </div>
-
-              <div class="tickets__item ticket-card" data-ticket data-price="10800" data-old-price="15000">
-                <div class="ticket-card__image">
-                  <img src="img/gallery-5.png" alt="" data-ticket-image />
+                  <img src="img/news-1.png" alt="" data-ticket-image />
                 </div>
                 <div class="ticket-card__body">
                   <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Будний билет</h2>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
                   <div class="ticket-card__prices">
-                    <span class="ticket-card__price">10 800 ₸</span>
-                    <span class="ticket-card__old">15 000 ₸</span>
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
                     <span class="ticket-card__per">Цена за гостя</span>
                   </div>
                   <div class="ticket-card__actions">
@@ -289,19 +224,19 @@
                     <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
                   </div>
                 </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Специальный тариф на посещение с понедельника по четверг. Действует при бронировании онлайн.</p>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
               </div>
 
-              <div class="tickets__item ticket-card" data-ticket data-price="14700" data-old-price="19500">
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
                 <div class="ticket-card__image">
-                  <img src="img/gallery-6.png" alt="" data-ticket-image />
+                  <img src="img/news-1.png" alt="" data-ticket-image />
                 </div>
                 <div class="ticket-card__body">
                   <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Билет выходного дня</h2>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
                   <div class="ticket-card__prices">
-                    <span class="ticket-card__price">14 700 ₸</span>
-                    <span class="ticket-card__old">19 500 ₸</span>
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
                     <span class="ticket-card__per">Цена за гостя</span>
                   </div>
                   <div class="ticket-card__actions">
@@ -322,73 +257,7 @@
                     <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
                   </div>
                 </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Посещение клуба в субботу и воскресенье. Расширенная программа парения и полный сервис.</p>
-              </div>
-
-              <div class="tickets__item ticket-card" data-ticket data-price="24000" data-old-price="32000">
-                <div class="ticket-card__image">
-                  <img src="img/gallery-7.png" alt="" data-ticket-image />
-                </div>
-                <div class="ticket-card__body">
-                  <div class="ticket-card__note" data-ticket-note>Сеанс 5 часов</div>
-                  <h2 class="ticket-card__title" data-ticket-title>VIP-билет</h2>
-                  <div class="ticket-card__prices">
-                    <span class="ticket-card__price">24 000 ₸</span>
-                    <span class="ticket-card__old">32 000 ₸</span>
-                    <span class="ticket-card__per">Цена за гостя</span>
-                  </div>
-                  <div class="ticket-card__actions">
-                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
-                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
-                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
-                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
-                  </div>
-                </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Отдельная зона клуба, персональный банщик и сопровождение сервиса на протяжении всего сеанса.</p>
-              </div>
-
-              <div class="tickets__item ticket-card" data-ticket data-price="54000" data-old-price="72000">
-                <div class="ticket-card__image">
-                  <img src="img/gallery-8.png" alt="" data-ticket-image />
-                </div>
-                <div class="ticket-card__body">
-                  <div class="ticket-card__note" data-ticket-note>5 посещений</div>
-                  <h2 class="ticket-card__title" data-ticket-title>Абонемент</h2>
-                  <div class="ticket-card__prices">
-                    <span class="ticket-card__price">54 000 ₸</span>
-                    <span class="ticket-card__old">72 000 ₸</span>
-                    <span class="ticket-card__per">Цена за гостя</span>
-                  </div>
-                  <div class="ticket-card__actions">
-                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
-                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
-                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
-                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
-                  </div>
-                </div>
-                <p class="ticket-card__desc" hidden data-ticket-desc>Пять посещений клуба по фиксированной цене. Абонемент действует 6 месяцев с даты покупки.</p>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
               </div>
             </div>
           </div>
@@ -535,12 +404,13 @@
   </div>
 </footer>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260903120317"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260903120317"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260903120317"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260903120317"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260903120317"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260903120317"></script>
-<script src="js/app.min.js?_v=20260903120317"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260903154557"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260903154557"></script>
+<script src="js/app.min.js?_v=20260903154557"></script>
   </body>
 </html>
