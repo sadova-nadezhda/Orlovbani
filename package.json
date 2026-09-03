@@ -29,6 +29,7 @@
     "gulp-sass": "^5.1.0",
     "gulp-ttf2woff2": "^4.0.1",
     "gulp-version-number": "^0.2.4",
+    "gulp-webp": "^5.1.0",
     "gulp-webp-html-nosvg": "^1.1.1",
     "gulp-webpcss": "^1.1.1",
     "sass": "^1.57.0",

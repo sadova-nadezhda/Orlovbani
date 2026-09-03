@@ -237,13 +237,19 @@
     text-transform: uppercase;
     @include transition;
 
+    // подложка уезжает под курсор, поэтому белым подсвечивается наведённый пункт
     &:hover {
-      color: var(--header-color);
+      color: var(--white, $white);
     }
 
     &.is-active {
       color: var(--white, $white);
     }
+  }
+
+  // пока курсор на другом языке, выбранный остаётся без подложки и подсветки
+  &:hover &__item.is-active:not(:hover) {
+    color: var(--header-pill-text);
   }
 }
 

@@ -33,9 +33,17 @@
                 <li>Услуги химчистки</li>
               </ul>
             </div>
-            <a href="" class="feedback__map" target="_blank" rel="noopener">
-              <img src="@img/map.png" alt="Схема проезда" />
-            </a>
+            <div class="feedback__map" data-map data-src="https://yandex.ru/map-widget/v1/?text=Алматы,+улица+Каныша+Сатпаева,+29/6&amp;z=17">
+              <button type="button" class="feedback__map-preview" aria-expanded="false" aria-label="Открыть карту" data-map-open>
+                <img src="@img/map.png" alt="Схема проезда" />
+              </button>
+              <div class="feedback__map-frame" data-map-frame></div>
+              <button type="button" class="feedback__map-close" aria-label="Закрыть карту" data-map-close>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>

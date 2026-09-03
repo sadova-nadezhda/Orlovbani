@@ -1,5 +1,5 @@
 import fileinclude from "gulp-file-include";
-// import webpHtmlNosvg from "gulp-webp-html-nosvg" //libs for formating img to webp
+import webpHtmlNosvg from "gulp-webp-html-nosvg";
 import versionNumber from "gulp-version-number";
 
 // Получаем пути и копируем пути
@@ -13,7 +13,8 @@ export const html = () => {
         ))
         .pipe(fileinclude())
         .pipe(app.plugins.replace(/@img\//g, 'img/'))
-        // .pipe(webpHtmlNosvg()) //autoformat WEBP IMG uncomment if need;
+        // каждый <img> заворачивается в <picture> с webp-исходником, svg не трогает
+        .pipe(webpHtmlNosvg())
         .pipe(versionNumber({
             'value': '%DT%',
             'append': {

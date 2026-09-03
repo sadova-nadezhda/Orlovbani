@@ -239,20 +239,12 @@
 
     const tabs = $$(".about__tab", section);
     const items = $$(".about__item", section);
-    const videos = $$(".about__video", section);
     if (!tabs.length) return null;
 
     let active = 0;
-    let inView = false;
 
-    // ролик подгружается только когда он стал активным и секция на экране
-    const playVideo = (video) => {
-      if (!video) return;
-      if (!video.getAttribute("src") && video.dataset.src) {
-        video.setAttribute("src", video.dataset.src);
-      }
-      video.play?.()?.catch?.(() => {});
-    };
+    // ролик один на всю секцию, при прокрутке меняется только текст
+    initLazyVideo($(".about__video", section));
 
     const setActive = (index) => {
       if (index === active) return;
@@ -260,34 +252,12 @@
 
       tabs.forEach((el, i) => el.classList.toggle("is-active", i === index));
       items.forEach((el, i) => el.classList.toggle("is-active", i === index));
-      videos.forEach((el, i) => {
-        el.classList.toggle("is-active", i === index);
-        if (i === index) {
-          if (inView) playVideo(el);
-        } else {
-          el.pause?.();
-        }
-      });
     };
 
     const update = (progress) => {
       const index = Math.floor(progress * tabs.length);
       setActive(Math.min(tabs.length - 1, Math.max(0, index)));
     };
-
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(
-        ([entry]) => {
-          inView = entry.isIntersecting;
-          if (inView) playVideo(videos[active]);
-          else videos.forEach((el) => el.pause?.());
-        },
-        { rootMargin: "20% 0px", threshold: 0 }
-      ).observe(section);
-    } else {
-      inView = true;
-      playVideo(videos[0]);
-    }
 
     if (typeof ScrollTrigger !== "undefined") {
       ScrollTrigger.create({
@@ -490,6 +460,47 @@
   };
 
   // ======================
+  // Карта в блоке контактов
+  // ======================
+  const initMap = () => {
+    const map = $("[data-map]");
+    if (!map) return null;
+
+    const frame = $("[data-map-frame]", map);
+    const opener = $("[data-map-open]", map);
+    const closer = $("[data-map-close]", map);
+    if (!frame || !opener || !closer) return null;
+
+    // iframe создаётся при первом открытии, чтобы не тянуть карту на каждой загрузке
+    const load = () => {
+      if (frame.firstElementChild || !map.dataset.src) return;
+
+      const iframe = document.createElement("iframe");
+      iframe.src = map.dataset.src;
+      iframe.title = "Карта проезда";
+      iframe.loading = "lazy";
+      iframe.setAttribute("allowfullscreen", "");
+      frame.append(iframe);
+    };
+
+    const setOpen = (state) => {
+      if (state) load();
+
+      map.classList.toggle("is-open", state);
+      opener.setAttribute("aria-expanded", String(state));
+    };
+
+    opener.addEventListener("click", () => setOpen(true));
+    closer.addEventListener("click", () => setOpen(false));
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    return { open: () => setOpen(true), close: () => setOpen(false) };
+  };
+
+  // ======================
   // Промо-карточка в hero
   // ======================
   const initHeroCard = () => {
@@ -571,15 +582,11 @@
     const thumb = bar ? $(".lang__thumb", bar) : null;
     const current = $$(".header__lang-current");
 
-    const updateThumb = () => {
-      if (!bar || !thumb) return;
+    const moveThumb = (item) => {
+      if (!bar || !thumb || !item || !item.offsetWidth) return;
 
-      const active = $(".lang__item.is-active", bar);
-
-      if (!active || !active.offsetWidth) return;
-
-      thumb.style.setProperty("--lang-thumb-w", active.offsetWidth + "px");
-      thumb.style.setProperty("--lang-thumb-x", active.offsetLeft + "px");
+      thumb.style.setProperty("--lang-thumb-w", item.offsetWidth + "px");
+      thumb.style.setProperty("--lang-thumb-x", item.offsetLeft + "px");
 
       if (!bar.classList.contains("is-ready")) {
         void thumb.offsetWidth;
@@ -587,7 +594,15 @@
       }
     };
 
+    const updateThumb = () => {
+      if (!bar) return;
+      moveThumb($(".lang__item.is-active", bar));
+    };
+
     links.forEach((link) => {
+      // подложка едет за курсором, а не за выбранным языком
+      link.addEventListener("mouseenter", () => moveThumb(link));
+
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const lang = link.dataset.lang;
@@ -598,6 +613,9 @@
         updateThumb();
       });
     });
+
+    // курсор ушёл — подложка возвращается к выбранному языку
+    bar?.addEventListener("mouseleave", updateThumb);
 
     if ("ResizeObserver" in window && bar) new ResizeObserver(updateThumb).observe(bar);
     document.fonts?.ready.then(updateThumb);
@@ -627,32 +645,6 @@
         pagination: {
           el: ".hero__pagination",
           clickable: true,
-        },
-      });
-    }
-
-    const teams = $(".teams__swiper");
-    if (teams) {
-      state.swipers.teams = new Swiper(teams, {
-        slidesPerView: 1.3,
-        spaceBetween: s(16),
-        grabCursor: true,
-        pagination: {
-          el: ".teams__counter",
-          type: "fraction",
-        },
-        navigation: {
-          prevEl: ".teams__arrow--prev",
-          nextEl: ".teams__arrow--next",
-        },
-        breakpoints: {
-          768: {
-            slidesPerView: 2.5,
-          },
-          1025: {
-            slidesPerView: 4,
-            spaceBetween: s(24),
-          },
         },
       });
     }
@@ -799,7 +791,6 @@
     const links = $$("[data-anchor]", section);
     if (!links.length) return null;
 
-    // «Все» ведёт на начало списка и остаётся активной, пока не дошли до первого раздела
     const groups = links
       .map((link) => ({ link, target: document.getElementById(link.dataset.anchor) }))
       .filter((item) => item.target?.classList.contains("menu__group"));
@@ -1267,6 +1258,7 @@
     safe("news", initNews);
     safe("reviews", initReviews);
     safe("feedback", initFeedback);
+    safe("map", initMap);
     safe("newsPage", initNewsPage);
     safe("servicesPage", initServicesPage);
     safe("menu", initMenu);

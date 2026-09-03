@@ -18,6 +18,8 @@ export const path = {
     html: `${srcFolder}/*.html`,
     scss: `${srcFolder}/scss/style.scss`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp,mp4,ico}`,
+    // только то, что имеет смысл пережимать в webp: видео, иконки и svg сюда не попадают
+    raster: `${srcFolder}/img/**/*.{jpg,jpeg,png}`,
     svg: `${srcFolder}/img/**/*.svg`,
     js: `${srcFolder}/js/*.js`,
     files: `${srcFolder}/files/**/*.*`,
