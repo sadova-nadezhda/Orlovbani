@@ -463,30 +463,50 @@
   // Карта в блоке контактов
   // ======================
   const initMap = () => {
-    const map = $("[data-map]");
-    if (!map) return null;
+    const root = $("[data-map]");
+    if (!root) return null;
 
-    const frame = $("[data-map-frame]", map);
-    const opener = $("[data-map-open]", map);
-    const closer = $("[data-map-close]", map);
-    if (!frame || !opener || !closer) return null;
+    const plate = $(".feedback__map", root);
+    const frame = $("[data-map-frame]", root);
+    const opener = $("[data-map-open]", root);
+    const closer = $("[data-map-close]", root);
+    if (!plate || !frame || !opener || !closer) return null;
 
-    // iframe создаётся при первом открытии, чтобы не тянуть карту на каждой загрузке
+    // закрытое состояние клипа повторяет плашку, поэтому карта разъезжается от неё.
+    // Считаем по фактической геометрии: на мобильной плашка лежит в потоке,
+    // и её отступы из CSS не вычислить
+    const syncClip = () => {
+      const layer = frame.getBoundingClientRect();
+      const rect = plate.getBoundingClientRect();
+      if (!layer.width || !rect.width) return;
+
+      const radius = getComputedStyle(plate).borderRadius;
+
+      frame.style.setProperty(
+        "--map-clip",
+        `inset(${rect.top - layer.top}px ${layer.right - rect.right}px ` +
+          `${layer.bottom - rect.bottom}px ${rect.left - layer.left}px round ${radius})`
+      );
+    };
+
+    // iframe создаётся заранее, на подходе секции к экрану: к моменту клика
+    // виджет уже отрисован и при раскрытии не мелькает пустая подложка
     const load = () => {
-      if (frame.firstElementChild || !map.dataset.src) return;
+      if ($("iframe", frame) || !root.dataset.src) return;
 
       const iframe = document.createElement("iframe");
-      iframe.src = map.dataset.src;
+      iframe.src = root.dataset.src;
       iframe.title = "Карта проезда";
       iframe.loading = "lazy";
       iframe.setAttribute("allowfullscreen", "");
-      frame.append(iframe);
+      // перед кнопкой закрытия, чтобы та осталась сверху
+      frame.prepend(iframe);
     };
 
     const setOpen = (state) => {
-      if (state) load();
+      if (state) syncClip();
 
-      map.classList.toggle("is-open", state);
+      root.classList.toggle("is-map-open", state);
       opener.setAttribute("aria-expanded", String(state));
     };
 
@@ -496,6 +516,24 @@
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") setOpen(false);
     });
+
+    window.addEventListener("resize", debounce(syncClip, 150));
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          load();
+          observer.disconnect();
+        },
+        { rootMargin: "20% 0px", threshold: 0 }
+      );
+      observer.observe(root);
+    } else {
+      load();
+    }
+
+    syncClip();
 
     return { open: () => setOpen(true), close: () => setOpen(false) };
   };

@@ -169,6 +169,10 @@ img {
           user-select: none;
 }
 
+picture {
+  display: contents;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -1861,15 +1865,10 @@ body.no-scroll {
   border-radius: calc(12 * var(--width-multiplier));
   background-color: var(--dark, #202020);
   overflow: hidden;
-  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1), bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1), width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.feedback__map.is-open {
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
+.feedback__inner.is-map-open .feedback__map {
+  visibility: hidden;
 }
 
 .feedback__map-preview {
@@ -1890,20 +1889,20 @@ body.no-scroll {
      object-fit: cover;
 }
 
-.feedback__map.is-open .feedback__map-preview {
-  pointer-events: none;
-}
-
 .feedback__map-frame {
   position: absolute;
+  z-index: 5;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
+  background-color: var(--dark, #202020);
   visibility: hidden;
-  transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
+  -webkit-clip-path: var(--map-clip, inset(0));
+          clip-path: var(--map-clip, inset(0));
+  transition: visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feedback__map-frame iframe {
@@ -1913,9 +1912,10 @@ body.no-scroll {
   border: none;
 }
 
-.feedback__map.is-open .feedback__map-frame {
-  opacity: 1;
+.feedback__inner.is-map-open .feedback__map-frame {
   visibility: visible;
+  -webkit-clip-path: inset(0);
+          clip-path: inset(0);
 }
 
 .feedback__map-close {
@@ -1934,9 +1934,7 @@ body.no-scroll {
   background-color: var(--white, #FFFFFF);
   color: var(--dark, #202020);
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .feedback__map-close svg {
@@ -1947,11 +1945,6 @@ body.no-scroll {
 
 .feedback__map-close:hover {
   color: var(--primary, #6E1D0B);
-}
-
-.feedback__map.is-open .feedback__map-close {
-  opacity: 1;
-  visibility: visible;
 }
 
 .page-light main {
@@ -2806,7 +2799,10 @@ body.is-bar footer {
   --drawer-ease: cubic-bezier(0.4, 0, 0.2, 1);
   position: fixed;
   z-index: 20;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   visibility: hidden;
   pointer-events: none;
   transition: visibility var(--drawer-time) var(--drawer-ease);
@@ -2819,7 +2815,10 @@ body.is-bar footer {
 
 .drawer__overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: rgba(32, 32, 32, 0.4);
   opacity: 0;
   transition: opacity var(--drawer-time) var(--drawer-ease);
@@ -4489,13 +4488,6 @@ body.is-bar footer {
     height: calc(104 * var(--width-multiplier));
   }
 
-  .feedback__map.is-open {
-    position: absolute;
-    inset: 0;
-    width: auto;
-    height: auto;
-  }
-
   .page-light main {
     padding-top: calc(56 * var(--width-multiplier));
   }
@@ -4927,7 +4919,8 @@ body.is-bar footer {
   }
 
   .contacts .feedback__main {
-    margin: auto 0;
+    flex-grow: 1;
+    justify-content: center;
   }
 
   .seo__card {

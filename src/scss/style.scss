@@ -1437,35 +1437,18 @@
     border-radius: calc(12 * var(--width-multiplier));
     background-color: var(--dark, $dark);
     overflow: hidden;
-    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1), bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-    // раскрытая карта занимает карточку целиком
-    &.is-open {
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
-    }
-
-    // на мобильной карта встаёт в поток над кнопкой
     @media (max-width: 767px) {
       position: static;
       order: 1;
       align-self: flex-end;
       width: calc(180 * var(--width-multiplier));
       height: calc(104 * var(--width-multiplier));
-
-      // из потока в абсолют анимировать нечего, поэтому раскрытие мгновенное
-      &.is-open {
-        position: absolute;
-        inset: 0;
-        width: auto;
-        height: auto;
-      }
     }
+  }
+
+  &__inner.is-map-open &__map {
+    visibility: hidden;
   }
 
   &__map-preview {
@@ -1483,21 +1466,17 @@
     }
   }
 
-  // превью не прячем: пока карта разъезжается и грузится iframe,
-  // видно растянутую картинку, а не пустая подложка
-  &__map.is-open &__map-preview {
-    pointer-events: none;
-  }
-
   &__map-frame {
-    @include position-abs;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--dark, $dark);
     visibility: hidden;
-    // iframe включается сразу и разъезжается вместе с контейнером, без паузы
-    transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
+    clip-path: var(--map-clip, inset(0));
+    transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     iframe {
       display: block;
@@ -1507,9 +1486,9 @@
     }
   }
 
-  &__map.is-open &__map-frame {
-    opacity: 1;
+  &__inner.is-map-open &__map-frame {
     visibility: visible;
+    clip-path: inset(0);
   }
 
   &__map-close {
@@ -1528,9 +1507,7 @@
     background-color: var(--white, $white);
     color: var(--dark, $dark);
     cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out, color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 
     svg {
       width: calc(24 * var(--width-multiplier));
@@ -1541,11 +1518,6 @@
     &:hover {
       color: var(--primary, $primary);
     }
-  }
-
-  &__map.is-open &__map-close {
-    opacity: 1;
-    visibility: visible;
   }
 }
 
@@ -2514,7 +2486,10 @@ body.is-bar footer {
 
   position: fixed;
   z-index: 20;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   visibility: hidden;
   pointer-events: none;
   transition: visibility var(--drawer-time) var(--drawer-ease);
@@ -2526,7 +2501,10 @@ body.is-bar footer {
 
   &__overlay {
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-color: rgba(32, 32, 32, 0.4);
     opacity: 0;
     transition: opacity var(--drawer-time) var(--drawer-ease);
@@ -3877,8 +3855,13 @@ body.is-bar footer {
       gap: var(--pad-16);
     }
 
+    // блок забирает всё свободное место и центрирует контент внутри себя.
+    // auto-марджины здесь не годятся: они делят остаток высоты, поэтому блок
+    // сдвигался от любого изменения соседей — переноса списка услуг или
+    // ухода карты из потока при раскрытии
     .feedback__main {
-      margin: auto 0;
+      flex-grow: 1;
+      justify-content: center;
     }
   }
 }
