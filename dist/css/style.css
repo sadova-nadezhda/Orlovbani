@@ -3401,10 +3401,10 @@ body.is-bar footer {
 }
 
 .programm__tag {
-  padding: calc(12 * var(--width-multiplier)) var(--pad-16);
+  padding: calc(8 * var(--width-multiplier)) var(--pad-16);
   border-radius: var(--br-20);
   background-color: var(--light, rgba(255, 255, 255, 0.15));
-  font-size: calc(18 * var(--width-multiplier));
+  font-size: calc(14 * var(--width-multiplier));
   font-weight: 500;
 }
 
@@ -4801,11 +4801,6 @@ body.is-bar footer {
 
   .programm__body {
     gap: var(--pad-16);
-  }
-
-  .programm__tag {
-    padding: calc(8 * var(--width-multiplier)) var(--pad-12);
-    font-size: calc(16 * var(--width-multiplier));
   }
 
   .programm__actions {
