@@ -42,6 +42,21 @@
     introQueue.splice(0).forEach((fn) => fn());
   };
 
+  // прелоудер должен полностью отработать, прежде чем стартует интро баннера
+  let preloaderDone = false;
+  const preloaderQueue = [];
+
+  const onPreloaderDone = (fn) => {
+    if (preloaderDone) { fn(); return; }
+    preloaderQueue.push(fn);
+  };
+
+  const markPreloaderDone = () => {
+    if (preloaderDone) return;
+    preloaderDone = true;
+    preloaderQueue.splice(0).forEach((fn) => fn());
+  };
+
   const initLayoutWatcher = () => {
     const refresh = debounce(refreshLayout, 150);
 
@@ -578,7 +593,10 @@
   // ======================
   const initPreloader = ({ scrollLock }) => {
     const root = $(".preloader");
-    if (!root) return null;
+    if (!root) {
+      markPreloaderDone();
+      return null;
+    }
 
     const KEY = "preloader-shown-date";
     const today = new Date().toISOString().slice(0, 10);
@@ -592,6 +610,7 @@
 
     if (shownToday) {
       root.remove();
+      markPreloaderDone();
       return null;
     }
 
@@ -600,6 +619,7 @@
     const finish = () => {
       root.classList.add("is-hidden");
       scrollLock?.unlock?.("preloader");
+      markPreloaderDone();
 
       try {
         localStorage.setItem(KEY, today);
@@ -637,14 +657,17 @@
       refreshLayout();
     };
 
-    if (document.readyState === "complete") {
-      requestAnimationFrame(start);
-      return;
-    }
+    // ждём завершения прелоудера и только потом запускаем интро баннера
+    onPreloaderDone(() => {
+      if (document.readyState === "complete") {
+        requestAnimationFrame(start);
+        return;
+      }
 
-    window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
+      window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
 
-    setTimeout(start, 1500);
+      setTimeout(start, 1500);
+    });
   };
 
   const initHeroIntro = () => {
