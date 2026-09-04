@@ -28,10 +28,10 @@ html.no-preloader .preloader {
   &__logo {
     position: relative;
     width: calc(220 * var(--width-multiplier));
-    aspect-ratio: 164 / 96;
+    aspect-ratio: 160 / 72;
 
     @media (max-width: 767px) {
-      width: calc(180 * var(--width-multiplier));
+      width: calc(160 * var(--width-multiplier));
     }
   }
 
