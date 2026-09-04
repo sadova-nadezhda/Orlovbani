@@ -448,7 +448,7 @@ body.no-scroll {
   bottom: 0;
   z-index: 1;
   display: flex;
-  background-color: #623C2F;
+  background-color: rgb(98, 60, 47);
   opacity: 0;
   visibility: hidden;
   overflow-y: auto;
@@ -3865,6 +3865,78 @@ body.is-bar footer {
   margin-top: var(--pad-16);
 }
 
+/* sticky__box */
+
+.sticky__box {
+  position: fixed;
+  bottom: calc(20 * var(--width-multiplier));
+  right: calc(20 * var(--width-multiplier));
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--width-multiplier));
+  z-index: 5;
+}
+
+.sticky__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(52 * var(--width-multiplier));
+  height: calc(52 * var(--width-multiplier));
+  padding: calc(12 * var(--width-multiplier));
+  border-radius: 100%;
+  color: #FFFFFF !important;
+  background-color: rgb(98, 60, 47);
+  text-align: center;
+  font-size: calc(14 * var(--width-multiplier));
+  animation: pulse 1.5s linear infinite;
+  cursor: pointer;
+}
+
+.sticky__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.sticky__wp {
+  background-color: rgb(44, 183, 66);
+  animation: pulse-2 1.5s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(98, 60, 47);
+  }
+
+  70% {
+    box-shadow: 0 0 0 calc(12 * var(--width-multiplier)) rgba(98, 60, 47, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(98, 60, 47, 0);
+  }
+}
+
+@keyframes pulse-2 {
+  0% {
+    box-shadow: 0 0 0 0 rgb(44, 183, 66);
+  }
+
+  70% {
+    box-shadow: 0 0 0 calc(12 * var(--width-multiplier)) rgba(44, 183, 66, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(44, 183, 66, 0);
+  }
+}
+
+@media (min-width: 1025px) {
+  .sticky__tel {
+    display: none;
+  }
+}
+
 @media (min-width: 1921px) {
   :root {
     --width-base: 1920;
@@ -4978,6 +5050,12 @@ body.is-bar footer {
 
   .seo__title {
     font-size: calc(20 * var(--width-multiplier));
+  }
+
+  .sticky__box {
+    bottom: calc(16 * var(--width-multiplier));
+    right: calc(16 * var(--width-multiplier));
+    gap: calc(12 * var(--width-multiplier));
   }
 }
 

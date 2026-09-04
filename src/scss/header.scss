@@ -2,7 +2,6 @@
 @import "mixins.scss";
 
 .header {
-  // Тема шапки: поверх hero — светлая, при скролле — тёмная на белом фоне
   --header-color: var(--white);
   --header-bg: transparent;
   --header-pill-bg: var(--light);
@@ -10,7 +9,6 @@
   --header-pill-text: rgba(255, 255, 255, 0.6);
   --header-blur: blur(calc(8 * var(--width-multiplier)));
 
-  // Логотип: полный знак и компактный венок лежат друг на друге
   --logo-w: calc(160 * var(--width-multiplier));
   --logo-h: calc(87 * var(--width-multiplier));
   --logo-full-opacity: 1;
@@ -78,7 +76,6 @@
     }
   }
 
-  // Поверх открытого меню шапка снова светлая и с полным логотипом
   .menu-open &.scrolled,
   .menu-open.page-light & {
     --header-color: var(--white);
@@ -145,7 +142,6 @@
 // ====== Мобильная шапка ======
 
 @media (max-width: 767px) {
-  // на мобильной шапка всегда тёмная на белом
   .header,
   .header.scrolled {
     --header-color: var(--primary);
@@ -207,7 +203,6 @@
   backdrop-filter: var(--header-blur);
   transition: background-color 0.2s ease-in-out;
 
-  // подвижная подложка под активным языком
   &__thumb {
     position: absolute;
     top: calc(4 * var(--width-multiplier));
@@ -237,7 +232,6 @@
     text-transform: uppercase;
     @include transition;
 
-    // подложка уезжает под курсор, поэтому белым подсвечивается наведённый пункт
     &:hover {
       color: var(--white, $white);
     }
@@ -247,7 +241,6 @@
     }
   }
 
-  // пока курсор на другом языке, выбранный остаётся без подложки и подсветки
   &:hover &__item.is-active:not(:hover) {
     color: var(--header-pill-text);
   }
@@ -320,7 +313,7 @@
   bottom: 0;
   z-index: 1;
   display: flex;
-  background-color: #623C2F;
+  background-color: rgb(98, 60, 47);
   opacity: 0;
   visibility: hidden;
   overflow-y: auto;
