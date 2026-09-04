@@ -728,7 +728,7 @@ html.no-preloader .preloader {
 .preloader__logo {
   position: relative;
   width: calc(220 * var(--width-multiplier));
-  aspect-ratio: 164/96;
+  aspect-ratio: 160/72;
 }
 
 .preloader__logo-img {
@@ -759,7 +759,7 @@ html.no-preloader .preloader {
 }
 
 .preloader.is-animating .preloader__logo-shine {
-  animation: preloader-shine 1.8s ease-in-out 3;
+  animation: preloader-shine 1.8s ease-in-out 2;
 }
 
 @keyframes preloader-shine {
@@ -4378,7 +4378,7 @@ body.is-bar footer {
   }
 
   .preloader__logo {
-    width: calc(180 * var(--width-multiplier));
+    width: calc(160 * var(--width-multiplier));
   }
 
   .container {

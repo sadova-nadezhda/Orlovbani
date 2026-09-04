@@ -42,7 +42,6 @@
     introQueue.splice(0).forEach((fn) => fn());
   };
 
-  // прелоудер должен полностью отработать, прежде чем стартует интро баннера
   let preloaderDone = false;
   const preloaderQueue = [];
 
@@ -591,6 +590,8 @@
   // ======================
   // Прелоудер
   // ======================
+  const PRELOADER_ONCE_PER_DAY = false;
+
   const initPreloader = ({ scrollLock }) => {
     const root = $(".preloader");
     if (!root) {
@@ -601,17 +602,19 @@
     const KEY = "preloader-shown-date";
     const today = new Date().toISOString().slice(0, 10);
 
-    let shownToday = false;
-    try {
-      shownToday = localStorage.getItem(KEY) === today;
-    } catch (e) {
-      shownToday = false;
-    }
+    if (PRELOADER_ONCE_PER_DAY) {
+      let shownToday = false;
+      try {
+        shownToday = localStorage.getItem(KEY) === today;
+      } catch (e) {
+        shownToday = false;
+      }
 
-    if (shownToday) {
-      root.remove();
-      markPreloaderDone();
-      return null;
+      if (shownToday) {
+        root.remove();
+        markPreloaderDone();
+        return null;
+      }
     }
 
     const shine = $(".preloader__logo-shine", root);
@@ -621,10 +624,12 @@
       scrollLock?.unlock?.("preloader");
       markPreloaderDone();
 
-      try {
-        localStorage.setItem(KEY, today);
-      } catch (e) {
-        // приватный режим — прелоудер покажется снова в следующий раз
+      if (PRELOADER_ONCE_PER_DAY) {
+        try {
+          localStorage.setItem(KEY, today);
+        } catch (e) {
+          // приватный режим — прелоудер покажется снова в следующий раз
+        }
       }
 
       root.addEventListener("transitionend", () => root.remove(), { once: true });
