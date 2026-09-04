@@ -574,6 +574,55 @@
   };
 
   // ======================
+  // Прелоудер
+  // ======================
+  const initPreloader = ({ scrollLock }) => {
+    const root = $(".preloader");
+    if (!root) return null;
+
+    const KEY = "preloader-shown-date";
+    const today = new Date().toISOString().slice(0, 10);
+
+    let shownToday = false;
+    try {
+      shownToday = localStorage.getItem(KEY) === today;
+    } catch (e) {
+      shownToday = false;
+    }
+
+    if (shownToday) {
+      root.remove();
+      return null;
+    }
+
+    const shine = $(".preloader__logo-shine", root);
+
+    const finish = () => {
+      root.classList.add("is-hidden");
+      scrollLock?.unlock?.("preloader");
+
+      try {
+        localStorage.setItem(KEY, today);
+      } catch (e) {
+        // приватный режим — прелоудер покажется снова в следующий раз
+      }
+
+      root.addEventListener("transitionend", () => root.remove(), { once: true });
+    };
+
+    scrollLock?.lock?.("preloader");
+
+    if (shine) {
+      shine.addEventListener("animationend", finish, { once: true });
+      root.classList.add("is-animating");
+    } else {
+      finish();
+    }
+
+    return null;
+  };
+
+  // ======================
   // Интро
   // ======================
   const initIntro = () => {
@@ -1317,7 +1366,6 @@
 
     const scrollLock = createScrollLock(lenis);
 
-
     const safe = (name, fn) => {
       try {
         return fn();
@@ -1331,6 +1379,7 @@
       // Your custom options
     });
 
+    safe("preloader", () => initPreloader({ scrollLock }));
     safe("header", initHeader);
     const mobileMenu = safe("burger", () => initBurger({ scrollLock }));
     const lang = safe("lang", initLang);

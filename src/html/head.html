@@ -18,5 +18,16 @@
     setTimeout(function () {
       document.documentElement.classList.remove("is-loading");
     }, 3000);
+
+    // прелоудер с бликом на логотипе показываем не чаще раза в сутки
+    try {
+      var preloaderKey = "preloader-shown-date";
+      var preloaderToday = new Date().toISOString().slice(0, 10);
+      if (localStorage.getItem(preloaderKey) === preloaderToday) {
+        document.documentElement.classList.add("no-preloader");
+      }
+    } catch (e) {
+      // приватный режим — просто показываем прелоудер каждый раз
+    }
   </script>
 </head>
