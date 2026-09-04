@@ -11,11 +11,19 @@
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/site.webmanifest">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260903191832" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260903191832" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260903191832" />
-  <link rel="stylesheet" href="css/style.css?_v=20260903191832" />
-  <!-- <script>document.documentElement.classList.add("is-loading");</script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260904115353" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260904115353" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260904115353" />
+  <link rel="stylesheet" href="css/style.css?_v=20260904115353" />
+  <!-- Класс ставится до первой отрисовки: анимируемые элементы не должны успеть
+       показаться, иначе они схлопнутся при инициализации. Снимает его app.js,
+       таймер — страховка на случай, если скрипты не загрузились -->
+  <script>
+    document.documentElement.classList.add("is-loading");
+    setTimeout(function () {
+      document.documentElement.classList.remove("is-loading");
+    }, 3000);
+  </script>
 </head>
 
   <body class="page-light">
@@ -66,7 +74,8 @@
 
 
     <main>
-      <section class="products section-pad section-hidden">
+      <!-- section-hidden не ставим: overflow у родителя ломает sticky у табов -->
+      <section class="products section-pad">
         <div class="container">
           <div class="products__container">
             <nav class="breadcrumbs">
@@ -77,18 +86,18 @@
 
             <h1 class="products__title s text-up">Товары для бани</h1>
 
-            <div class="products__tabs tabs">
-              <button type="button" class="tabs__item is-active" data-filter="all">Все</button>
-              <button type="button" class="tabs__item" data-filter="rent">Аренда</button>
-              <button type="button" class="tabs__item" data-filter="hats">Панамы</button>
-            </div>
+            <nav class="products__tabs tabs">
+              <a href="#products-groups" class="tabs__item is-active" data-anchor="products-groups">Все</a>
+              <a href="#rent" class="tabs__item" data-anchor="rent">Аренда</a>
+              <a href="#hats" class="tabs__item" data-anchor="hats">Панамы</a>
+            </nav>
 
-            <div class="products__groups">
-              <div class="products__group" data-group="rent">
+            <div class="products__groups" id="products-groups">
+              <div class="products__group" id="rent">
                 <h3 class="products__group-title text-up">Аренда</h3>
                 <div class="products__list">
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-1.webp" type="image/webp"><img src="img/product-1.png" alt="Пештемаль" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Пештемаль</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -99,7 +108,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-1.png" alt="Банный набор" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-1.webp" type="image/webp"><img src="img/product-1.png" alt="Банный набор" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Банный набор</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -110,7 +119,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-1.webp" type="image/webp"><img src="img/product-1.png" alt="Пештемаль" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Пештемаль</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -121,7 +130,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-1.png" alt="Пештемаль" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-1.webp" type="image/webp"><img src="img/product-1.png" alt="Пештемаль" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Пештемаль</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -134,11 +143,11 @@
                 </div>
               </div>
 
-              <div class="products__group" data-group="hats">
+              <div class="products__group" id="hats">
                 <h3 class="products__group-title text-up">Панамы</h3>
                 <div class="products__list">
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-2.webp" type="image/webp"><img src="img/product-2.png" alt="Панама" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Панама</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -149,7 +158,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-2.webp" type="image/webp"><img src="img/product-2.png" alt="Панама" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Панама</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -160,7 +169,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-2.webp" type="image/webp"><img src="img/product-2.png" alt="Панама" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Панама</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -171,7 +180,7 @@
                     </div>
                   </article>
                   <article class="products__item product-card">
-                    <div class="product-card__image"><img src="img/product-2.png" alt="Панама" /></div>
+                    <div class="product-card__image"><picture><source srcset="img/product-2.webp" type="image/webp"><img src="img/product-2.png" alt="Панама" /></picture></div>
                     <div class="product-card__body">
                       <h3 class="product-card__title">Панама</h3>
                       <span class="product-card__note">Состав: Хлопковая пештемаль</span>
@@ -331,18 +340,19 @@
       <span class="footer__copy">&copy; 2026 XXX</span>
       <a href="" class="footer__link">Политика конфиденциальности</a>
       <a href="" class="footer__link">Договор оферты</a>
+      <a href="" class="footer__link">Условия оплаты</a>
       <a href="https://factum.agency/" class="footer__link" target="_blank">Сделано в factum.</a>
     </div>
   </div>
 </footer>
 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260903191832"></script>
-<script src="js/app.min.js?_v=20260903191832"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260904115353"></script>
+<script src="js/app.min.js?_v=20260904115353"></script>
   </body>
 </html>

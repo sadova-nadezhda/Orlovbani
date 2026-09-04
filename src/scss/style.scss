@@ -62,7 +62,8 @@
   text-transform: uppercase;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.4s ease-out !important;
+  transition: transform 0.4s ease-out, outline-color 0.4s ease-out, outline-offset 0.4s ease-out,
+    background-color 0.4s ease-out, color 0.4s ease-out, border-color 0.4s ease-out !important;
   outline: 1px solid transparent;
   outline-offset: 0;
   &:hover {
@@ -290,13 +291,9 @@
     }
   }
 
-
-  // колонки заданы явно: без этого скрытая карточка освобождает первую ячейку,
-  // и пагинация с подписью сдвигаются влево
   &__card {
     grid-column: 1;
 
-    // на мобильной колонка одна, явная расстановка не нужна
     @media (max-width: 767px) {
       grid-column: auto;
     }
@@ -386,7 +383,6 @@
 .about {
   --about-steps: 4;
   --about-step: 40svh;
-  // высота залипшей шапки: карточка встаёт под ней, а не под неё
   --about-top: calc(61 * var(--width-multiplier));
 
   @media (max-width: 767px) {
@@ -1327,7 +1323,6 @@
     }
   }
 
-  // на внутренней странице над заголовком стоят хлебные крошки
   &__head {
     display: flex;
     flex-direction: column;
@@ -1391,7 +1386,6 @@
     width: 100%;
 
     @media (max-width: 767px) {
-      // карта в макете стоит над кнопкой
       order: 2;
       gap: var(--pad-16);
     }
@@ -1558,7 +1552,6 @@
     margin-bottom: var(--pad-16);
   }
 
-  // крошки поверх тёмной подложки
   &--light {
     color: rgba(255, 255, 255, 0.5);
 
@@ -1781,7 +1774,6 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    // глобально скроллбар скрыт, внутри списка он нужен
     scrollbar-width: thin;
     scrollbar-color: rgba(110, 29, 11, 0.25) transparent;
 
@@ -2059,7 +2051,6 @@
     width: 100%;
   }
 
-  // кнопкам карточки оставляем прежний ховер по фону, без рамки и сжатия
   &__add:hover,
   &__more:hover {
     transform: none;
@@ -2852,6 +2843,24 @@ body.is-bar footer {
     }
   }
 
+  &.is-intro &__inner > * {
+    opacity: 0;
+    transform: translateY(calc(32 * var(--width-multiplier)));
+    transition: none;
+  }
+
+  &__inner > * {
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+
+    &:nth-child(2) {
+      transition-delay: 0.12s;
+    }
+
+    &:nth-child(3) {
+      transition-delay: 0.24s;
+    }
+  }
+
   &__label {
     position: relative;
     padding: 0 calc(32 * var(--width-multiplier));
@@ -3248,8 +3257,13 @@ body.is-bar footer {
   &__title {
     max-width: calc(740 * var(--width-multiplier));
 
+    @media (max-width: 1024px) {
+      font-size: calc(32 * var(--width-multiplier));
+    }
+
     @media (max-width: 767px) {
       max-width: unset;
+      font-size: calc(28 * var(--width-multiplier));
     }
   }
 
@@ -3580,10 +3594,30 @@ body.is-bar footer {
   }
 
   &__tabs {
-    margin-bottom: var(--pad-42);
+    position: sticky;
+    top: calc(61 * var(--width-multiplier));
+    z-index: 5;
+    padding: var(--pad-16) 0;
+    margin-top: calc(var(--pad-16) * -1);
+    margin-bottom: calc(var(--pad-42) - var(--pad-16));
+    background-color: var(--bg, $bg);
 
     @media (max-width: 767px) {
-      margin-bottom: var(--pad-24);
+      top: calc(56 * var(--width-multiplier));
+      padding: calc(12 * var(--width-multiplier)) 0;
+      margin-top: calc(-12 * var(--width-multiplier));
+      margin-bottom: calc(var(--pad-24) - 12 * var(--width-multiplier));
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tabs__item {
+        flex-shrink: 0;
+      }
     }
   }
 
@@ -3851,10 +3885,6 @@ body.is-bar footer {
       gap: var(--pad-16);
     }
 
-    // блок забирает всё свободное место и центрирует контент внутри себя.
-    // auto-марджины здесь не годятся: они делят остаток высоты, поэтому блок
-    // сдвигался от любого изменения соседей — переноса списка услуг или
-    // ухода карты из потока при раскрытии
     .feedback__main {
       flex-grow: 1;
       justify-content: center;
@@ -3952,6 +3982,3 @@ body.is-bar footer {
     }
   }
 }
-
-// ====== Keyframes ======
-

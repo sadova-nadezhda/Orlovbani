@@ -367,6 +367,13 @@
   };
 
   // ======================
+  // Карточки комплекса и VIP-кабинета
+  // ======================
+  const initComplex = () => {
+    $$(".complex").forEach((section) => revealOnce(section));
+  };
+
+  // ======================
   // Новости
   // ======================
   const initNews = () => {
@@ -451,7 +458,6 @@
       toggle.setAttribute("aria-expanded", String(open));
     });
 
-    // высота меняется всю анимацию, поэтому пересчитываем layout по её окончании
     body?.addEventListener("transitionend", (e) => {
       if (e.propertyName === "grid-template-rows") refreshLayout();
     });
@@ -472,9 +478,6 @@
     const closer = $("[data-map-close]", root);
     if (!plate || !frame || !opener || !closer) return null;
 
-    // закрытое состояние клипа повторяет плашку, поэтому карта разъезжается от неё.
-    // Считаем по фактической геометрии: на мобильной плашка лежит в потоке,
-    // и её отступы из CSS не вычислить
     const syncClip = () => {
       const layer = frame.getBoundingClientRect();
       const rect = plate.getBoundingClientRect();
@@ -489,8 +492,6 @@
       );
     };
 
-    // iframe создаётся заранее, на подходе секции к экрану: к моменту клика
-    // виджет уже отрисован и при раскрытии не мелькает пустая подложка
     const load = () => {
       if ($("iframe", frame) || !root.dataset.src) return;
 
@@ -499,7 +500,6 @@
       iframe.title = "Карта проезда";
       iframe.loading = "lazy";
       iframe.setAttribute("allowfullscreen", "");
-      // перед кнопкой закрытия, чтобы та осталась сверху
       frame.prepend(iframe);
     };
 
@@ -577,14 +577,25 @@
   // Интро
   // ======================
   const initIntro = () => {
+    let started = false;
+
     const start = () => {
-      document.documentElement.classList.remove("is-loading");
+      if (started) return;
+      started = true;
+
       markIntroReady();
+      document.documentElement.classList.remove("is-loading");
       refreshLayout();
     };
 
-    if (document.readyState === "complete") requestAnimationFrame(start);
-    else window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
+    if (document.readyState === "complete") {
+      requestAnimationFrame(start);
+      return;
+    }
+
+    window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
+
+    setTimeout(start, 1500);
   };
 
   const initHeroIntro = () => {
@@ -593,15 +604,21 @@
     onIntroReady(() => {
       if (typeof gsap === "undefined") return;
 
+      gsap.set(".header__container > *", { y: s(-20), opacity: 0 });
+      gsap.set(".hero__title", { y: s(40), opacity: 0 });
+      gsap.set(".hero__desc", { y: s(30), opacity: 0 });
+      gsap.set(".hero__button", { y: s(20), opacity: 0 });
+      gsap.set(".hero__bottom > *", { y: s(20), opacity: 0 });
+
       const tl = gsap.timeline({
         defaults: { ease: "power3.out", duration: 1, clearProps: "all" },
       });
 
-      tl.fromTo(".header__container > *", { y: s(-20), opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 })
-        .fromTo(".hero__title", { y: s(40), opacity: 0 }, { y: 0, opacity: 1 }, "-=0.8")
-        .fromTo(".hero__desc", { y: s(30), opacity: 0 }, { y: 0, opacity: 1 }, "-=0.75")
-        .fromTo(".hero__button", { y: s(20), opacity: 0 }, { y: 0, opacity: 1 }, "-=0.75")
-        .fromTo(".hero__bottom > *", { y: s(20), opacity: 0 }, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.7");
+      tl.to(".header__container > *", { y: 0, opacity: 1, stagger: 0.1 })
+        .to(".hero__title", { y: 0, opacity: 1 }, "-=0.8")
+        .to(".hero__desc", { y: 0, opacity: 1 }, "-=0.75")
+        .to(".hero__button", { y: 0, opacity: 1 }, "-=0.75")
+        .to(".hero__bottom > *", { y: 0, opacity: 1, stagger: 0.1 }, "-=0.7");
 
       setTimeout(() => {
         if (tl.progress() < 1) tl.progress(1);
@@ -802,10 +819,63 @@
     return { render };
   };
 
-  // товары для бани фильтруются целыми разделами, SPA-услуги — карточками
-  const initProducts = () => initTabsFilter($(".products"), "[data-group]", "group");
-
   const initServicesPage = () => initTabsFilter($(".services-page"), "[data-category]", "category");
+
+  // ======================
+  // Якорная навигация по разделам
+  // ======================
+  const initAnchorNav = (section, groupClass) => {
+    if (!section) return null;
+
+    const links = $$("[data-anchor]", section);
+    if (!links.length) return null;
+
+    const panel = links[0].closest(".tabs");
+
+    const anchorOffset = () => {
+      if (!panel) return s(120);
+
+      const stickyTop = parseFloat(getComputedStyle(panel).top) || 0;
+      return stickyTop + panel.offsetHeight + s(8);
+    };
+
+    const groups = links
+      .map((link) => ({ link, target: document.getElementById(link.dataset.anchor) }))
+      .filter((item) => item.target?.classList.contains(groupClass));
+
+    const sync = () => {
+      const offset = anchorOffset() + s(8);
+      let current = links[0];
+
+      groups.forEach(({ link, target }) => {
+        if (target.getBoundingClientRect().top <= offset) current = link;
+      });
+
+      links.forEach((link) => link.classList.toggle("is-active", link === current));
+    };
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const target = document.getElementById(link.dataset.anchor);
+        if (!target) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const top = window.scrollY + target.getBoundingClientRect().top - anchorOffset();
+
+        if (window.lenis?.scrollTo) window.lenis.scrollTo(top);
+        else window.scrollTo({ top, behavior: "smooth" });
+      });
+    });
+
+    window.addEventListener("scroll", sync, { passive: true });
+    sync();
+
+    return { sync };
+  };
+
+  const initProducts = () => initAnchorNav($(".products"), "products__group");
 
   // ======================
   // Бар и кухня
@@ -825,29 +895,7 @@
       });
     }
 
-    // разделы не фильтруются, ссылки просто прокручивают к нужному блоку
-    const links = $$("[data-anchor]", section);
-    if (!links.length) return null;
-
-    const groups = links
-      .map((link) => ({ link, target: document.getElementById(link.dataset.anchor) }))
-      .filter((item) => item.target?.classList.contains("menu__group"));
-
-    const sync = () => {
-      const offset = s(140);
-      let current = links[0];
-
-      groups.forEach(({ link, target }) => {
-        if (target.getBoundingClientRect().top <= offset) current = link;
-      });
-
-      links.forEach((link) => link.classList.toggle("is-active", link === current));
-    };
-
-    window.addEventListener("scroll", sync, { passive: true });
-    sync();
-
-    return { sync };
+    return initAnchorNav(section, "menu__group");
   };
 
   // ======================
@@ -1293,6 +1341,7 @@
     safe("book", initBook);
     const gallery = safe("gallery", initGallery);
     safe("services", initServices);
+    safe("complex", initComplex);
     safe("news", initNews);
     safe("reviews", initReviews);
     safe("feedback", initFeedback);

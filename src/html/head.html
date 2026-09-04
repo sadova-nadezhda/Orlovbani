@@ -13,5 +13,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <!-- <script>document.documentElement.classList.add("is-loading");</script> -->
+  <!-- Класс ставится до первой отрисовки: анимируемые элементы не должны успеть
+       показаться, иначе они схлопнутся при инициализации. Снимает его app.js,
+       таймер — страховка на случай, если скрипты не загрузились -->
+  <script>
+    document.documentElement.classList.add("is-loading");
+    setTimeout(function () {
+      document.documentElement.classList.remove("is-loading");
+    }, 3000);
+  </script>
 </head>

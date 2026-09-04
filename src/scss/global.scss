@@ -218,4 +218,17 @@ body.no-scroll {
   .hero__bottom > * {
     opacity: 0;
   }
+
+  // Секции, которые появляются по скроллу. Класс is-intro вешает JS уже после
+  // первой отрисовки, поэтому без этого они успевают показаться и схлопнуться
+  .book__info > *,
+  .book__overlay,
+  .complex__inner > *,
+  .gallery__item,
+  .services__title,
+  .services__desc,
+  .services__tags,
+  .services__button {
+    opacity: 0;
+  }
 }

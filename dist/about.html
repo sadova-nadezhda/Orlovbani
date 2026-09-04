@@ -11,11 +11,19 @@
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/site.webmanifest">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260903191832" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260903191832" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260903191832" />
-  <link rel="stylesheet" href="css/style.css?_v=20260903191832" />
-  <!-- <script>document.documentElement.classList.add("is-loading");</script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260904115353" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260904115353" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260904115353" />
+  <link rel="stylesheet" href="css/style.css?_v=20260904115353" />
+  <!-- Класс ставится до первой отрисовки: анимируемые элементы не должны успеть
+       показаться, иначе они схлопнутся при инициализации. Снимает его app.js,
+       таймер — страховка на случай, если скрипты не загрузились -->
+  <script>
+    document.documentElement.classList.add("is-loading");
+    setTimeout(function () {
+      document.documentElement.classList.remove("is-loading");
+    }, 3000);
+  </script>
 </head>
 
   <body>
@@ -70,7 +78,7 @@
         <div class="hero__slider swiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <div class="hero__image"><img src="img/hero-home.webp" alt="" /></div>
+              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
               <div class="container">
                 <div class="hero__content">
                   <h1 class="hero__title text-up">Пространство настоящего банного опыта</h1>
@@ -80,7 +88,7 @@
               </div>
             </div>
             <div class="swiper-slide">
-              <div class="hero__image"><img src="img/hero-home.webp" alt="" /></div>
+              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
               <div class="container">
                 <div class="hero__content">
                   <h1 class="hero__title text-up">Пространство настоящего банного опыта</h1>
@@ -90,7 +98,7 @@
               </div>
             </div>
             <div class="swiper-slide">
-              <div class="hero__image"><img src="img/hero-home.webp" alt="" /></div>
+              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
               <div class="container">
                 <div class="hero__content">
                   <h1 class="hero__title text-up">Пространство настоящего банного опыта</h1>
@@ -111,7 +119,7 @@
         <div class="container">
           <div class="complex__container">
             <div class="complex__card">
-              <img class="complex__image" src="img/about-img.png" alt="" />
+              <picture><source srcset="img/about-img.webp" type="image/webp"><img class="complex__image" src="img/about-img.png" alt="" /></picture>
               <div class="complex__inner">
                 <span class="complex__label text-up">Общая площадь комплекса</span>
 
@@ -138,14 +146,14 @@
           <div class="gallery__container">
             <div class="gallery__slider swiper">
               <div class="gallery__list swiper-wrapper">
-                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-1.png" data-fancybox="gallery"><img src="img/gallery-1.png" alt="" /></a>
-                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-2.png" data-fancybox="gallery"><img src="img/gallery-2.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-3.png" data-fancybox="gallery"><img src="img/gallery-3.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-4.png" data-fancybox="gallery"><img src="img/gallery-4.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-5.png" data-fancybox="gallery"><img src="img/gallery-5.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-6.png" data-fancybox="gallery"><img src="img/gallery-6.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-7.png" data-fancybox="gallery"><img src="img/gallery-7.png" alt="" /></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-8.png" data-fancybox="gallery"><img src="img/gallery-8.png" alt="" /></a>
+                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-1.png" data-fancybox="gallery"><picture><source srcset="img/gallery-1.webp" type="image/webp"><img src="img/gallery-1.png" alt="" /></picture></a>
+                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-2.png" data-fancybox="gallery"><picture><source srcset="img/gallery-2.webp" type="image/webp"><img src="img/gallery-2.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-3.png" data-fancybox="gallery"><picture><source srcset="img/gallery-3.webp" type="image/webp"><img src="img/gallery-3.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-4.png" data-fancybox="gallery"><picture><source srcset="img/gallery-4.webp" type="image/webp"><img src="img/gallery-4.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-5.png" data-fancybox="gallery"><picture><source srcset="img/gallery-5.webp" type="image/webp"><img src="img/gallery-5.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-6.png" data-fancybox="gallery"><picture><source srcset="img/gallery-6.webp" type="image/webp"><img src="img/gallery-6.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-7.png" data-fancybox="gallery"><picture><source srcset="img/gallery-7.webp" type="image/webp"><img src="img/gallery-7.png" alt="" /></picture></a>
+                <a class="gallery__item swiper-slide" href="img/gallery-8.png" data-fancybox="gallery"><picture><source srcset="img/gallery-8.webp" type="image/webp"><img src="img/gallery-8.png" alt="" /></picture></a>
               </div>
             </div>
           </div>
@@ -233,7 +241,7 @@
             <div class="book__info">
               <h2 class="book__title s text-up">Орловские бани Select открывают двери</h2>
               <div class="book__image">
-                <img src="img/book-img.png" alt="" />
+                <picture><source srcset="img/book-img.webp" type="image/webp"><img src="img/book-img.png" alt="" /></picture>
               </div>
               <p class="book__text">Баня — это больше, чем отдых. Это время, чтобы остановиться, восстановить силы и вернуть ясность. В Орловских Банях Select традиции настоящего пара сочетаются с высоким уровнем сервиса и вниманием к каждой детали.</p>
             </div>
@@ -251,7 +259,7 @@
         <div class="container">
           <div class="complex__container">
             <div class="complex__card">
-              <img class="complex__image" src="img/vip-img.png" alt="" />
+              <picture><source srcset="img/vip-img.webp" type="image/webp"><img class="complex__image" src="img/vip-img.png" alt="" /></picture>
               <div class="complex__inner">
                 <span class="complex__label text-up">VIP-кабинет</span>
 
@@ -278,7 +286,7 @@
         <div class="container">
           <div class="services__container">
             <div class="services__card">
-              <img class="services__image" src="img/home-services.png" alt="" />
+              <picture><source srcset="img/home-services.webp" type="image/webp"><img class="services__image" src="img/home-services.png" alt="" /></picture>
               <div class="services__inner">
                 <div class="services__content">
                   <h2 class="services__title s text-up">SPA-услуги</h2>
@@ -303,14 +311,14 @@
             <!-- мин 6-8 картинок -->
             <div class="menu__gallery swiper">
               <div class="menu__gallery-list swiper-wrapper">
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-1.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-2.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-3.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-4.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-1.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-2.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-3.png" alt="" /></div>
-                <div class="menu__gallery-item swiper-slide"><img src="img/menu-4.png" alt="" /></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-1.webp" type="image/webp"><img src="img/menu-1.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-2.webp" type="image/webp"><img src="img/menu-2.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-3.webp" type="image/webp"><img src="img/menu-3.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-4.webp" type="image/webp"><img src="img/menu-4.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-1.webp" type="image/webp"><img src="img/menu-1.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-2.webp" type="image/webp"><img src="img/menu-2.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-3.webp" type="image/webp"><img src="img/menu-3.png" alt="" /></picture></div>
+                <div class="menu__gallery-item swiper-slide"><picture><source srcset="img/menu-4.webp" type="image/webp"><img src="img/menu-4.png" alt="" /></picture></div>
               </div>
             </div>
 
@@ -325,7 +333,7 @@
             <div class="news__slider swiper">
               <div class="news__list swiper-wrapper">
                 <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
                   <div class="news-card__body">
                     <span class="news-card__label">Новости</span>
                     <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
@@ -333,7 +341,7 @@
                   </div>
                 </a>
                 <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
                   <div class="news-card__body">
                     <span class="news-card__label">Новости</span>
                     <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
@@ -341,7 +349,7 @@
                   </div>
                 </a>
                 <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><img src="img/news-1.png" alt="" /></div>
+                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
                   <div class="news-card__body">
                     <span class="news-card__label">Новости</span>
                     <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
@@ -349,7 +357,7 @@
                   </div>
                 </a>
                 <a href="news.html" class="news__item news-card news-card--promo swiper-slide">
-                  <div class="news-card__image"><img src="img/promo-1.png" alt="" /></div>
+                  <div class="news-card__image"><picture><source srcset="img/promo-1.webp" type="image/webp"><img src="img/promo-1.png" alt="" /></picture></div>
                   <div class="news-card__body">
                     <span class="news-card__label">Акции</span>
                     <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
@@ -365,7 +373,7 @@
         <div class="container">
           <div class="about-programm__container">
             <div class="about-programm__card">
-              <img class="about-programm__image" src="img/programm-img.png" alt="" />
+              <picture><source srcset="img/programm-img.webp" type="image/webp"><img class="about-programm__image" src="img/programm-img.png" alt="" /></picture>
               <div class="about-programm__inner">
                 <h2 class="about-programm__title text-up">Подписаться на программу лояльности и получить первые бонусы</h2>
                 <a href="" class="about-programm__button button button-white button-white-2" target="_blank">Перейти к регистрации</a>
@@ -464,18 +472,19 @@
       <span class="footer__copy">&copy; 2026 XXX</span>
       <a href="" class="footer__link">Политика конфиденциальности</a>
       <a href="" class="footer__link">Договор оферты</a>
+      <a href="" class="footer__link">Условия оплаты</a>
       <a href="https://factum.agency/" class="footer__link" target="_blank">Сделано в factum.</a>
     </div>
   </div>
 </footer>
  
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260903191832"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260903191832"></script>
-<script src="js/app.min.js?_v=20260903191832"></script>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260904115353"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260904115353"></script>
+<script src="js/app.min.js?_v=20260904115353"></script>
   </body>
 </html>

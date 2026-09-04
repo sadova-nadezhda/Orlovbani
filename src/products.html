@@ -5,7 +5,8 @@
     @@include('html/header.html')
 
     <main>
-      <section class="products section-pad section-hidden">
+      <!-- section-hidden не ставим: overflow у родителя ломает sticky у табов -->
+      <section class="products section-pad">
         <div class="container">
           <div class="products__container">
             <nav class="breadcrumbs">
@@ -16,14 +17,14 @@
 
             <h1 class="products__title s text-up">Товары для бани</h1>
 
-            <div class="products__tabs tabs">
-              <button type="button" class="tabs__item is-active" data-filter="all">Все</button>
-              <button type="button" class="tabs__item" data-filter="rent">Аренда</button>
-              <button type="button" class="tabs__item" data-filter="hats">Панамы</button>
-            </div>
+            <nav class="products__tabs tabs">
+              <a href="#products-groups" class="tabs__item is-active" data-anchor="products-groups">Все</a>
+              <a href="#rent" class="tabs__item" data-anchor="rent">Аренда</a>
+              <a href="#hats" class="tabs__item" data-anchor="hats">Панамы</a>
+            </nav>
 
-            <div class="products__groups">
-              <div class="products__group" data-group="rent">
+            <div class="products__groups" id="products-groups">
+              <div class="products__group" id="rent">
                 <h3 class="products__group-title text-up">Аренда</h3>
                 <div class="products__list">
                   <article class="products__item product-card">
@@ -73,7 +74,7 @@
                 </div>
               </div>
 
-              <div class="products__group" data-group="hats">
+              <div class="products__group" id="hats">
                 <h3 class="products__group-title text-up">Панамы</h3>
                 <div class="products__list">
                   <article class="products__item product-card">
