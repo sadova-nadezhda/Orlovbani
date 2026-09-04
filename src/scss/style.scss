@@ -1488,20 +1488,20 @@
   &__map-close {
     position: absolute;
     z-index: 2;
-    top: var(--pad-8);
+    top: calc(48 * var(--width-multiplier));
     right: var(--pad-8);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(40 * var(--width-multiplier));
-    height: calc(40 * var(--width-multiplier));
+    width: calc(42 * var(--width-multiplier));
+    height: calc(42 * var(--width-multiplier));
     padding: 0;
     border: none;
     border-radius: var(--br-200);
-    background-color: var(--white, $white);
-    color: var(--dark, $dark);
+    background-color: var(--primary, $primary);
+    color: var(--white, $white);
     cursor: pointer;
-    transition: color 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 
     svg {
       width: calc(24 * var(--width-multiplier));
@@ -1510,7 +1510,7 @@
     }
 
     &:hover {
-      color: var(--primary, $primary);
+      transform: scale(1.05);
     }
   }
 }
