@@ -1349,13 +1349,19 @@
       const free = slots - prefix.length;
       const head = matrix.slice(0, matrix.indexOf("_"));
 
-      let body;
-      if (value.startsWith(head)) {
-        body = value.slice(head.length).replace(/\D/g, "");
-      } else {
-        body = value.replace(/\D/g, "");
-        if (body.length > free && /^[78]/.test(body)) body = body.slice(1);
+      let body = value.startsWith(head)
+        ? value.slice(head.length).replace(/\D/g, "")
+        : value.replace(/\D/g, "");
+
+      // Номер набирают и через +7, и через 8 — это одно и то же.
+      // Ведущую 8 убираем сразу, иначе номер съезжает и теряется последняя цифра.
+      if (prefix === "7" && body.startsWith("8")) {
+        body = body.slice(1);
+      } else if (body.length > free && body.startsWith(prefix)) {
+        // Код страны при вставке целого номера: 7 747 123 45 67
+        body = body.slice(prefix.length);
       }
+
       body = body.slice(0, free);
       if (!body) return "";
 
