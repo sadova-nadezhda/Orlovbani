@@ -2,24 +2,24 @@
 @import "mixins.scss";
 
 .footer {
-  padding: calc(64 * var(--width-multiplier)) 0 0;
+  padding: w(64) 0 0;
   background-color: var(--primary, $primary);
   color: var(--white, $white);
 
-  @media (max-width: 767px) {
+  @include mobile {
     padding-top: var(--pad-24);
   }
 
   &__container {
     display: flex;
-    gap: calc(120 * var(--width-multiplier));
-    padding-bottom: calc(64 * var(--width-multiplier));
+    gap: w(120);
+    padding-bottom: w(64);
 
-    @media (max-width: 1024px) {
-      gap: calc(64 * var(--width-multiplier));
+    @include tablet {
+      gap: w(64);
     }
 
-    @media (max-width: 767px) {
+    @include mobile {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--pad-24);
@@ -30,53 +30,53 @@
   &__col {
     display: flex;
     flex-direction: column;
-    gap: calc(16 * var(--width-multiplier));
+    gap: w(16);
 
     &--brand {
       gap: var(--pad-16);
-      @media (max-width: 767px) {
+      @include mobile {
         grid-column: span 2;
         align-items: center;
       }
     }
 
     &:last-child {
-      @media (max-width: 767px) {
+      @include mobile {
         grid-column: 1 / -1;
       }
     }
   }
 
   &__logo img {
-    width: calc(230 * var(--width-multiplier));
+    width: w(230);
     height: auto;
 
-    @media (max-width: 767px) {
-      width: calc(160 * var(--width-multiplier));
+    @include mobile {
+      width: w(160);
     }
   }
 
   &__slogan {
-    max-width: calc(230 * var(--width-multiplier));
+    max-width: w(230);
     font-weight: 500;
-    font-size: calc(16 * var(--width-multiplier));
+    font-size: w(16);
     line-height: 1.4em;
     text-align: center;
 
-    @media (max-width: 767px) {
+    @include mobile {
       max-width: unset;
     }
   }
 
   &__label {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: calc(14 * var(--width-multiplier));
+    color: rgba($white, 0.5);
+    font-size: w(14);
   }
 
   &__menu {
     display: flex;
     flex-direction: column;
-    gap: calc(16 * var(--width-multiplier));
+    gap: w(16);
 
     a {
       @include transition;
@@ -90,13 +90,13 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: calc(24 * var(--width-multiplier));
+    gap: w(24);
   }
 
   &__name {
     display: block;
-    margin-bottom: calc(4 * var(--width-multiplier));
-    font-size: calc(12 * var(--width-multiplier));
+    margin-bottom: w(4);
+    font-size: w(12);
   }
 
   &__value {
@@ -114,12 +114,12 @@
     justify-content: space-between;
     gap: var(--pad-16) var(--pad-24);
     padding: var(--pad-24) 0;
-    border-top: 1px solid rgba(255, 255, 255, 1);
-    font-size: calc(12 * var(--width-multiplier));
+    border-top: 1px solid rgba($white, 1);
+    font-size: w(12);
   }
 
   &__copy {
-    @media (max-width: 767px) {
+    @include mobile {
       order: 1;
     }
   }
@@ -132,7 +132,7 @@
     }
 
     &:last-of-type {
-      @media (max-width: 767px) {
+      @include mobile {
         order: 1;
       }
     }

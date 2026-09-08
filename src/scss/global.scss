@@ -5,39 +5,39 @@
   --white: #FFFFFF;
   --primary: #6E1D0B;
   --dark: #202020;
-  --light: rgba(255, 255, 255, 0.15);
-  --grey: rgba(32, 32, 32, 0.5);
+  --light: #{rgba($white, 0.15)};
+  --grey: #{rgba($dark, 0.5)};
   --bg: #F5F5F5;
-  --pad-64: calc(64 * var(--width-multiplier));
-  --pad-42: calc(42 * var(--width-multiplier));
-  --pad-24: calc(24 * var(--width-multiplier));
-  --pad-16: calc(16 * var(--width-multiplier));
-  --pad-8: calc(8 * var(--width-multiplier));
-  --gap-8: calc(8 * var(--width-multiplier));
-  --br-200: calc(200 * var(--width-multiplier));
-  --br-20: calc(20 * var(--width-multiplier));
-  --br-12: calc(12 * var(--width-multiplier));
-  --br-8: calc(8 * var(--width-multiplier));
+  --pad-64: #{w(64)};
+  --pad-42: #{w(42)};
+  --pad-24: #{w(24)};
+  --pad-16: #{w(16)};
+  --pad-8: #{w(8)};
+  --gap-8: #{w(8)};
+  --br-200: #{w(200)};
+  --br-20: #{w(20)};
+  --br-12: #{w(12)};
+  --br-8: #{w(8)};
   --width-base: 1440;
   --width-current: 100vw;
   --width-multiplier: calc(var(--width-current) / var(--width-base));
 }
 
-@media(min-width: 1921px) {
+@include wide {
     :root {
       --width-base: 1920;
       --width-current: 100vw;
     }
 }
 
-@media(max-width: 1024px) {
+@include tablet {
     :root {
       --width-base: 768;
       --width-current: 100vmin;
     }
 }
 
-@media(max-width: 767px) {
+@include mobile {
     :root {
       --width-base: 375;
       --width-current: 100vmin;
@@ -47,7 +47,7 @@
 html {
   height: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(64 * var(--width-multiplier));
+  scroll-padding-top: w(64);
 }
 
 body {
@@ -57,7 +57,7 @@ body {
   min-height: 100vh;
   color: var(--dark, $dark);
   background-color: var(--bg, $bg);
-  font: 400 calc(14 * var(--width-multiplier))/1.4 Euclid;
+  font: 400 w(14)/1.4 Euclid;
   text-rendering: optimizeSpeed;
   overflow-x: hidden;
   overflow-x: clip;
@@ -93,51 +93,51 @@ dd {
 }
 
 h1 {
-  font: 700 calc(64 * var(--width-multiplier))/1 Shadower;
-  @media (max-width: 1024px) {
-    font-size: calc(52 * var(--width-multiplier));
+  font: 700 w(64)/1 Shadower;
+  @include tablet {
+    font-size: w(52);
   }
-  @media (max-width: 767px) {
-    font-size: calc(40 * var(--width-multiplier));
+  @include mobile {
+    font-size: w(40);
   }
   &.s {
-    font: 700 calc(40 * var(--width-multiplier))/1.1 Shadower;
-    @media (max-width: 767px) {
-      font-size: calc(30 * var(--width-multiplier));
+    font: 700 w(40)/1.1 Shadower;
+    @include mobile {
+      font-size: w(30);
     }
   }
 }
 
 h2 {
-  font: 700 calc(48 * var(--width-multiplier))/1.1 Shadower;
-  @media (max-width: 1024px) {
-    font-size: calc(40 * var(--width-multiplier));
+  font: 700 w(48)/1.1 Shadower;
+  @include tablet {
+    font-size: w(40);
   }
-  @media (max-width: 767px) {
-    font-size: calc(36 * var(--width-multiplier));
+  @include mobile {
+    font-size: w(36);
   }
   &.s {
-    font: 700 calc(32 * var(--width-multiplier))/1.1 Shadower;
-    @media (max-width: 1024px) {
-      font-size: calc(30 * var(--width-multiplier));
+    font: 700 w(32)/1.1 Shadower;
+    @include tablet {
+      font-size: w(30);
     }
-    @media (max-width: 767px) {
-      font-size: calc(28 * var(--width-multiplier));
+    @include mobile {
+      font-size: w(28);
     }
   }
 }
 
 h3 {
-  font: 400 calc(24 * var(--width-multiplier))/1.1 Shadower;
-  @media (max-width: 767px) {
-    font-size: calc(22 * var(--width-multiplier));
+  font: 400 w(24)/1.1 Shadower;
+  @include mobile {
+    font-size: w(22);
   }
 }
 
 h4 {
- font: 400 calc(24 * var(--width-multiplier))/1.1 Montserrat;
-   @media (max-width: 767px) {
-    font-size: calc(20 * var(--width-multiplier));
+ font: 400 w(24)/1.1 Montserrat;
+   @include mobile {
+    font-size: w(20);
   }
 }
 

@@ -1,14 +1,145 @@
 (() => {
   "use strict";
 
-  // Helpers
+  // ============================================================
+  // Утилиты
+  // ============================================================
+
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const debounce = (fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; };
+  const debounce = (fn, ms) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), ms);
+    };
+  };
+
+  // В приватном режиме и при заблокированных куках обращение к storage бросает
+  // исключение — оборачиваем, чтобы это не роняло инициализацию.
+  const safeStorage = (getStore) => ({
+    get(key) {
+      try {
+        return getStore().getItem(key);
+      } catch (e) {
+        return null;
+      }
+    },
+    set(key, value) {
+      try {
+        getStore().setItem(key, value);
+      } catch (e) {
+        // не запомнили — не страшно
+      }
+    },
+  });
+
+  const localStore = safeStorage(() => localStorage);
+  const sessionStore = safeStorage(() => sessionStorage);
+
+  // Одноразовый сигнал: подписчик, добавленный после срабатывания, вызывается сразу.
+  const createSignal = () => {
+    let fired = false;
+    const queue = [];
+
+    return {
+      then: (fn) => (fired ? fn() : queue.push(fn)),
+      fire: () => {
+        if (fired) return;
+        fired = true;
+        queue.splice(0).forEach((fn) => fn());
+      },
+    };
+  };
+
+  const escapeHandlers = new Set();
+  const onEscape = (fn) => escapeHandlers.add(fn);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") escapeHandlers.forEach((fn) => fn());
+  });
+
+  // Ролик подгружается и играет, только пока он на экране.
+  const lazyVideo = (video, root = video) => {
+    if (!video) return;
+
+    const start = () => {
+      if (!video.getAttribute("src") && video.dataset.src) {
+        video.setAttribute("src", video.dataset.src);
+      }
+      video.play?.()?.catch?.(() => {});
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      start();
+      return;
+    }
+
+    new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : video.pause?.()),
+      { rootMargin: "20% 0px", threshold: 0 }
+    ).observe(root);
+  };
+
+  // Секция появляется один раз при подходе к ней.
+  const revealOnce = (section, { onMobile = true } = {}) => {
+    if (!section) return;
+    if (!onMobile && window.innerWidth <= 767) return;
+
+    section.classList.add("is-intro");
+    const reveal = () => section.classList.remove("is-intro");
+
+    if (typeof ScrollTrigger !== "undefined") {
+      ScrollTrigger.create({ trigger: section, start: "top 85%", once: true, onEnter: reveal });
+      return;
+    }
+
+    const onScroll = () => {
+      if (section.getBoundingClientRect().top > window.innerHeight * 0.85) return;
+      reveal();
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  };
+
+  // Прокрутка к точке — через Lenis, если он есть.
+  const scrollToY = (top) => {
+    if (window.lenis?.scrollTo) window.lenis.scrollTo(top);
+    else window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  // ============================================================
+  // Общее состояние и пересчёт раскладки
+  // ============================================================
+
+  const state = {
+    multiplier: 1,
+    swipers: {},
+  };
+
+  const getWidthMultiplier = () => {
+    const width = window.innerWidth;
+    const minSide = Math.min(window.innerWidth, window.innerHeight);
+
+    if (width <= 767) return minSide / 375;
+    if (width <= 1024) return minSide / 768;
+    return width / 1440;
+  };
+
+  const updateMultiplier = () => {
+    state.multiplier = getWidthMultiplier();
+  };
+
+  const s = (value) => value * state.multiplier;
+
+  const introSignal = createSignal();
+  const preloaderSignal = createSignal();
 
   const refreshLenis = () => {
-    if (window.lenis && typeof window.lenis.resize === "function") window.lenis.resize();
+    if (typeof window.lenis?.resize === "function") window.lenis.resize();
   };
 
   const layoutFrozen = () =>
@@ -18,7 +149,11 @@
   let layoutPending = false;
 
   const refreshLayout = () => {
-    if (layoutFrozen()) { layoutPending = true; return; }
+    if (layoutFrozen()) {
+      layoutPending = true;
+      return;
+    }
+
     layoutPending = false;
     refreshLenis();
     if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
@@ -26,34 +161,6 @@
 
   const flushLayout = () => {
     if (layoutPending) requestAnimationFrame(refreshLayout);
-  };
-
-  let introReady = false;
-  const introQueue = [];
-
-  const onIntroReady = (fn) => {
-    if (introReady) { fn(); return; }
-    introQueue.push(fn);
-  };
-
-  const markIntroReady = () => {
-    if (introReady) return;
-    introReady = true;
-    introQueue.splice(0).forEach((fn) => fn());
-  };
-
-  let preloaderDone = false;
-  const preloaderQueue = [];
-
-  const onPreloaderDone = (fn) => {
-    if (preloaderDone) { fn(); return; }
-    preloaderQueue.push(fn);
-  };
-
-  const markPreloaderDone = () => {
-    if (preloaderDone) return;
-    preloaderDone = true;
-    preloaderQueue.splice(0).forEach((fn) => fn());
   };
 
   const initLayoutWatcher = () => {
@@ -77,8 +184,10 @@
 
     new ResizeObserver(() => {
       if (busy) return;
+
       const height = document.body.offsetHeight;
       if (Math.abs(height - last) < 2) return;
+
       last = height;
       refresh();
     }).observe(document.body);
@@ -93,12 +202,13 @@
         document.documentElement.style.setProperty("--scrollbar-width", `${scrollbar}px`);
         document.body.classList.add("no-scroll");
         lenis?.stop?.();
-      } else {
-        document.body.classList.remove("no-scroll");
-        document.documentElement.style.setProperty("--scrollbar-width", "0px");
-        lenis?.start?.();
-        flushLayout();
+        return;
       }
+
+      document.body.classList.remove("no-scroll");
+      document.documentElement.style.setProperty("--scrollbar-width", "0px");
+      lenis?.start?.();
+      flushLayout();
     };
 
     return {
@@ -120,93 +230,57 @@
     };
   };
 
-  const revealOnce = (section, { onMobile = true } = {}) => {
-    if (!section) return;
-    if (!onMobile && window.innerWidth <= 767) return;
+  // ============================================================
+  // Внешние библиотеки
+  // ============================================================
 
-    section.classList.add("is-intro");
-    const reveal = () => section.classList.remove("is-intro");
-
-    if (typeof ScrollTrigger !== "undefined") {
-      ScrollTrigger.create({ trigger: section, start: "top 85%", once: true, onEnter: reveal });
-      return;
-    }
-
-    const onScroll = () => {
-      if (section.getBoundingClientRect().top > window.innerHeight * 0.85) return;
-      reveal();
-      window.removeEventListener("scroll", onScroll);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-  };
-
-  const state = {
-    multiplier: 1,
-    swipers: {},
-  };
-
-  // ======================
-  // Lenis
-  // ======================
   const initLenis = () => {
     if (typeof Lenis === "undefined") return null;
+
     const useGsapTicker = typeof gsap !== "undefined";
     const lenis = new Lenis({
       autoRaf: !useGsapTicker,
       anchors: { offset: -Math.round(s(120)) },
     });
-    window.lenis = lenis;
 
+    window.lenis = lenis;
     document.documentElement.style.scrollBehavior = "auto";
 
     if (useGsapTicker) {
       gsap.ticker.add((time) => lenis.raf(time * 1000));
       gsap.ticker.lagSmoothing(0);
-      if (typeof ScrollTrigger !== "undefined") {
-        lenis.on("scroll", ScrollTrigger.update);
-      }
+      if (typeof ScrollTrigger !== "undefined") lenis.on("scroll", ScrollTrigger.update);
     }
 
     return lenis;
   };
 
-  // ======================
-  // Multiplier / s()
-  // ======================
-  const getWidthMultiplier = () => {
-    const w = window.innerWidth;
-    const minSide = Math.min(window.innerWidth, window.innerHeight);
+  const makeSwiper = (name, target, options) => {
+    if (!target || typeof Swiper === "undefined") return null;
 
-    if (w <= 767) return minSide / 375;
-    if (w <= 1024) return minSide / 768;
-    return window.innerWidth / 1440;
+    state.swipers[name] = new Swiper(target, options);
+    return state.swipers[name];
   };
 
-  const updateMultiplier = () => {
-    state.multiplier = getWidthMultiplier();
+  const initFancybox = () => {
+    if (typeof Fancybox === "undefined") return;
+    Fancybox.bind("[data-fancybox]", {});
   };
 
-  const s = (value) => value * state.multiplier;
+  // ============================================================
+  // Шапка и навигация
+  // ============================================================
 
-  // ======================
-  // Header
-  // ======================
   const initHeader = () => {
     const header = $(".header");
     if (!header) return;
 
-    const toggle = () => {
-      header.classList.toggle("scrolled", window.scrollY > 10);
-    };
+    const toggle = () => header.classList.toggle("scrolled", window.scrollY > 10);
 
     toggle();
     window.addEventListener("scroll", toggle, { passive: true });
   };
 
-  // ======================
-  // Бургер
-  // ======================
   const initBurger = ({ scrollLock }) => {
     const burger = $(".header__burger");
     const nav = $(".header__nav");
@@ -214,16 +288,16 @@
 
     let opened = false;
 
-    const setState = (state) => {
-      if (opened === state) return;
-      opened = state;
+    const setState = (next) => {
+      if (opened === next) return;
+      opened = next;
 
-      burger.classList.toggle("is-active", state);
-      nav.classList.toggle("is-open", state);
-      document.body.classList.toggle("menu-open", state);
-      burger.setAttribute("aria-expanded", String(state));
+      burger.classList.toggle("is-active", next);
+      nav.classList.toggle("is-open", next);
+      document.body.classList.toggle("menu-open", next);
+      burger.setAttribute("aria-expanded", String(next));
 
-      if (state) scrollLock?.lock?.("menu");
+      if (next) scrollLock?.lock?.("menu");
       else scrollLock?.unlock?.("menu");
     };
 
@@ -233,9 +307,7 @@
       link.addEventListener("click", () => setState(false));
     });
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setState(false);
-    });
+    onEscape(() => setState(false));
 
     return {
       open: () => setState(true),
@@ -244,9 +316,85 @@
     };
   };
 
-  // ======================
-  // О клубе
-  // ======================
+  const initLang = () => {
+    const links = $$("[data-lang]");
+    if (!links.length) return null;
+
+    const bar = $(".lang");
+    const thumb = bar ? $(".lang__thumb", bar) : null;
+    const current = $$(".header__lang-current");
+
+    const moveThumb = (item) => {
+      if (!bar || !thumb || !item || !item.offsetWidth) return;
+
+      thumb.style.setProperty("--lang-thumb-w", `${item.offsetWidth}px`);
+      thumb.style.setProperty("--lang-thumb-x", `${item.offsetLeft}px`);
+
+      if (!bar.classList.contains("is-ready")) {
+        void thumb.offsetWidth;
+        bar.classList.add("is-ready");
+      }
+    };
+
+    const updateThumb = () => {
+      if (bar) moveThumb($(".lang__item.is-active", bar));
+    };
+
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => moveThumb(link));
+
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const lang = link.dataset.lang;
+        if (!lang) return;
+
+        links.forEach((el) => el.classList.toggle("is-active", el.dataset.lang === lang));
+        current.forEach((el) => { el.textContent = lang; });
+        updateThumb();
+      });
+    });
+
+    bar?.addEventListener("mouseleave", updateThumb);
+
+    if (bar && "ResizeObserver" in window) new ResizeObserver(updateThumb).observe(bar);
+    document.fonts?.ready.then(updateThumb);
+    updateThumb();
+
+    return { update: updateThumb };
+  };
+
+  // ============================================================
+  // Главная
+  // ============================================================
+
+  const initHeroSlider = () => {
+    makeSwiper("hero", $(".hero__slider"), {
+      slidesPerView: 1,
+      loop: true,
+      speed: 1000,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      autoplay: { delay: 6000, disableOnInteraction: false },
+      pagination: { el: ".hero__pagination", clickable: true },
+    });
+  };
+
+  const initHeroCard = () => {
+    const card = $(".hero__card");
+    if (!card) return;
+
+    const KEY = "hero-card-closed";
+
+    if (sessionStore.get(KEY) === "1") card.classList.add("is-hidden");
+
+    $("[data-card-close]", card)?.addEventListener("click", () => {
+      card.classList.add("is-hidden");
+      sessionStore.set(KEY, "1");
+      refreshLayout();
+    });
+  };
+
   const initAbout = () => {
     const section = $(".about");
     if (!section) return null;
@@ -257,8 +405,7 @@
 
     let active = 0;
 
-    // ролик один на всю секцию, при прокрутке меняется только текст
-    initLazyVideo($(".about__video", section));
+    lazyVideo($(".about__video", section));
 
     const setActive = (index) => {
       if (index === active) return;
@@ -285,67 +432,32 @@
         const total = section.offsetHeight - window.innerHeight;
         update(total > 0 ? -section.getBoundingClientRect().top / total : 0);
       };
+
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     }
 
-    // клик по пункту прокручивает к соответствующему экрану
     tabs.forEach((tab, i) => {
       tab.addEventListener("click", () => {
         const total = section.offsetHeight - window.innerHeight;
-        const top = section.offsetTop + (total * (i + 0.5)) / tabs.length;
-        if (window.lenis?.scrollTo) window.lenis.scrollTo(top);
-        else window.scrollTo({ top, behavior: "smooth" });
+        scrollToY(section.offsetTop + (total * (i + 0.5)) / tabs.length);
       });
     });
 
     return { setActive };
   };
 
-  // ======================
-  // Бронирование
-  // ======================
   const initBook = () => {
     const section = $(".book");
-    if (!section) return null;
-
-    const media = $(".book__media", section);
-    const video = $(".book__video", section);
-    if (!media) return null;
+    if (!section || !$(".book__media", section)) return;
 
     revealOnce(section);
-
-    // ролик подгружается только при подходе к секции
-    const startVideo = () => {
-      if (!video) return;
-      if (!video.getAttribute("src") && video.dataset.src) {
-        video.setAttribute("src", video.dataset.src);
-      }
-      video.play?.()?.catch?.(() => {});
-    };
-
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) startVideo();
-          else video?.pause?.();
-        },
-        { rootMargin: "20% 0px", threshold: 0 }
-      ).observe(section);
-
-    } else {
-      startVideo();
-    }
-
-    return null;
+    lazyVideo($(".book__video", section), section);
   };
 
-  // ======================
-  // Галерея
-  // ======================
   const initGallery = () => {
     const section = $(".gallery");
-    const slider = $(".gallery__slider", section || document);
+    const slider = section ? $(".gallery__slider", section) : null;
     if (!section || !slider) return null;
 
     let swiper = null;
@@ -353,8 +465,8 @@
     const sync = () => {
       const mobile = window.innerWidth <= 767;
 
-      if (mobile && !swiper && typeof Swiper !== "undefined") {
-        swiper = new Swiper(slider, {
+      if (mobile && !swiper) {
+        swiper = makeSwiper("gallery", slider, {
           slidesPerView: 1.15,
           spaceBetween: s(12),
           grabCursor: true,
@@ -362,39 +474,23 @@
       } else if (!mobile && swiper) {
         swiper.destroy(true, true);
         swiper = null;
+        delete state.swipers.gallery;
       }
     };
 
     sync();
-
     revealOnce(section, { onMobile: false });
 
     return { update: sync };
   };
 
-  // ======================
-  // Услуги
-  // ======================
-  const initServices = () => {
-    // анимация появления нужна только блоку на главной, на странице услуг её нет
+  const initReveals = () => {
     revealOnce($(".home-services"));
-  };
-
-  // ======================
-  // Карточки комплекса и VIP-кабинета
-  // ======================
-  const initComplex = () => {
     $$(".complex").forEach((section) => revealOnce(section));
   };
 
-  // ======================
-  // Новости
-  // ======================
-  const initNews = () => {
-    const slider = $(".news__slider");
-    if (!slider || typeof Swiper === "undefined") return null;
-
-    state.swipers.news = new Swiper(slider, {
+  const initCardSliders = () => {
+    makeSwiper("news", $(".news__slider"), {
       slidesPerView: 1.25,
       spaceBetween: s(12),
       grabCursor: true,
@@ -404,17 +500,7 @@
       },
     });
 
-    return null;
-  };
-
-  // ======================
-  // Отзывы
-  // ======================
-  const initReviews = () => {
-    const slider = $(".reviews__slider");
-    if (!slider || typeof Swiper === "undefined") return null;
-
-    state.swipers.reviews = new Swiper(slider, {
+    makeSwiper("reviews", $(".reviews__slider"), {
       slidesPerView: 1.15,
       spaceBetween: s(12),
       grabCursor: true,
@@ -423,65 +509,19 @@
         1025: { slidesPerView: 3 },
       },
     });
-
-    return null;
   };
 
-  // ======================
-  // Контакты
-  // ======================
+  // ============================================================
+  // Контакты, карта, SEO-блок
+  // ============================================================
+
   const initFeedback = () => {
     const section = $(".feedback");
-    const video = section ? $(".feedback__video", section) : null;
-    if (!section || !video) return null;
+    if (!section) return;
 
-    // ролик подгружается только при подходе к секции
-    const startVideo = () => {
-      if (!video.getAttribute("src") && video.dataset.src) {
-        video.setAttribute("src", video.dataset.src);
-      }
-      video.play?.()?.catch?.(() => {});
-    };
-
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) startVideo();
-          else video.pause?.();
-        },
-        { rootMargin: "20% 0px", threshold: 0 }
-      ).observe(section);
-    } else {
-      startVideo();
-    }
-
-    return null;
+    lazyVideo($(".feedback__video", section), section);
   };
 
-  // ======================
-  // SEO-блок
-  // ======================
-  const initSeo = () => {
-    const card = $("[data-seo]");
-    const toggle = card ? $("[data-seo-toggle]", card) : null;
-    const body = card ? $(".seo__body", card) : null;
-    if (!card || !toggle) return null;
-
-    toggle.addEventListener("click", () => {
-      const open = card.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-
-    body?.addEventListener("transitionend", (e) => {
-      if (e.propertyName === "grid-template-rows") refreshLayout();
-    });
-
-    return null;
-  };
-
-  // ======================
-  // Карта в блоке контактов
-  // ======================
   const initMap = () => {
     const root = $("[data-map]");
     if (!root) return null;
@@ -492,6 +532,7 @@
     const closer = $("[data-map-close]", root);
     if (!plate || !frame || !opener || !closer) return null;
 
+    // Карта раскрывается из маленькой плашки
     const syncClip = () => {
       const layer = frame.getBoundingClientRect();
       const rect = plate.getBoundingClientRect();
@@ -517,21 +558,16 @@
       frame.prepend(iframe);
     };
 
-    const setOpen = (state) => {
-      if (state) syncClip();
+    const setOpen = (open) => {
+      if (open) syncClip();
 
-      root.classList.toggle("is-map-open", state);
-      opener.setAttribute("aria-expanded", String(state));
+      root.classList.toggle("is-map-open", open);
+      opener.setAttribute("aria-expanded", String(open));
     };
 
     opener.addEventListener("click", () => setOpen(true));
     closer.addEventListener("click", () => setOpen(false));
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
-    });
-
-    window.addEventListener("resize", debounce(syncClip, 150));
+    onEscape(() => setOpen(false));
 
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(
@@ -549,267 +585,48 @@
 
     syncClip();
 
-    return { open: () => setOpen(true), close: () => setOpen(false) };
+    return { open: () => setOpen(true), close: () => setOpen(false), sync: syncClip };
   };
 
-  // ======================
-  // Промо-карточка в hero
-  // ======================
-  const initHeroCard = () => {
-    const card = $(".hero__card");
-    if (!card) return;
+  const initSeo = () => {
+    const card = $("[data-seo]");
+    const toggle = card ? $("[data-seo-toggle]", card) : null;
+    if (!card || !toggle) return;
 
-    // закрытая карточка не возвращается до конца сессии
-    const KEY = "hero-card-closed";
+    toggle.addEventListener("click", () => {
+      const open = card.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
 
-    const remember = () => {
-      try {
-        sessionStorage.setItem(KEY, "1");
-      } catch (e) {
-        // приватный режим — просто не запоминаем
-      }
-    };
-
-    const wasClosed = () => {
-      try {
-        return sessionStorage.getItem(KEY) === "1";
-      } catch (e) {
-        return false;
-      }
-    };
-
-    if (wasClosed()) card.classList.add("is-hidden");
-
-    $("[data-card-close]", card)?.addEventListener("click", () => {
-      card.classList.add("is-hidden");
-      remember();
-      refreshLayout();
+    $(".seo__body", card)?.addEventListener("transitionend", (e) => {
+      if (e.propertyName === "grid-template-rows") refreshLayout();
     });
   };
 
-  // ======================
-  // Прелоудер
-  // ======================
-  const PRELOADER_ONCE_PER_DAY = false;
+  // ============================================================
+  // Внутренние страницы: фильтры и якоря
+  // ============================================================
 
-  const initPreloader = ({ scrollLock }) => {
-    const root = $(".preloader");
-    if (!root) {
-      markPreloaderDone();
-      return null;
-    }
-
-    const KEY = "preloader-shown-date";
-    const today = new Date().toISOString().slice(0, 10);
-
-    if (PRELOADER_ONCE_PER_DAY) {
-      let shownToday = false;
-      try {
-        shownToday = localStorage.getItem(KEY) === today;
-      } catch (e) {
-        shownToday = false;
-      }
-
-      if (shownToday) {
-        root.remove();
-        markPreloaderDone();
-        return null;
-      }
-    }
-
-    const shine = $(".preloader__logo-shine", root);
-
-    const finish = () => {
-      root.classList.add("is-hidden");
-      scrollLock?.unlock?.("preloader");
-      markPreloaderDone();
-
-      if (PRELOADER_ONCE_PER_DAY) {
-        try {
-          localStorage.setItem(KEY, today);
-        } catch (e) {
-          // приватный режим — прелоудер покажется снова в следующий раз
-        }
-      }
-
-      root.addEventListener("transitionend", () => root.remove(), { once: true });
-    };
-
-    scrollLock?.lock?.("preloader");
-
-    if (shine) {
-      shine.addEventListener("animationend", finish, { once: true });
-      root.classList.add("is-animating");
-    } else {
-      finish();
-    }
-
-    return null;
-  };
-
-  // ======================
-  // Интро
-  // ======================
-  const initIntro = () => {
-    let started = false;
-
-    const start = () => {
-      if (started) return;
-      started = true;
-
-      markIntroReady();
-      document.documentElement.classList.remove("is-loading");
-      refreshLayout();
-    };
-
-    // ждём завершения прелоудера и только потом запускаем интро баннера
-    onPreloaderDone(() => {
-      if (document.readyState === "complete") {
-        requestAnimationFrame(start);
-        return;
-      }
-
-      window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
-
-      setTimeout(start, 1500);
-    });
-  };
-
-  const initHeroIntro = () => {
-    if (!$(".hero")) return;
-
-    onIntroReady(() => {
-      if (typeof gsap === "undefined") return;
-
-      gsap.set(".header__container > *", { y: s(-20), opacity: 0 });
-      gsap.set(".hero__title", { y: s(40), opacity: 0 });
-      gsap.set(".hero__desc", { y: s(30), opacity: 0 });
-      gsap.set(".hero__button", { y: s(20), opacity: 0 });
-      gsap.set(".hero__bottom > *", { y: s(20), opacity: 0 });
-
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 1, clearProps: "all" },
-      });
-
-      tl.to(".header__container > *", { y: 0, opacity: 1, stagger: 0.1 })
-        .to(".hero__title", { y: 0, opacity: 1 }, "-=0.8")
-        .to(".hero__desc", { y: 0, opacity: 1 }, "-=0.75")
-        .to(".hero__button", { y: 0, opacity: 1 }, "-=0.75")
-        .to(".hero__bottom > *", { y: 0, opacity: 1, stagger: 0.1 }, "-=0.7");
-
-      setTimeout(() => {
-        if (tl.progress() < 1) tl.progress(1);
-      }, 4000);
-    });
-  };
-
-  // ======================
-  // Переключатель языков
-  // ======================
-  const initLang = () => {
-    const links = $$("[data-lang]");
-    if (!links.length) return null;
-
-    const bar = $(".lang");
-    const thumb = bar ? $(".lang__thumb", bar) : null;
-    const current = $$(".header__lang-current");
-
-    const moveThumb = (item) => {
-      if (!bar || !thumb || !item || !item.offsetWidth) return;
-
-      thumb.style.setProperty("--lang-thumb-w", item.offsetWidth + "px");
-      thumb.style.setProperty("--lang-thumb-x", item.offsetLeft + "px");
-
-      if (!bar.classList.contains("is-ready")) {
-        void thumb.offsetWidth;
-        bar.classList.add("is-ready");
-      }
-    };
-
-    const updateThumb = () => {
-      if (!bar) return;
-      moveThumb($(".lang__item.is-active", bar));
-    };
-
-    links.forEach((link) => {
-      // подложка едет за курсором, а не за выбранным языком
-      link.addEventListener("mouseenter", () => moveThumb(link));
-
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const lang = link.dataset.lang;
-        if (!lang) return;
-
-        links.forEach((l) => l.classList.toggle("is-active", l.dataset.lang === lang));
-        current.forEach((el) => (el.textContent = lang));
-        updateThumb();
-      });
-    });
-
-    // курсор ушёл — подложка возвращается к выбранному языку
-    bar?.addEventListener("mouseleave", updateThumb);
-
-    if ("ResizeObserver" in window && bar) new ResizeObserver(updateThumb).observe(bar);
-    document.fonts?.ready.then(updateThumb);
-    updateThumb();
-
-    return { update: updateThumb };
-  };
-
-  // ======================
-  // Swipers
-  // ======================
-  const initSwipers = () => {
-    if (typeof Swiper === "undefined") return;
-
-    const hero = $(".hero__slider");
-    if (hero) {
-      state.swipers.hero = new Swiper(hero, {
-        slidesPerView: 1,
-        loop: true,
-        speed: 1000,
-        effect: "fade",
-        fadeEffect: { crossFade: true },
-        autoplay: {
-          delay: 6000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".hero__pagination",
-          clickable: true,
-        },
-      });
-    }
-
-  };
-
-  // ======================
-  // Новости и акции — фильтр и «показать ещё»
-  // ======================
-  const initNewsPage = () => {
-    const section = $(".news-page");
+  const initTabsFilter = (section, { items: itemsSel, key, more: moreSel, step = 0 } = {}) => {
     if (!section) return null;
 
-    const cards = $$("[data-category]", section);
-    if (!cards.length) return null;
-
-    const STEP = 8;
-
+    const items = $$(itemsSel, section);
     const tabs = $$("[data-filter]", section);
-    const more = $("[data-news-more]", section);
+    const more = moreSel ? $(moreSel, section) : null;
+
+    if (!items.length || (!tabs.length && !more)) return null;
 
     let filter = "all";
-    let limit = STEP;
-
-    const matched = () => cards.filter((card) => filter === "all" || card.dataset.category === filter);
+    let shown = step;
 
     const render = () => {
-      const list = matched();
+      const matched = items.filter((item) => filter === "all" || item.dataset[key] === filter);
+      const limit = step ? shown : matched.length;
 
-      cards.forEach((card) => { card.hidden = true; });
-      list.slice(0, limit).forEach((card) => { card.hidden = false; });
+      items.forEach((item) => { item.hidden = true; });
+      matched.slice(0, limit).forEach((item) => { item.hidden = false; });
 
-      if (more) more.hidden = list.length <= limit;
+      if (more) more.hidden = matched.length <= limit;
 
       refreshLayout();
     };
@@ -817,14 +634,14 @@
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         filter = tab.dataset.filter || "all";
-        limit = STEP;
+        shown = step;
         tabs.forEach((el) => el.classList.toggle("is-active", el === tab));
         render();
       });
     });
 
     more?.addEventListener("click", () => {
-      limit += STEP;
+      shown += step;
       render();
     });
 
@@ -833,74 +650,6 @@
     return { render };
   };
 
-  // ролик подгружается и играет только пока он на экране
-  const initLazyVideo = (video) => {
-    if (!video) return;
-
-    const start = () => {
-      if (!video.getAttribute("src") && video.dataset.src) {
-        video.setAttribute("src", video.dataset.src);
-      }
-      video.play?.()?.catch?.(() => {});
-    };
-
-    if (!("IntersectionObserver" in window)) {
-      start();
-      return;
-    }
-
-    new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) start();
-        else video.pause?.();
-      },
-      { rootMargin: "20% 0px", threshold: 0 }
-    ).observe(video);
-  };
-
-  // ======================
-  // Расписание парений
-  // ======================
-  const initSchedule = () => {
-    initLazyVideo($(".schedule__video"));
-    return null;
-  };
-
-  // ======================
-  // Фильтр по табам — прячет элементы, у которых значение не совпало
-  // ======================
-  const initTabsFilter = (section, selector, key) => {
-    if (!section) return null;
-
-    const items = $$(selector, section);
-    const tabs = $$("[data-filter]", section);
-    if (!items.length || !tabs.length) return null;
-
-    const render = (filter) => {
-      items.forEach((item) => {
-        item.hidden = filter !== "all" && item.dataset[key] !== filter;
-      });
-
-      refreshLayout();
-    };
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        tabs.forEach((el) => el.classList.toggle("is-active", el === tab));
-        render(tab.dataset.filter || "all");
-      });
-    });
-
-    render("all");
-
-    return { render };
-  };
-
-  const initServicesPage = () => initTabsFilter($(".services-page"), "[data-category]", "category");
-
-  // ======================
-  // Якорная навигация по разделам
-  // ======================
   const initAnchorNav = (section, groupClass) => {
     if (!section) return null;
 
@@ -939,10 +688,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        const top = window.scrollY + target.getBoundingClientRect().top - anchorOffset();
-
-        if (window.lenis?.scrollTo) window.lenis.scrollTo(top);
-        else window.scrollTo({ top, behavior: "smooth" });
+        scrollToY(window.scrollY + target.getBoundingClientRect().top - anchorOffset());
       });
     });
 
@@ -952,37 +698,44 @@
     return { sync };
   };
 
+  const initNewsPage = () =>
+    initTabsFilter($(".news-page"), {
+      items: "[data-category]",
+      key: "category",
+      more: "[data-news-more]",
+      step: 8,
+    });
+
+  const initServicesPage = () =>
+    initTabsFilter($(".services-page"), { items: "[data-category]", key: "category" });
+
   const initProducts = () => initAnchorNav($(".products"), "products__group");
 
-  // ======================
-  // Бар и кухня
-  // ======================
   const initMenu = () => {
     const section = $(".menu");
     if (!section) return null;
 
-    const gallery = $(".menu__gallery", section);
-    if (gallery && typeof Swiper !== "undefined") {
-      state.swipers.menu = new Swiper(gallery, {
-        slidesPerView: "auto",
-        spaceBetween: s(8),
-        grabCursor: true,
-        centeredSlides: true,
-        loop: true,
-      });
-    }
+    makeSwiper("menu", $(".menu__gallery", section), {
+      slidesPerView: "auto",
+      spaceBetween: s(8),
+      grabCursor: true,
+      centeredSlides: true,
+      loop: true,
+    });
 
     return initAnchorNav(section, "menu__group");
   };
 
-  // ======================
-  // Поля выбора даты и времени
-  // ======================
+  const initSchedule = () => lazyVideo($(".schedule__video"));
+
+  // ============================================================
+  // Поля выбора, билеты, модалки, формы
+  // ============================================================
+
   const initFields = () => {
     const fields = $$("[data-field]");
     if (!fields.length) return null;
 
-    // список «закрывашек» — открытым может быть только одно поле
     const closers = [];
     const closeAll = (except) => closers.forEach((close) => close !== except && close());
 
@@ -1010,13 +763,10 @@
       closers.push(close);
 
       control.addEventListener("click", (e) => {
-        // клики внутри самого календаря обрабатывает flatpickr
-        if (e.target.closest(".flatpickr-calendar")) {
-          e.stopPropagation();
-          return;
-        }
-
         e.stopPropagation();
+
+        // клики внутри самого календаря обрабатывает flatpickr
+        if (e.target.closest(".flatpickr-calendar")) return;
 
         if (picker.isOpen) {
           picker.close();
@@ -1062,16 +812,14 @@
     });
 
     document.addEventListener("click", () => closeAll());
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeAll();
-    });
+    onEscape(() => closeAll());
 
     return { close: () => closeAll() };
   };
 
-  // ======================
-  // Билеты / корзина бронирования
-  // ======================
+  const formatPrice = (value) =>
+    `${Math.round(value).toLocaleString("ru-RU").replace(/[  ]/g, " ")} ₸`;
+
   const initTickets = ({ scrollLock }) => {
     const section = $(".tickets");
     if (!section) return null;
@@ -1086,8 +834,9 @@
     const drawer = $("[data-drawer]");
     let drawerCard = null;
 
-    const price = (value) => `${Math.round(value).toLocaleString("ru-RU").replace(/[\u00A0\u202F]/g, " ")} ₸`;
     const qtyOf = (card) => Number(card.dataset.qty || 0);
+
+    // ---- Карточка и нижняя панель ----
 
     const renderCard = (card) => {
       const qty = qtyOf(card);
@@ -1102,12 +851,15 @@
     const renderBar = () => {
       if (!bar) return;
 
-      const total = cards.reduce((sum, card) => sum + qtyOf(card) * Number(card.dataset.price || 0), 0);
-      const old = cards.reduce((sum, card) => sum + qtyOf(card) * Number(card.dataset.oldPrice || 0), 0);
+      const sumBy = (field) =>
+        cards.reduce((sum, card) => sum + qtyOf(card) * Number(card.dataset[field] || 0), 0);
 
-      if (barPrice) barPrice.textContent = price(total);
+      const total = sumBy("price");
+      const old = sumBy("oldPrice");
+
+      if (barPrice) barPrice.textContent = formatPrice(total);
       if (barOld) {
-        barOld.textContent = price(old);
+        barOld.textContent = formatPrice(old);
         barOld.hidden = old <= total;
       }
 
@@ -1122,17 +874,8 @@
       renderBar();
     };
 
-    cards.forEach((card) => {
-      card.dataset.qty = card.dataset.qty || "0";
-      renderCard(card);
+    // ---- Шторка с описанием билета ----
 
-      $("[data-ticket-add]", card).addEventListener("click", () => setQty(card, 1));
-      $("[data-ticket-plus]", card).addEventListener("click", () => setQty(card, qtyOf(card) + 1));
-      $("[data-ticket-minus]", card).addEventListener("click", () => setQty(card, qtyOf(card) - 1));
-      $("[data-ticket-more]", card).addEventListener("click", () => openDrawer(card));
-    });
-
-    // ---- Панель с описанием билета ----
     const fillDrawer = (card) => {
       const image = $("[data-drawer-image]", drawer);
       const cardImage = $("[data-ticket-image]", card);
@@ -1141,16 +884,18 @@
         image.alt = cardImage.alt;
       }
 
-      const set = (sel, value) => {
+      const setText = (sel, value) => {
         const el = $(sel, drawer);
         if (el) el.textContent = value;
       };
 
-      set("[data-drawer-title]", $("[data-ticket-title]", card)?.textContent.trim() ?? "");
-      set("[data-drawer-note]", $("[data-ticket-note]", card)?.textContent.trim() ?? "");
-      set("[data-drawer-desc]", $("[data-ticket-desc]", card)?.textContent.trim() ?? "");
-      set("[data-drawer-price]", price(Number(card.dataset.price || 0)));
-      set("[data-drawer-old]", price(Number(card.dataset.oldPrice || 0)));
+      const textOf = (sel) => $(sel, card)?.textContent.trim() ?? "";
+
+      setText("[data-drawer-title]", textOf("[data-ticket-title]"));
+      setText("[data-drawer-note]", textOf("[data-ticket-note]"));
+      setText("[data-drawer-desc]", textOf("[data-ticket-desc]"));
+      setText("[data-drawer-price]", formatPrice(Number(card.dataset.price || 0)));
+      setText("[data-drawer-old]", formatPrice(Number(card.dataset.oldPrice || 0)));
     };
 
     const openDrawer = (card) => {
@@ -1181,36 +926,40 @@
         closeDrawer();
       });
 
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeDrawer();
-      });
+      onEscape(closeDrawer);
     }
+
+    cards.forEach((card) => {
+      card.dataset.qty = card.dataset.qty || "0";
+      renderCard(card);
+
+      $("[data-ticket-add]", card).addEventListener("click", () => setQty(card, 1));
+      $("[data-ticket-plus]", card).addEventListener("click", () => setQty(card, qtyOf(card) + 1));
+      $("[data-ticket-minus]", card).addEventListener("click", () => setQty(card, qtyOf(card) - 1));
+      $("[data-ticket-more]", card).addEventListener("click", () => openDrawer(card));
+    });
 
     renderBar();
 
     return { open: openDrawer, close: closeDrawer };
   };
 
-  // ======================
-  // Modals
-  // ======================
   const initModals = ({ scrollLock, closeMobileMenu }) => {
     const wrapper = $(".modals");
-    if (!wrapper) return;
+    if (!wrapper) return null;
 
     const modals = $$(".modal", wrapper);
-    const getModalByType = (type) => wrapper.querySelector(`.modal[data-type="${type}"]`);
+    const modalByType = (type) => $(`.modal[data-type="${type}"]`, wrapper);
 
-    const showWrapper = () => {
-      wrapper.style.opacity = 1;
-      wrapper.style.pointerEvents = "auto";
-      scrollLock?.lock?.("modal");
-    };
+    let isOpen = false;
 
-    const hideWrapper = () => {
-      wrapper.style.opacity = 0;
-      wrapper.style.pointerEvents = "none";
-      scrollLock?.unlock?.("modal");
+    const setWrapperOpen = (open) => {
+      isOpen = open;
+      wrapper.style.opacity = open ? "1" : "0";
+      wrapper.style.pointerEvents = open ? "auto" : "none";
+
+      if (open) scrollLock?.lock?.("modal");
+      else scrollLock?.unlock?.("modal");
     };
 
     const fillFromCard = (modal, btn) => {
@@ -1243,65 +992,64 @@
           el.value = topic && label ? `${label}: ${topic}` : topic;
           return;
         }
+
         el.textContent = topic;
         el.hidden = !topic;
-        if (label) {
-          el.dataset.label = label;
-        } else {
-          delete el.dataset.label;
-        }
+
+        if (label) el.dataset.label = label;
+        else delete el.dataset.label;
       });
     };
 
     const openModal = (type) => {
       closeMobileMenu?.();
 
-      modals.forEach((m) => {
-        m.classList.remove("open");
-        m.style.removeProperty("transform");
+      modals.forEach((modal) => {
+        modal.classList.remove("open");
+        modal.style.removeProperty("transform");
       });
 
-      const modal = getModalByType(type);
+      const modal = modalByType(type);
       if (!modal) return;
 
       modal.classList.add("open");
-      showWrapper();
+      setWrapperOpen(true);
 
-      if (window.gsap) {
-        window.gsap.fromTo(modal, { y: -100 }, { y: 0, duration: 0.5, ease: "power3.out" });
-      }
+      window.gsap?.fromTo(modal, { y: -100 }, { y: 0, duration: 0.5, ease: "power3.out" });
     };
 
-    const closeCurrentModal = () => {
-      const current = modals.find((m) => m.classList.contains("open"));
+    const closeModal = () => {
+      const current = modals.find((modal) => modal.classList.contains("open"));
 
       const finish = () => {
-        if (current) current.classList.remove("open");
-        hideWrapper();
+        current?.classList.remove("open");
+        setWrapperOpen(false);
       };
 
-      if (current && window.gsap) {
-        window.gsap.to(current, {
-          y: -100,
-          duration: 0.4,
-          ease: "power3.in",
-          onComplete: () => {
-            current.style.removeProperty("transform");
-            finish();
-          },
-        });
-      } else {
+      if (!current || !window.gsap) {
         finish();
+        return;
       }
+
+      window.gsap.to(current, {
+        y: -100,
+        duration: 0.4,
+        ease: "power3.in",
+        onComplete: () => {
+          current.style.removeProperty("transform");
+          finish();
+        },
+      });
     };
 
     $$(".modal-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
+
         const type = btn.dataset.type;
         if (!type) return;
 
-        const modal = getModalByType(type);
+        const modal = modalByType(type);
         fillFromCard(modal, btn);
         fillTopic(modal, btn);
         openModal(type);
@@ -1309,97 +1057,192 @@
     });
 
     wrapper.addEventListener("click", (e) => {
-      if (
-        e.target === wrapper ||
-        e.target.closest(".modal__close") ||
-        e.target.closest("[data-modal-close]")
-      ) closeCurrentModal();
+      const onBackdrop = e.target === wrapper;
+      const onCloseBtn = e.target.closest(".modal__close, [data-modal-close]");
+      if (onBackdrop || onCloseBtn) closeModal();
     });
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && wrapper.style.pointerEvents === "auto") closeCurrentModal();
+    onEscape(() => {
+      if (isOpen) closeModal();
     });
 
-    return { open: openModal, close: closeCurrentModal };
+    return { open: openModal, close: closeModal };
   };
 
-  // ======================
-  // Формы
-  // ======================
-  const initForms = ({ modals }) => {
+  const initForms = () => {
+    // TODO: отправка на бэкенд и окно «заявка отправлена»
     $$(".form").forEach((form) => {
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        // здесь будет реальная отправка, пока показываем окно «заявка отправлена»
         form.reset();
       });
     });
   };
 
-  // ======================
-  // Phone mask
-  // ======================
+  const formatPhone = (value, matrix) => {
+    const prefix = matrix.replace(/\D/g, "");
+    const slots = (matrix.match(/[_\d]/g) || []).length;
+    const free = slots - prefix.length;
+    const head = matrix.slice(0, matrix.indexOf("_"));
+
+    let body = value.startsWith(head)
+      ? value.slice(head.length).replace(/\D/g, "")
+      : value.replace(/\D/g, "");
+
+    if (prefix === "7" && body.startsWith("8")) {
+      body = body.slice(1);
+    } else if (body.length > free && body.startsWith(prefix)) {
+      body = body.slice(prefix.length);
+    }
+
+    body = body.slice(0, free);
+    if (!body) return "";
+
+    const digits = prefix + body;
+    let result = "";
+    let i = 0;
+
+    for (const ch of matrix) {
+      if (!/[_\d]/.test(ch)) {
+        result += ch;
+        continue;
+      }
+      if (i >= digits.length) break;
+      result += digits[i++];
+    }
+
+    return result.replace(/\D+$/, "");
+  };
+
   const initPhoneMask = () => {
-    const inputs = $$('input[type="tel"]');
-    if (!inputs.length) return;
-
-    const format = (value, matrix) => {
-      const prefix = matrix.replace(/\D/g, "");
-      const slots = (matrix.match(/[_\d]/g) || []).length;
-      const free = slots - prefix.length;
-      const head = matrix.slice(0, matrix.indexOf("_"));
-
-      let body = value.startsWith(head)
-        ? value.slice(head.length).replace(/\D/g, "")
-        : value.replace(/\D/g, "");
-
-      // Номер набирают и через +7, и через 8 — это одно и то же.
-      // Ведущую 8 убираем сразу, иначе номер съезжает и теряется последняя цифра.
-      if (prefix === "7" && body.startsWith("8")) {
-        body = body.slice(1);
-      } else if (body.length > free && body.startsWith(prefix)) {
-        // Код страны при вставке целого номера: 7 747 123 45 67
-        body = body.slice(prefix.length);
-      }
-
-      body = body.slice(0, free);
-      if (!body) return "";
-
-      const digits = prefix + body;
-      let res = "";
-      let i = 0;
-      for (const ch of matrix) {
-        if (/[_\d]/.test(ch)) {
-          if (i >= digits.length) break;
-          res += digits[i++];
-        } else {
-          res += ch;
-        }
-      }
-      return res.replace(/\D+$/, "");
-    };
-
-    inputs.forEach((input) => {
+    $$('input[type="tel"]').forEach((input) => {
       const matrix = input.dataset.mask || "+7 (___) ___ ____";
       const prefix = matrix.replace(/\D/g, "");
 
       input.addEventListener("input", (e) => {
         const entered = input.value.replace(/\D/g, "");
+
         if (e.inputType?.startsWith("delete") && entered.length <= prefix.length) {
           input.value = "";
           return;
         }
-        input.value = format(input.value, matrix);
+
+        input.value = formatPhone(input.value, matrix);
       });
     });
   };
 
+  // ============================================================
+  // Прелоудер и интро
+  // ============================================================
+
+  const PRELOADER_ONCE_PER_DAY = false;
+
+  const initPreloader = ({ scrollLock }) => {
+    const root = $(".preloader");
+    if (!root) {
+      preloaderSignal.fire();
+      return;
+    }
+
+    const KEY = "preloader-shown-date";
+    const today = new Date().toISOString().slice(0, 10);
+
+    if (PRELOADER_ONCE_PER_DAY && localStore.get(KEY) === today) {
+      root.remove();
+      preloaderSignal.fire();
+      return;
+    }
+
+    const finish = () => {
+      root.classList.add("is-hidden");
+      scrollLock?.unlock?.("preloader");
+      preloaderSignal.fire();
+
+      if (PRELOADER_ONCE_PER_DAY) localStore.set(KEY, today);
+
+      root.addEventListener("transitionend", () => root.remove(), { once: true });
+    };
+
+    scrollLock?.lock?.("preloader");
+
+    const shine = $(".preloader__logo-shine", root);
+    if (!shine) {
+      finish();
+      return;
+    }
+
+    shine.addEventListener("animationend", finish, { once: true });
+    root.classList.add("is-animating");
+  };
+
+  const initIntro = () => {
+    let started = false;
+
+    const start = () => {
+      if (started) return;
+      started = true;
+
+      introSignal.fire();
+      document.documentElement.classList.remove("is-loading");
+      refreshLayout();
+    };
+
+    preloaderSignal.then(() => {
+      if (document.readyState === "complete") {
+        requestAnimationFrame(start);
+        return;
+      }
+
+      window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
+      setTimeout(start, 1500);
+    });
+  };
+
+  const initHeroIntro = () => {
+    if (!$(".hero")) return;
+
+    introSignal.then(() => {
+      if (typeof gsap === "undefined") return;
+
+      const offsets = {
+        ".header__container > *": s(-20),
+        ".hero__title": s(40),
+        ".hero__desc": s(30),
+        ".hero__button": s(20),
+        ".hero__bottom > *": s(20),
+      };
+
+      Object.entries(offsets).forEach(([sel, y]) => gsap.set(sel, { y, opacity: 0 }));
+
+      const show = { y: 0, opacity: 1 };
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 1, clearProps: "all" },
+      });
+
+      tl.to(".header__container > *", { ...show, stagger: 0.1 })
+        .to(".hero__title", show, "-=0.8")
+        .to(".hero__desc", show, "-=0.75")
+        .to(".hero__button", show, "-=0.75")
+        .to(".hero__bottom > *", { ...show, stagger: 0.1 }, "-=0.7");
+
+      setTimeout(() => {
+        if (tl.progress() < 1) tl.progress(1);
+      }, 4000);
+    });
+  };
+
+  // ============================================================
+  // Старт
+  // ============================================================
+
   document.addEventListener("DOMContentLoaded", () => {
     updateMultiplier();
-    const lenis = initLenis();
 
+    const lenis = initLenis();
     const scrollLock = createScrollLock(lenis);
 
+    // Падение одного блока не должно уносить всю остальную инициализацию.
     const safe = (name, fn) => {
       try {
         return fn();
@@ -1409,40 +1252,45 @@
       }
     };
 
-    Fancybox.bind("[data-fancybox]", {
-      // Your custom options
-    });
-
+    safe("fancybox", initFancybox);
     safe("preloader", () => initPreloader({ scrollLock }));
+
+    // Шапка и навигация
     safe("header", initHeader);
     const mobileMenu = safe("burger", () => initBurger({ scrollLock }));
     const lang = safe("lang", initLang);
-    safe("swipers", initSwipers);
+
+    // Главная
+    safe("heroSlider", initHeroSlider);
     safe("heroCard", initHeroCard);
-    safe("seo", initSeo);
     safe("about", initAbout);
     safe("book", initBook);
     const gallery = safe("gallery", initGallery);
-    safe("services", initServices);
-    safe("complex", initComplex);
-    safe("news", initNews);
-    safe("reviews", initReviews);
+    safe("reveals", initReveals);
+    safe("cardSliders", initCardSliders);
+
+    // Контакты и SEO-блок
     safe("feedback", initFeedback);
-    safe("map", initMap);
+    const map = safe("map", initMap);
+    safe("seo", initSeo);
+
+    // Внутренние страницы
     safe("newsPage", initNewsPage);
     safe("servicesPage", initServicesPage);
     safe("menu", initMenu);
     safe("products", initProducts);
     safe("schedule", initSchedule);
+
+    // Поля, билеты, модалки, формы
     safe("fields", initFields);
     safe("tickets", () => initTickets({ scrollLock }));
+    safe("modals", () => initModals({ scrollLock, closeMobileMenu: mobileMenu?.close }));
+    safe("forms", initForms);
     safe("phoneMask", initPhoneMask);
-    const modals = safe("modals", () => initModals({ scrollLock, closeMobileMenu: mobileMenu?.close }));
-    safe("forms", () => initForms({ modals }));
 
+    // Интро запускаем последним — оно снимает is-loading и размораживает раскладку
     safe("heroIntro", initHeroIntro);
     initIntro();
-
 
     refreshLayout();
     initLayoutWatcher();
@@ -1451,6 +1299,7 @@
       updateMultiplier();
       lang?.update?.();
       gallery?.update?.();
+      map?.sync?.();
       refreshLayout();
     }, 150));
   });

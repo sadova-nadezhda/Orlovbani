@@ -1,0 +1,163 @@
+@import "vars.scss";
+@import "mixins.scss";
+
+// ====== Раскладка ======
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Сетка каталога: 4 колонки → 2 на планшете → 1 на мобильных
+%grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-8);
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Отступ сверху у первой секции внутренней страницы
+%page-offset {
+  padding-top: var(--pad-42);
+  @include mobile {
+    padding-top: var(--pad-24);
+  }
+}
+
+// Кнопка на всю ширину на мобильных
+%button-mobile-full {
+  @include mobile {
+    width: 100%;
+  }
+}
+
+// ====== Типографика ======
+
+// Заголовок секции
+%section-title {
+  margin-bottom: var(--pad-42);
+  color: var(--primary, $primary);
+  @include mobile {
+    margin-bottom: var(--pad-24);
+  }
+}
+
+// Заголовок группы внутри секции
+%group-title {
+  margin-bottom: var(--pad-24);
+  color: var(--primary, $primary);
+  @include mobile {
+    margin-bottom: var(--pad-16);
+  }
+}
+
+// ====== Карточки ======
+
+// Белая карточка каталога
+%card-white {
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad-16);
+  border-radius: var(--br-12);
+  background-color: var(--white, $white);
+  @include mobile {
+    padding: var(--pad-8);
+  }
+}
+
+// Колонка, растягивающаяся на остаток высоты (тело карточки, скролл-область)
+%flex-col-grow {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+// Фоновая картинка/видео, растянутые на всю карточку
+%media-cover {
+  @include position-abs;
+  z-index: 1;
+  @include full-img-cover;
+}
+
+// ====== Цены ======
+
+%prices-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-8);
+}
+
+%price {
+  color: var(--primary, $primary);
+  font: 500 w(18)/1.2 Euclid;
+}
+
+%price-old {
+  color: var(--grey, $grey);
+  font: 400 w(14)/1.2 Euclid;
+  text-decoration: line-through;
+}
+
+// Подпись справа от цены («за час», «за человека» и т.п.)
+%price-per {
+  margin-left: auto;
+  color: var(--grey, $grey);
+  font-size: w(12);
+}
+
+// ====== Прочее ======
+
+// Тонкий скроллбар в выпадашках и шторке
+%thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($primary, 0.25) transparent;
+  &::-webkit-scrollbar {
+    width: w(4);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--br-200);
+    background-color: rgba($primary, 0.25);
+  }
+}
+
+%hide-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Липкая панель табов над списком
+%sticky-tabs {
+  position: sticky;
+  top: w(61);
+  z-index: 5;
+  padding: var(--pad-16) 0;
+  margin-top: calc(var(--pad-16) * -1);
+  margin-bottom: calc(var(--pad-42) - var(--pad-16));
+  background-color: var(--bg, $bg);
+
+  @include mobile {
+    top: w(56);
+    padding: w(12) 0;
+    margin-top: w(-12);
+    margin-bottom: calc(var(--pad-24) - 12 * var(--width-multiplier));
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tabs__item {
+      flex-shrink: 0;
+    }
+  }
+}

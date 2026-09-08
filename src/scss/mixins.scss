@@ -1,3 +1,35 @@
+@import "vars.scss";
+
+// ====== Размеры ======
+// Все размеры макета задаются в пикселях базовой сетки и масштабируются
+// множителем --width-multiplier. w(16) === calc(16 * var(--width-multiplier)).
+@function w($n) {
+  @return calc(#{$n} * var(--width-multiplier));
+}
+
+// ====== Брейкпоинты ======
+$bp-wide: 1921px; // широкие мониторы, база сетки 1920
+$bp-desktop: 1025px; // нижняя граница «только десктоп»
+$bp-tablet: 1024px; // планшет и ниже
+$bp-mobile: 767px; // мобильные
+
+@mixin wide {
+  @media (min-width: $bp-wide) { @content; }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-desktop) { @content; }
+}
+
+@mixin tablet {
+  @media (max-width: $bp-tablet) { @content; }
+}
+
+@mixin mobile {
+  @media (max-width: $bp-mobile) { @content; }
+}
+
+// ====== Изображения и позиционирование ======
 @mixin full-img-cover {
   width: 100%;
   height: 100%;
@@ -18,4 +50,34 @@
 
 @mixin transition {
   transition: all 0.2s ease-in-out;
+}
+
+// ====== Составные паттерны ======
+
+// Затемняющая плёнка поверх фоновой картинки карточки
+@mixin overlay($bg, $z: 2) {
+  content: "";
+  @include position-abs;
+  @if $z != null {
+    z-index: $z;
+  }
+  width: 100%;
+  height: 100%;
+  background: $bg;
+}
+
+// Пункт списка с маркером-точкой
+@mixin bullet-item($pad: 16, $top: 8, $size: 4, $color: var(--dark, $dark)) {
+  position: relative;
+  padding-left: w($pad);
+  &::before {
+    content: "";
+    position: absolute;
+    top: w($top);
+    left: 0;
+    width: w($size);
+    height: w($size);
+    border-radius: 50%;
+    background-color: $color;
+  }
 }
