@@ -8,7 +8,7 @@
       <section class="feedback contacts section-hidden">
         <div class="feedback__card">
           <video class="feedback__video" data-src="@img/feedback-video.mp4" muted loop playsinline preload="none"></video>
-          <div class="feedback__inner" data-map data-src="https://yandex.ru/map-widget/v1/?text=Алматы,+улица+Каныша+Сатпаева,+29/6&amp;z=17">
+          <div class="feedback__inner" data-map>
             <div class="feedback__head">
               <nav class="breadcrumbs breadcrumbs--light">
                 <a href="index.html" class="breadcrumbs__link">Главная</a>
@@ -39,6 +39,11 @@
               </button>
             </div>
             <div class="feedback__map-frame" data-map-frame>
+              <div class="feedback__map-tabs" role="tablist" aria-label="Выбор карты">
+                <span class="feedback__map-thumb" aria-hidden="true"></span>
+                <button type="button" class="feedback__map-tab is-active" role="tab" aria-selected="true" data-map-tab data-src="https://widgets.2gis.com/widget?type=firmsonmap&amp;options=%7B%22pos%22%3A%7B%22lat%22%3A43.237512091446206%2C%22lon%22%3A76.91657066345216%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22almaty%22%7D%2C%22org%22%3A%229429940000898788%22%7D">2ГИС</button>
+                <button type="button" class="feedback__map-tab" role="tab" aria-selected="false" data-map-tab data-src="https://yandex.ru/map-widget/v1/?text=Алматы,+улица+Каныша+Сатпаева,+29/6&amp;z=17">Яндекс Карты</button>
+              </div>
               <button type="button" class="feedback__map-close" aria-label="Закрыть карту" data-map-close>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor"/>

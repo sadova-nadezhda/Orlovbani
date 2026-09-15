@@ -530,7 +530,26 @@
     const frame = $("[data-map-frame]", root);
     const opener = $("[data-map-open]", root);
     const closer = $("[data-map-close]", root);
-    if (!plate || !frame || !opener || !closer) return null;
+    const tabs = $$("[data-map-tab]", root);
+    if (!plate || !frame || !opener || !closer || !tabs.length) return null;
+
+    const bar = $(".feedback__map-tabs", root);
+    const thumb = bar ? $(".feedback__map-thumb", bar) : null;
+
+    // Подложка табов ездит как у переключателя языка
+    const moveThumb = (tab) => {
+      if (!bar || !thumb || !tab || !tab.offsetWidth) return;
+
+      thumb.style.setProperty("--map-thumb-w", `${tab.offsetWidth}px`);
+      thumb.style.setProperty("--map-thumb-x", `${tab.offsetLeft}px`);
+
+      if (!bar.classList.contains("is-ready")) {
+        void thumb.offsetWidth;
+        bar.classList.add("is-ready");
+      }
+    };
+
+    const updateThumb = () => moveThumb(tabs.find((tab) => tab.classList.contains("is-active")));
 
     // Карта раскрывается из маленькой плашки
     const syncClip = () => {
@@ -547,16 +566,44 @@
       );
     };
 
-    const load = () => {
-      if ($("iframe", frame) || !root.dataset.src) return;
+    // У каждого таба свой iframe, создаётся при первом показе
+    const iframes = new Map();
 
-      const iframe = document.createElement("iframe");
-      iframe.src = root.dataset.src;
-      iframe.title = "Карта проезда";
-      iframe.loading = "lazy";
-      iframe.setAttribute("allowfullscreen", "");
-      frame.prepend(iframe);
+    const show = (tab) => {
+      if (!tab.dataset.src) return;
+
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-selected", String(active));
+      });
+      updateThumb();
+
+      if (!iframes.has(tab)) {
+        const iframe = document.createElement("iframe");
+        iframe.src = tab.dataset.src;
+        iframe.title = `Карта проезда — ${tab.textContent.trim()}`;
+        iframe.loading = "lazy";
+        iframe.setAttribute("allowfullscreen", "");
+        frame.prepend(iframe);
+        iframes.set(tab, iframe);
+      }
+
+      iframes.forEach((iframe, key) => {
+        iframe.hidden = key !== tab;
+      });
     };
+
+    const load = () => show(tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0]);
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("mouseenter", () => moveThumb(tab));
+      tab.addEventListener("click", () => show(tab));
+    });
+
+    bar?.addEventListener("mouseleave", updateThumb);
+    if (bar && "ResizeObserver" in window) new ResizeObserver(updateThumb).observe(bar);
+    document.fonts?.ready.then(updateThumb);
 
     const setOpen = (open) => {
       if (open) syncClip();
@@ -584,8 +631,16 @@
     }
 
     syncClip();
+    updateThumb();
 
-    return { open: () => setOpen(true), close: () => setOpen(false), sync: syncClip };
+    return {
+      open: () => setOpen(true),
+      close: () => setOpen(false),
+      sync: () => {
+        syncClip();
+        updateThumb();
+      },
+    };
   };
 
   const initSeo = () => {

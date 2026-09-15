@@ -1416,12 +1416,73 @@
       width: 100%;
       height: 100%;
       border: none;
+
+      &[hidden] {
+        display: none;
+      }
     }
   }
 
   &__inner.is-map-open &__map-frame {
     visibility: visible;
     clip-path: inset(0);
+  }
+
+  &__map-tabs {
+    position: absolute;
+    z-index: 2;
+    top: w(20);
+    left: 50%;
+    display: flex;
+    gap: w(2);
+    padding: w(4);
+    border-radius: var(--br-200);
+    background-color: var(--white, $white);
+    transform: translateX(-50%);
+  }
+
+  // Подложка ездит как у переключателя языка
+  &__map-thumb {
+    position: absolute;
+    top: w(4);
+    bottom: w(4);
+    left: 0;
+    width: var(--map-thumb-w, 0);
+    border-radius: var(--br-200);
+    background-color: var(--primary, $primary);
+    transform: translateX(var(--map-thumb-x, 0));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &__map-tabs.is-ready &__map-thumb {
+    opacity: 1;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-in-out;
+  }
+
+  &__map-tab {
+    position: relative;
+    z-index: 1;
+    min-width: w(90);
+    padding: w(4);
+    border: none;
+    border-radius: var(--br-200);
+    background-color: transparent;
+    color: var(--dark, $dark);
+    font: 400 w(12)/1.2 Euclid;
+    white-space: nowrap;
+    cursor: pointer;
+    @include transition;
+
+    &:hover,
+    &.is-active {
+      color: var(--white, $white);
+    }
+  }
+
+  &__map-tabs:hover &__map-tab.is-active:not(:hover) {
+    color: var(--dark, $dark);
   }
 
   &__map-close {
