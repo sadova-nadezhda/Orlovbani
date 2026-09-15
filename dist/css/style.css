@@ -1220,9 +1220,9 @@ html.no-preloader .preloader {
 }
 
 .hero-card__logo {
-  width: calc(118 * var(--width-multiplier));
-  height: calc(32 * var(--width-multiplier));
-  background: url("../img/bulldozer.svg") center/contain no-repeat;
+  width: calc(85 * var(--width-multiplier));
+  height: calc(52 * var(--width-multiplier));
+  background: url("../img/logo-s.svg") center/contain no-repeat;
 }
 
 .hero-card__buttons {
