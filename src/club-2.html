@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
   @@include('html/head.html', { "title": "VIP-Кабинет “Шале”" })
-  <body class="page-light">
+  <body class="page-light is-bar">
     @@include('html/header.html')
 
     <main>
-      <section class="formats tickets section-pad">
+      <section class="formats room section-pad">
         <div class="container">
           <div class="formats__container">
             <nav class="breadcrumbs">
@@ -18,13 +18,90 @@
 
             <h1 class="formats__title s text-up">VIP-Кабинет “Шале”</h1>
 
-            
+            <div class="room__container">
+              <div class="room__image">
+                <img src="@img/vip-img.png" alt="VIP-Кабинет “Шале”" />
+              </div>
+
+              <div class="room__card">
+                <div class="room__head">
+                  <h2 class="room__title s text-up">Условия бронирования</h2>
+
+                  <form class="room__filters filters" action="#">
+                    <div class="filters__field field" data-field>
+                      <span class="field__label">Выберите дату</span>
+                      <div class="field__control" data-field-control>
+                        <span class="field__icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H16V2H18V4H19C19.55 4 20.0208 4.19583 20.4125 4.5875C20.8042 4.97917 21 5.45 21 6V20C21 20.55 20.8042 21.0208 20.4125 21.4125C20.0208 21.8042 19.55 22 19 22H5ZM5 20H19V10H5V20Z" fill="#6E1D0B"/>
+                          </svg>
+                        </span>
+                        <input type="text" class="field__input" name="date" value="" readonly data-datepicker />
+                        <span class="field__arrow">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="filters__field field" data-field>
+                      <span class="field__label">Выберите время</span>
+                      <div class="field__control" data-field-control data-select>
+                        <span class="field__icon">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22C10.6167 22 9.31667 21.7375 8.1 21.2125ZM4 12H12V4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12Z" fill="#6E1D0B"/>
+                          </svg>
+                        </span>
+                        <span class="field__value" data-select-value>12:00-15:00</span>
+                        <input type="hidden" name="time" value="12:00-15:00" data-select-input />
+                        <span class="field__arrow">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                          </svg>
+                        </span>
+                        <div class="field__dropdown select-list" data-select-list data-lenis-prevent>
+                          <button type="button" class="select-list__item" data-select-option="09:00-12:00">09:00-12:00</button>
+                          <button type="button" class="select-list__item is-active" data-select-option="12:00-15:00">12:00-15:00</button>
+                          <button type="button" class="select-list__item" data-select-option="15:00-18:00">15:00-18:00</button>
+                          <button type="button" class="select-list__item" data-select-option="18:00-21:00">18:00-21:00</button>
+                          <button type="button" class="select-list__item" data-select-option="21:00-00:00">21:00-00:00</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="room__desc">Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
+
+                <div class="room__prices">
+                  <span class="room__price">12 600 ₸</span>
+                  <span class="room__old">18 000 ₸</span>
+                  <span class="room__per">Цена за гостя</span>
+                </div>
+
+                <div class="room__block">
+                  <h3 class="room__subtitle">Условия посещения</h3>
+                  <ul class="room__list">
+                    <li>Билет действует на выбранные дату и время</li>
+                    <li>Продолжительность сеанса — 3 часа + 30 минут</li>
+                    <li>Стоимость рассчитывается с учётом действующего тарифа и скидки</li>
+                    <li>Дополнительные SPA-услуги и другие позиции можно выбрать отдельно</li>
+                  </ul>
+                </div>
+
+                <div class="room__block">
+                  <h3 class="room__subtitle">Обратите внимание</h3>
+                  <p class="room__text">Итоговая стоимость может меняться в зависимости от даты, времени посещения и действующих специальных предложений.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <div class="booking-bar" data-booking-bar>
+    <div class="booking-bar is-visible" data-booking-bar>
       <div class="container">
         <div class="booking-bar__inner">
           <div class="booking-bar__info">
@@ -32,8 +109,8 @@
             <div class="booking-bar__total">
               <span class="booking-bar__label">К оплате</span>
               <div class="booking-bar__prices">
-                <span class="booking-bar__price" data-booking-price>0 ₸</span>
-                <span class="booking-bar__old" data-booking-old>0 ₸</span>
+                <span class="booking-bar__price" data-booking-price>12 600 ₸</span>
+                <span class="booking-bar__old" data-booking-old>18 000 ₸</span>
               </div>
             </div>
           </div>

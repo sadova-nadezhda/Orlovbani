@@ -2608,6 +2608,123 @@ body.is-bar footer {
   }
 }
 
+// ====== Страница кабинета (VIP-Кабинет "Шале") ======
+
+.room {
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr w(580);
+    align-items: start;
+    gap: var(--gap-8);
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__image {
+    border-radius: var(--br-12);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: w(460);
+      object-fit: cover;
+
+      @include tablet {
+        height: w(400);
+      }
+
+      @include mobile {
+        height: w(240);
+      }
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--br-12);
+    background-color: var(--white, $white);
+  }
+
+  &__head,
+  &__desc,
+  &__prices,
+  &__block {
+    padding: var(--pad-24);
+    border-bottom: 1px solid var(--dark, $dark);
+
+    @include mobile {
+      padding: var(--pad-16);
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-24);
+
+    @include mobile {
+      gap: var(--pad-16);
+    }
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .filters__field {
+      width: auto;
+      min-width: 0;
+    }
+  }
+
+  &__prices {
+    @extend %prices-row;
+    flex-wrap: wrap;
+  }
+
+  &__price {
+    @extend %price;
+  }
+
+  &__old {
+    @extend %price-old;
+  }
+
+  &__per {
+    @extend %price-per;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad-16);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__subtitle {
+    font: 400 w(20)/1.2 Euclid;
+
+    @include mobile {
+      font-size: w(18);
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    li {
+      @include bullet-item;
+    }
+  }
+}
+
 .success {
   --success-offset: calc(61 * var(--width-multiplier) + var(--pad-24) * 2);
 
