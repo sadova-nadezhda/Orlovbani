@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', { "title": "VIP-Кабинет “Шале”" })
+  <body class="page-light">
+    @@include('html/header.html')
+
+    <main>
+      <section class="formats tickets section-pad">
+        <div class="container">
+          <div class="formats__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <a href="format.html" class="breadcrumbs__link">Бронирование бани</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">VIP-Кабинет “Шале”</span>
+            </nav>
+
+            <h1 class="formats__title s text-up">VIP-Кабинет “Шале”</h1>
+
+            
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="booking-bar" data-booking-bar>
+      <div class="container">
+        <div class="booking-bar__inner">
+          <div class="booking-bar__info">
+            <span class="booking-bar__mark"></span>
+            <div class="booking-bar__total">
+              <span class="booking-bar__label">К оплате</span>
+              <div class="booking-bar__prices">
+                <span class="booking-bar__price" data-booking-price>0 ₸</span>
+                <span class="booking-bar__old" data-booking-old>0 ₸</span>
+              </div>
+            </div>
+          </div>
+          <a href="book.html" class="booking-bar__button button s button-primary">Перейти к бронированию</a>
+        </div>
+      </div>
+    </div>
+
+    @@include('html/footer.html')
+    @@include('html/foot.html')
+  </body>
+</html>

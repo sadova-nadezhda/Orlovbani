@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Главная</title>
+  <title>Мужской банный клуб</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   <link rel="manifest" href="img/site.webmanifest">
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260930111207" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260930111207" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260930111207" />
-  <link rel="stylesheet" href="css/style.css?_v=20260930111207" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css?_v=20260930110929" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css?_v=20260930110929" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.css?_v=20260930110929" />
+  <link rel="stylesheet" href="css/style.css?_v=20260930110929" />
   <script>
     document.documentElement.classList.add("is-loading");
     setTimeout(function () {
@@ -36,16 +36,7 @@
   </script>
 </head>
 
-  <body>
-    <div class="preloader" data-preloader>
-  <div class="preloader__content">
-    <div class="preloader__logo">
-      <img class="preloader__logo-img" src="img/red-logo-full.svg" alt="Орловские бани Select" />
-      <span class="preloader__logo-shine" aria-hidden="true"></span>
-    </div>
-  </div>
-</div>
-
+  <body class="page-light">
     <header class="header">
   <div class="container">
     <div class="header__container">
@@ -92,339 +83,272 @@
 </header>
 
     <main>
-      <section class="hero home-hero section-hidden">
-        <div class="hero__slider swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
-              <div class="container">
-                <div class="hero__content">
-                  <h1 class="hero__title text-up">Скидка -X% на посещение в будни</h1>
-                  <div class="hero__desc">индивидуальные вип-кабинеты для отдыха вашей компании до х человек</div>
-                  <a href="format.html" class="hero__button button button-white button-white-1">Забронировать посещение</a>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
-              <div class="container">
-                <div class="hero__content">
-                  <h2 class="hero__title text-up">Скидка -X% на посещение в будни</h2>
-                  <div class="hero__desc">индивидуальные вип-кабинеты для отдыха вашей компании до х человек</div>
-                  <a href="format.html" class="hero__button button button-white button-white-1">Забронировать посещение</a>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="hero__image"><picture><source srcset="img/hero-home.webp" type="image/webp"><img src="img/hero-home.webp" alt="" /></picture></div>
-              <div class="container">
-                <div class="hero__content">
-                  <h2 class="hero__title text-up">Скидка -X% на посещение в будни</h2>
-                  <div class="hero__desc">индивидуальные вип-кабинеты для отдыха вашей компании до х человек</div>
-                  <a href="format.html" class="hero__button button button-white button-white-1">Забронировать посещение</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <section class="formats tickets section-pad">
         <div class="container">
-          <div class="hero__bottom">
-            <div class="hero__card hero-card">
-              <div class="hero-card__logo"></div>
-              <div class="hero-card__buttons">
-                <a href="" class="hero-card__btn button s button-white button-white-2">Перейти</a>
-                <button type="button" class="hero-card__btn button s button-light" data-card-close>Закрыть</button>
-              </div>
-            </div>
-            <div class="hero__pagination"></div>
-            <div class="hero__tagline">Восстанавливая силу / Сохраняя традиции.</div>
-          </div>
-        </div>
-      </section>
-      <section id="about" class="about home-about">
-        <div class="about__scroll">
-          <div class="about__sticky">
-            <div class="container">
-              <div class="about__card">
-                <div class="about__media">
-                  <video class="about__video" data-src="img/about-video-1.mp4" muted loop playsinline preload="none"></video>
-                </div>
-                <div class="about__inner">
-                  <ul class="about__nav">
-                    <li><button type="button" class="about__tab is-active">О клубе</button></li>
-                    <li><button type="button" class="about__tab">Идея</button></li>
-                    <li><button type="button" class="about__tab">Принципы</button></li>
-                    <li><button type="button" class="about__tab">Новый формат</button></li>
-                  </ul>
-                  <div class="about__content">
-                    <div class="about__item is-active">
-                      <h2 class="about__title text-up">Орловские бани Select</h2>
-                      <p class="about__text">Орловские Бани Select — премиальное мужское пространство, где качественный пар, высокий уровень сервиса и уважение к традициям становятся частью современной культуры</p>
-                    </div>
-                    <div class="about__item">
-                      <h2 class="about__title text-up">Главная идея</h2>
-                      <p class="about__text">Мы создаем пространство, в котором качественный пар, сильные традиции, высокий сервис и круг единомышленников помогают восстанавливать силы, сохранять ясность мышления и поддерживать качество жизни.</p>
-                    </div>
-                    <div class="about__item">
-                      <h2 class="about__title text-up">Почему Select</h2>
-                      <p class="about__text">Мы сознательно оставляем только то, что действительно помогает человеку восстановиться. Каждый элемент проекта отвечает на один вопрос: помогает ли это гостю восстанавливать силы, энергию и внутренний баланс?</p>
-                    </div>
-                    <div class="about__item">
-                      <h2 class="about__title text-up">Новый формат</h2>
-                      <p class="about__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas, labore nihil. Repellat aperiam modi minus dolores commodi praesentium veritatis! Odio animi pariatur error odit inventore sit eaque eius totam facere.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="book home-book section-pad-s section-hidden">
-        <div class="container">
-          <div class="book__container">
-            <div class="book__info">
-              <h2 class="book__title s text-up">Орловские бани Select открывают двери</h2>
-              <div class="book__image">
-                <picture><source srcset="img/book-img.webp" type="image/webp"><img src="img/book-img.png" alt="" /></picture>
-              </div>
-              <p class="book__text">Баня — это больше, чем отдых. Это время, чтобы остановиться, восстановить силы и вернуть ясность. В Орловских Банях Select традиции настоящего пара сочетаются с высоким уровнем сервиса и вниманием к каждой детали.</p>
-            </div>
-            <div class="book__media">
-              <video class="book__video" data-src="img/book-video-1.mp4" muted loop playsinline preload="none"></video>
-              <div class="book__overlay">
-                <h2 class="book__heading s text-up">Ваше время для восстановления</h2>
-                <a href="" class="book__button button button-white button-white-1 modal-btn" data-type="book">Забронировать</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="gallery home-gallery section-pad-s section-hidden">
-        <div class="container">
-          <div class="gallery__container">
-            <div class="gallery__slider swiper">
-              <div class="gallery__list swiper-wrapper">
-                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-1.png" data-fancybox="gallery"><picture><source srcset="img/gallery-1.webp" type="image/webp"><img src="img/gallery-1.png" alt="" /></picture></a>
-                <a class="gallery__item gallery__item--big swiper-slide" href="img/gallery-2.png" data-fancybox="gallery"><picture><source srcset="img/gallery-2.webp" type="image/webp"><img src="img/gallery-2.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-3.png" data-fancybox="gallery"><picture><source srcset="img/gallery-3.webp" type="image/webp"><img src="img/gallery-3.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-4.png" data-fancybox="gallery"><picture><source srcset="img/gallery-4.webp" type="image/webp"><img src="img/gallery-4.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-5.png" data-fancybox="gallery"><picture><source srcset="img/gallery-5.webp" type="image/webp"><img src="img/gallery-5.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-6.png" data-fancybox="gallery"><picture><source srcset="img/gallery-6.webp" type="image/webp"><img src="img/gallery-6.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-7.png" data-fancybox="gallery"><picture><source srcset="img/gallery-7.webp" type="image/webp"><img src="img/gallery-7.png" alt="" /></picture></a>
-                <a class="gallery__item swiper-slide" href="img/gallery-8.png" data-fancybox="gallery"><picture><source srcset="img/gallery-8.webp" type="image/webp"><img src="img/gallery-8.png" alt="" /></picture></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="services home-services section-pad-s section-hidden">
-        <div class="container">
-          <div class="services__container">
-            <div class="services__card">
-              <picture><source srcset="img/home-services.webp" type="image/webp"><img class="services__image" src="img/home-services.png" alt="" /></picture>
-              <div class="services__inner">
-                <div class="services__content">
-                  <h2 class="services__title s text-up">SPA-услуги</h2>
-                  <p class="services__desc">Индивидуальные парения, массажи и уходовые процедуры, направленные на восстановление сил, внутренний баланс и глубокую перезагрузку.</p>
-                  <ul class="services__tags">
-                    <li class="services__tag">индивидуальные парения</li>
-                    <li class="services__tag">массажи</li>
-                    <li class="services__tag">уходовые процедуры</li>
-                  </ul>
-                </div>
-                <a href="services.html" class="services__button button button-white button-white-1">Смотреть все услуги</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="news home-news section-pad section-hidden">
-        <div class="container">
-          <div class="news__conrainer">
-            <h2 class="news__title text-center text-up">Новости и акции</h2>
-            <div class="news__slider swiper">
-              <div class="news__list swiper-wrapper">
-                <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
-                  <div class="news-card__body">
-                    <span class="news-card__label">Новости</span>
-                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
-                    <span class="news-card__more">Подробнее</span>
-                  </div>
-                </a>
-                <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
-                  <div class="news-card__body">
-                    <span class="news-card__label">Новости</span>
-                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
-                    <span class="news-card__more">Подробнее</span>
-                  </div>
-                </a>
-                <a href="news.html" class="news__item news-card swiper-slide">
-                  <div class="news-card__image"><picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" /></picture></div>
-                  <div class="news-card__body">
-                    <span class="news-card__label">Новости</span>
-                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
-                    <span class="news-card__more">Подробнее</span>
-                  </div>
-                </a>
-                <a href="news.html" class="news__item news-card news-card--promo swiper-slide">
-                  <div class="news-card__image"><picture><source srcset="img/promo-1.webp" type="image/webp"><img src="img/promo-1.png" alt="" /></picture></div>
-                  <div class="news-card__body">
-                    <span class="news-card__label">Акции</span>
-                    <h3 class="news-card__title">Орловские Бани Select открывают двери</h3>
-                    <span class="news-card__more">Подробнее</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="reviews home-reviews section-pad section-hidden">
-        <div class="container">
-          <div class="reviews__conrainer">
-            <h2 class="reviews__title text-center text-up">Отзывы</h2>
-            <div class="reviews__slider swiper">
-              <div class="reviews__list swiper-wrapper">
-                <div class="reviews__item reviews-card swiper-slide">
-                  <div class="reviews-card__head">
-                    <div class="reviews-card__rating">
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star is-empty"></span>
-                    </div>
-                    <span class="reviews-card__score">4/5</span>
-                  </div>
-                  <div class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</div>
-                  <div class="reviews-card__foot">
-                    <span class="reviews-card__author">Марк К</span>
-                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
-                  </div>
-                </div>
-                <div class="reviews__item reviews-card swiper-slide">
-                  <div class="reviews-card__head">
-                    <div class="reviews-card__rating">
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star is-empty"></span>
-                    </div>
-                    <span class="reviews-card__score">4/5</span>
-                  </div>
-                  <div class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</div>
-                  <div class="reviews-card__foot">
-                    <span class="reviews-card__author">Марк К</span>
-                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
-                  </div>
-                </div>
-                <div class="reviews__item reviews-card swiper-slide">
-                  <div class="reviews-card__head">
-                    <div class="reviews-card__rating">
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star is-empty"></span>
-                    </div>
-                    <span class="reviews-card__score">4/5</span>
-                  </div>
-                  <div class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</div>
-                  <div class="reviews-card__foot">
-                    <span class="reviews-card__author">Марк К</span>
-                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
-                  </div>
-                </div>
-                <div class="reviews__item reviews-card swiper-slide">
-                  <div class="reviews-card__head">
-                    <div class="reviews-card__rating">
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star is-empty"></span>
-                    </div>
-                    <span class="reviews-card__score">4/5</span>
-                  </div>
-                  <div class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</div>
-                  <div class="reviews-card__foot">
-                    <span class="reviews-card__author">Марк К</span>
-                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
-                  </div>
-                </div>
-                <div class="reviews__item reviews-card swiper-slide">
-                  <div class="reviews-card__head">
-                    <div class="reviews-card__rating">
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star"></span>
-                    <span class="reviews-card__star is-empty"></span>
-                    </div>
-                    <span class="reviews-card__score">4/5</span>
-                  </div>
-                  <div class="reviews-card__text">Мы создаём новый формат банной культуры и сознательно оставляем в нём только то, что помогает гостю восстанавливать силы, энергию и внутренний баланс. Так традиционная баня становится частью сильной и осознанной жизни.</div>
-                  <div class="reviews-card__foot">
-                    <span class="reviews-card__author">Марк К</span>
-                    <a href="" class="reviews-card__link" target="_blank" rel="noopener">Отзыв на 2ГИС</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="feedback home-feedback section-pad-s section-hidden">
-        <div class="container">
-          <div class="feedback__container">
-            <div class="feedback__card">
-              <video class="feedback__video" data-src="img/feedback-video.mp4" muted loop playsinline preload="none"></video>
-              <div class="feedback__inner" data-map>
-                <h2 class="feedback__title text-up">Свяжитесь с нами</h2>
-                <div class="feedback__main">
-                  <a href="tel:+70000000000" class="feedback__phone">+7 (XXX) XXX-XX-XX</a>
-                  <div class="feedback__contacts">
-                    <span class="feedback__contact">Улица Каныша Сатпаева, 29/6</span>
-                    <span class="feedback__contact text-up">Ежедневно с 10.00 до 23.00</span>
-                    <a href="mailto:info@orlovbanya-select.kz" class="feedback__contact text-up">info@orlovbanya-select.kz</a>
-                  </div>
-                </div>
-                <div class="feedback__bottom">
-                  <a href="format.html" class="feedback__button button button-white button-white-1">Забронировать визит</a>
-                  <ul class="feedback__notes">
-                    <li>VIP-парковка для гостей</li>
-                    <li>Каждый час парения</li>
-                    <li>Услуги химчистки</li>
-                  </ul>
-                </div>
-                <div class="feedback__map">
-                  <button type="button" class="feedback__map-preview" aria-expanded="false" aria-label="Открыть карту" data-map-open>
-                    <picture><source srcset="img/map.webp" type="image/webp"><img src="img/map.png" alt="Схема проезда" /></picture>
-                  </button>
-                </div>
-                <div class="feedback__map-frame" data-map-frame>
-                  <div class="feedback__map-tabs" role="tablist" aria-label="Выбор карты">
-                    <span class="feedback__map-thumb" aria-hidden="true"></span>
-                    <button type="button" class="feedback__map-tab is-active" role="tab" aria-selected="true" data-map-tab data-src="https://widgets.2gis.com/widget?type=firmsonmap&amp;options=%7B%22pos%22%3A%7B%22lat%22%3A43.237512091446206%2C%22lon%22%3A76.91657066345216%2C%22zoom%22%3A16%7D%2C%22opt%22%3A%7B%22city%22%3A%22almaty%22%7D%2C%22org%22%3A%229429940000898788%22%7D">2ГИС</button>
-                    <button type="button" class="feedback__map-tab" role="tab" aria-selected="false" data-map-tab data-src="https://yandex.ru/map-widget/v1/?text=Алматы,+улица+Каныша+Сатпаева,+29/6&amp;z=17">Яндекс Карты</button>
-                    <button type="button" class="feedback__map-tab" role="tab" aria-selected="false" data-map-tab data-src="https://maps.google.com/maps?q=Алматы,+улица+Сатпаева,+29/6&amp;z=17&amp;hl=ru&amp;output=embed">Google Карты</button>
-                  </div>
-                  <button type="button" class="feedback__map-close" aria-label="Закрыть карту" data-map-close>
+          <div class="formats__container">
+            <nav class="breadcrumbs">
+              <a href="index.html" class="breadcrumbs__link">Главная</a>
+              <span class="breadcrumbs__sep">/</span>
+              <a href="format.html" class="breadcrumbs__link">Бронирование бани</a>
+              <span class="breadcrumbs__sep">/</span>
+              <span class="breadcrumbs__current">Мужской банный клуб</span>
+            </nav>
+
+            <h1 class="formats__title s text-up">Мужской банный клуб</h1>
+
+            <form class="tickets__filters filters" action="#">
+              <div class="filters__field field" data-field>
+                <span class="field__label">Выберите дату</span>
+                <div class="field__control" data-field-control>
+                  <span class="field__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="currentColor"/>
+                      <path d="M5 22C4.45 22 3.97917 21.8042 3.5875 21.4125C3.19583 21.0208 3 20.55 3 20V6C3 5.45 3.19583 4.97917 3.5875 4.5875C3.97917 4.19583 4.45 4 5 4H6V2H8V4H16V2H18V4H19C19.55 4 20.0208 4.19583 20.4125 4.5875C20.8042 4.97917 21 5.45 21 6V20C21 20.55 20.8042 21.0208 20.4125 21.4125C20.0208 21.8042 19.55 22 19 22H5ZM5 20H19V10H5V20Z" fill="#6E1D0B"/>
                     </svg>
-                  </button>
+                  </span>
+                  <input type="text" class="field__input" name="date" value="" readonly data-datepicker />
+                  <span class="field__arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
                 </div>
+              </div>
+
+              <div class="filters__field field" data-field>
+                <span class="field__label">Выберите время</span>
+                <div class="field__control" data-field-control data-select>
+                  <span class="field__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22C10.6167 22 9.31667 21.7375 8.1 21.2125ZM4 12H12V4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                  <span class="field__value" data-select-value>12:00</span>
+                  <input type="hidden" name="time" value="12:00" data-select-input />
+                  <span class="field__arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z" fill="#6E1D0B"/>
+                    </svg>
+                  </span>
+                  <div class="field__dropdown select-list" data-select-list data-lenis-prevent>
+                    <button type="button" class="select-list__item is-active" data-select-option="10:00">10:00</button>
+                    <button type="button" class="select-list__item" data-select-option="11:00">11:00</button>
+                    <button type="button" class="select-list__item" data-select-option="12:00">12:00</button>
+                    <button type="button" class="select-list__item" data-select-option="13:00">13:00</button>
+                    <button type="button" class="select-list__item" data-select-option="14:00">14:00</button>
+                    <button type="button" class="select-list__item" data-select-option="15:00">15:00</button>
+                    <button type="button" class="select-list__item" data-select-option="16:00">16:00</button>
+                    <button type="button" class="select-list__item" data-select-option="18:00">18:00</button>
+                    <button type="button" class="select-list__item" data-select-option="20:00">20:00</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="tickets__list">
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" data-ticket-image /></picture>
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" data-ticket-image /></picture>
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" data-ticket-image /></picture>
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
+              </div>
+
+              <div class="tickets__item ticket-card" data-ticket data-price="12600" data-old-price="18000">
+                <div class="ticket-card__image">
+                  <picture><source srcset="img/news-1.webp" type="image/webp"><img src="img/news-1.png" alt="" data-ticket-image /></picture>
+                </div>
+                <div class="ticket-card__body">
+                  <div class="ticket-card__note" data-ticket-note>Сеанс 3 часа + 30 минут</div>
+                  <h2 class="ticket-card__title" data-ticket-title>Взрослый билет</h2>
+                  <div class="ticket-card__prices">
+                    <span class="ticket-card__price">12 600 ₸</span>
+                    <span class="ticket-card__old">18 000 ₸</span>
+                    <span class="ticket-card__per">Цена за гостя</span>
+                  </div>
+                  <div class="ticket-card__actions">
+                    <button type="button" class="ticket-card__add button s button-dark" data-ticket-add>Добавить</button>
+                    <div class="ticket-card__counter counter" data-ticket-counter hidden>
+                      <button type="button" class="counter__btn" data-ticket-minus aria-label="Убрать билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <input type="text" class="counter__value" value="1" inputmode="numeric" readonly data-ticket-value aria-label="Количество билетов" />
+                      <button type="button" class="counter__btn" data-ticket-plus aria-label="Добавить билет">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button type="button" class="ticket-card__more button s button-grey" data-ticket-more>Подробнее</button>
+                  </div>
+                </div>
+                <div class="ticket-card__desc" hidden data-ticket-desc>Полноценное посещение мужского банного клуба Орловские Бани Select. Время для качественного пара, отдыха и восстановления в пространстве клуба.</div>
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
+
+    <div class="booking-bar" data-booking-bar>
+      <div class="container">
+        <div class="booking-bar__inner">
+          <div class="booking-bar__info">
+            <span class="booking-bar__mark"></span>
+            <div class="booking-bar__total">
+              <span class="booking-bar__label">К оплате</span>
+              <div class="booking-bar__prices">
+                <span class="booking-bar__price" data-booking-price>0 ₸</span>
+                <span class="booking-bar__old" data-booking-old>0 ₸</span>
+              </div>
+            </div>
+          </div>
+          <a href="book.html" class="booking-bar__button button s button-primary">Перейти к бронированию</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer" data-drawer aria-hidden="true">
+      <div class="drawer__overlay" data-drawer-close></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="drawer__head">
+          <div class="drawer__heading">
+            <h2 class="drawer__title s text-up" id="drawer-title" data-drawer-title>Взрослый билет</h2>
+            <div class="drawer__note" data-drawer-note>Сеанс 3 часа + 30 минут</div>
+          </div>
+          <button type="button" class="drawer__close" data-drawer-close aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="#202020"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drawer__scroll" data-lenis-prevent>
+          <div class="drawer__image">
+            <picture><source srcset="img/gallery-1.webp" type="image/webp"><img src="img/gallery-1.png" alt="" data-drawer-image /></picture>
+          </div>
+
+          <div class="drawer__desc" data-drawer-desc></div>
+
+          <div class="drawer__prices">
+            <span class="drawer__price" data-drawer-price></span>
+            <span class="drawer__old" data-drawer-old></span>
+            <span class="drawer__per">Цена за гостя</span>
+          </div>
+
+          <div class="drawer__block">
+            <h3 class="drawer__subtitle">Условия посещения</h3>
+            <ul class="drawer__list">
+              <li>Билет действует на выбранные дату и время</li>
+              <li>Продолжительность сеанса — 3 часа + 30 минут</li>
+              <li>Стоимость рассчитывается с учётом действующего тарифа и сезона</li>
+              <li>Дополнительные SPA-услуги и другие позиции можно выбрать отдельно</li>
+            </ul>
+          </div>
+
+          <div class="drawer__block last">
+            <h3 class="drawer__subtitle">Обратите внимание</h3>
+            <p class="drawer__text">Итоговая стоимость может меняться в зависимости от даты, времени посещения и действующих специальных предложений.</p>
+          </div>
+        </div>
+
+        <div class="drawer__foot">
+          <button type="button" class="drawer__button button s button-dark" data-drawer-add>Добавить</button>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
   <div class="container">
@@ -520,14 +444,14 @@
 			  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 13.8896 2.52505 15.6594 3.43756 17.1683L2.54581 20.2002C2.32023 20.9672 3.03284 21.6798 3.79975 21.4542L6.83171 20.5624C8.34058 21.475 10.1104 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C10.4231 20 8.95564 19.5448 7.71817 18.759C7.36114 18.5323 6.91075 18.4545 6.47827 18.5817L4.97667 19.0233L5.41832 17.5217C5.54552 17.0892 5.46769 16.6389 5.24098 16.2818C4.4552 15.0444 4 13.5769 4 12Z" fill="white"></path>
 		  </svg>
     </a>
-</div> 
-    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260930111207"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260930111207"></script>
-<script src="js/app.min.js?_v=20260930111207"></script>
+</div>
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ru.js?_v=20260930110929"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js?_v=20260930110929"></script>
+<script src="js/app.min.js?_v=20260930110929"></script>
   </body>
 </html>
